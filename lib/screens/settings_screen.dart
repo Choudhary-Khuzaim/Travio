@@ -44,25 +44,74 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _darkModeEnabled,
                     (value) => setState(() => _darkModeEnabled = value),
                   ),
-                  _buildListTile(Icons.language, "Language", "Choose your preferred language", "English"),
-                  
+                  _buildListTile(
+                    Icons.language,
+                    "Language",
+                    "Choose your preferred language",
+                    "English",
+                  ),
+
                   const SizedBox(height: 32),
                   _buildSectionHeader("Privacy & Security"),
-                  _buildListTile(Icons.lock_outline, "Change Password", "Update your account security", "", onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const ChangePasswordScreen()));
-                  }),
-                  _buildListTile(Icons.privacy_tip_outlined, "Privacy Policy", "How we manage your data", "", onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()));
-                  }),
-                  _buildListTile(Icons.description_outlined, "Terms of Service", "Conditions for using the app", "", onTap: () {
-                     Navigator.push(context, MaterialPageRoute(builder: (_) => const TermsOfServiceScreen()));
-                  }),
+                  _buildListTile(
+                    Icons.lock_outline,
+                    "Change Password",
+                    "Update your account security",
+                    "",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ChangePasswordScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildListTile(
+                    Icons.privacy_tip_outlined,
+                    "Privacy Policy",
+                    "How we manage your data",
+                    "",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const PrivacyPolicyScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildListTile(
+                    Icons.description_outlined,
+                    "Terms of Service",
+                    "Conditions for using the app",
+                    "",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const TermsOfServiceScreen(),
+                        ),
+                      );
+                    },
+                  ),
 
                   const SizedBox(height: 32),
                   _buildSectionHeader("Support & About"),
-                  _buildListTile(Icons.info_outline, "About Travio", "Version and build info", "v1.0.0"),
-                  _buildListTile(Icons.star_outline, "Rate Us", "Let us know your experience", "", onTap: () => _showRatingDialog(context)),
-                  
+                  _buildListTile(
+                    Icons.info_outline,
+                    "About Travio",
+                    "Version and build info",
+                    "v1.0.0",
+                  ),
+                  _buildListTile(
+                    Icons.star_outline,
+                    "Rate Us",
+                    "Let us know your experience",
+                    "",
+                    onTap: () => _showRatingDialog(context),
+                  ),
+
                   const SizedBox(height: 40),
                 ],
               ),
@@ -102,8 +151,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.3),
-                    AppColors.primary.withOpacity(0.9),
+                    Colors.black.withValues(alpha: 0.3),
+                    AppColors.primary.withValues(alpha: 0.9),
                   ],
                 ),
               ),
@@ -113,11 +162,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 margin: const EdgeInsets.only(top: 60),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.white.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white.withOpacity(0.3)),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.3),
+                  ),
                 ),
-                child: const Icon(Icons.settings_outlined, size: 40, color: Colors.white),
+                child: const Icon(
+                  Icons.settings_outlined,
+                  size: 40,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
@@ -140,16 +195,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ).animate().fadeIn().slideX(begin: -0.1);
   }
 
-  Widget _buildSwitchItem(IconData icon, String title, String subtitle, bool value, ValueChanged<bool> onChanged) {
+  Widget _buildSwitchItem(
+    IconData icon,
+    String title,
+    String subtitle,
+    bool value,
+    ValueChanged<bool> onChanged,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.primary.withOpacity(0.05)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.05),
+            color: AppColors.primary.withValues(alpha: 0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -161,40 +222,58 @@ class _SettingsScreenState extends State<SettingsScreen> {
           secondary: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.08),
-               borderRadius: BorderRadius.circular(12),
+              color: AppColors.primary.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: AppColors.primary, size: 22),
           ),
           title: Text(
             title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.textPrimary),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: AppColors.textPrimary,
+            ),
           ),
           subtitle: Text(
             subtitle,
-            style: TextStyle(fontSize: 12, color: AppColors.textSecondary.withOpacity(0.7)),
+            style: TextStyle(
+              fontSize: 12,
+              color: AppColors.textSecondary.withValues(alpha: 0.7),
+            ),
           ),
           value: value,
           onChanged: onChanged,
-          activeColor: AppColors.primary,
-          activeTrackColor: AppColors.primary.withOpacity(0.2),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          activeThumbColor: AppColors.primary,
+          activeTrackColor: AppColors.primary.withValues(alpha: 0.2),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 8,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
         ),
       ),
     ).animate().fadeIn().slideY(begin: 0.1);
   }
 
-  Widget _buildListTile(IconData icon, String title, String subtitle, String trailingText, {VoidCallback? onTap}) {
+  Widget _buildListTile(
+    IconData icon,
+    String title,
+    String subtitle,
+    String trailingText, {
+    VoidCallback? onTap,
+  }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.primary.withOpacity(0.05)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.05),
+            color: AppColors.primary.withValues(alpha: 0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -204,18 +283,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.08),
-             borderRadius: BorderRadius.circular(12),
+            color: AppColors.primary.withValues(alpha: 0.08),
+            borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(icon, color: AppColors.primary, size: 22),
         ),
         title: Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.textPrimary),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: AppColors.textPrimary,
+          ),
         ),
         subtitle: Text(
           subtitle,
-          style: TextStyle(fontSize: 12, color: AppColors.textSecondary.withOpacity(0.7)),
+          style: TextStyle(
+            fontSize: 12,
+            color: AppColors.textSecondary.withValues(alpha: 0.7),
+          ),
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
@@ -223,16 +309,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
             if (trailingText.isNotEmpty)
               Text(
                 trailingText,
-                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600, fontSize: 13),
+                style: const TextStyle(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                ),
               ),
             if (trailingText.isNotEmpty) const SizedBox(width: 8),
             Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.1),
+                color: Colors.grey.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.arrow_forward_ios, size: 12, color: AppColors.textSecondary),
+              child: const Icon(
+                Icons.arrow_forward_ios,
+                size: 12,
+                color: AppColors.textSecondary,
+              ),
             ),
           ],
         ),
@@ -253,31 +347,43 @@ class _SettingsScreenState extends State<SettingsScreen> {
             return AlertDialog(
               backgroundColor: Colors.white,
               surfaceTintColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(28),
+              ),
               title: Column(
                 children: [
-                   Container(
+                  Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.amber.withOpacity(0.1),
+                      color: Colors.amber.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.star_rounded, color: Colors.amber, size: 40),
+                    child: const Icon(
+                      Icons.star_rounded,
+                      color: Colors.amber,
+                      size: 40,
+                    ),
                   ),
                   const SizedBox(height: 16),
-                  const Text("Rate Your Experience", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  const Text(
+                    "Rate Your Experience",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
                 ],
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                   const Text(
+                  const Text(
                     "Your feedback helps us make Travio better for everyone.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 14,
+                    ),
                   ),
-                   const SizedBox(height: 24),
-                   Row(
+                  const SizedBox(height: 24),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(5, (index) {
                       return GestureDetector(
@@ -286,17 +392,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             rating = index + 1;
                           });
                         },
-                        child: Icon(
-                          index < rating ? Icons.star_rounded : Icons.star_outline_rounded,
-                          color: Colors.amber,
-                          size: 40,
-                        ).animate(target: index < rating ? 1 : 0).scale(duration: 200.ms),
+                        child:
+                            Icon(
+                                  index < rating
+                                      ? Icons.star_rounded
+                                      : Icons.star_outline_rounded,
+                                  color: Colors.amber,
+                                  size: 40,
+                                )
+                                .animate(target: index < rating ? 1 : 0)
+                                .scale(duration: 200.ms),
                       );
                     }),
                   ),
                 ],
               ),
-              actionsPadding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
+              actionsPadding: const EdgeInsets.only(
+                bottom: 16,
+                left: 16,
+                right: 16,
+              ),
               actions: [
                 Row(
                   children: [
@@ -305,33 +420,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () => Navigator.pop(context),
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
-                        child: const Text("Not Now", style: TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.bold)),
+                        child: const Text(
+                          "Not Now",
+                          style: TextStyle(
+                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: rating == 0 ? null : () {
-                          Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: const Text("Thank you for your rating!"),
-                              behavior: SnackBarBehavior.floating,
-                              backgroundColor: AppColors.primary,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                            ),
-                          );
-                        },
+                        onPressed: rating == 0
+                            ? null
+                            : () {
+                                Navigator.pop(context);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: const Text(
+                                      "Thank you for your rating!",
+                                    ),
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor: AppColors.primary,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                );
+                              },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
                           foregroundColor: Colors.white,
                           elevation: 0,
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
-                        child: const Text("Submit", style: TextStyle(fontWeight: FontWeight.bold)),
+                        child: const Text(
+                          "Submit",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ],

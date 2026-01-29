@@ -51,7 +51,7 @@ class BookingChoiceScreen extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.black.withOpacity(0.3), Colors.transparent],
+                  colors: [Colors.black.withValues(alpha: 0.3), Colors.transparent],
                 ),
               ),
             ),
@@ -66,9 +66,9 @@ class BookingChoiceScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white.withOpacity(0.3)),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
                 ),
                 child: const Icon(Icons.arrow_back, color: Colors.white),
               ),
@@ -124,7 +124,7 @@ class BookingChoiceScreen extends StatelessWidget {
                           "Select a service to proceed with your booking.",
                           style: TextStyle(
                             fontSize: 14,
-                            color: AppColors.textSecondary.withOpacity(0.8),
+                            color: AppColors.textSecondary.withValues(alpha: 0.8),
                           ),
                         ),
                       ],
@@ -191,7 +191,7 @@ class BookingChoiceScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
@@ -203,7 +203,7 @@ class BookingChoiceScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 30),

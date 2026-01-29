@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:travio/core/colors.dart';
 import 'package:travio/screens/create_profile_screen.dart';
-import 'package:travio/screens/home_screen.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({super.key});
@@ -13,7 +12,10 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  final List<TextEditingController> _controllers = List.generate(4, (_) => TextEditingController());
+  final List<TextEditingController> _controllers = List.generate(
+    4,
+    (_) => TextEditingController(),
+  );
   final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
 
   @override
@@ -43,12 +45,10 @@ class _OTPScreenState extends State<OTPScreen> {
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                color: Colors.black.withOpacity(0.4),
-              ),
+              child: Container(color: Colors.black.withValues(alpha: 0.4)),
             ),
           ),
-          
+
           SafeArea(
             child: Column(
               children: [
@@ -57,7 +57,10 @@ class _OTPScreenState extends State<OTPScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      ),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ),
@@ -88,31 +91,40 @@ class _OTPScreenState extends State<OTPScreen> {
                             height: 1.5,
                           ),
                         ).animate().fadeIn(delay: 200.ms).slideX(),
-                        
+
                         const SizedBox(height: 48),
-                        
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: List.generate(4, (index) => _buildOTPBox(index)),
+                          children: List.generate(
+                            4,
+                            (index) => _buildOTPBox(index),
+                          ),
                         ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
-                        
+
                         const SizedBox(height: 40),
-                        
+
                         SizedBox(
                           width: double.infinity,
                           height: 56,
                           child: ElevatedButton(
                             onPressed: () {
-                              String otp = _controllers.map((e) => e.text).join();
+                              String otp = _controllers
+                                  .map((e) => e.text)
+                                  .join();
                               if (otp == '0000') {
                                 Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(builder: (_) => const CreateProfileScreen()),
+                                  MaterialPageRoute(
+                                    builder: (_) => const CreateProfileScreen(),
+                                  ),
                                 );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text("Invalid OTP! Please enter 0000."),
+                                    content: Text(
+                                      "Invalid OTP! Please enter 0000.",
+                                    ),
                                     backgroundColor: Colors.redAccent,
                                   ),
                                 );
@@ -121,18 +133,23 @@ class _OTPScreenState extends State<OTPScreen> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,
                               foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                               elevation: 0,
                             ),
                             child: const Text(
                               "Verify",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ).animate().fadeIn(delay: 600.ms).scale(),
-                        
+
                         const SizedBox(height: 32),
-                        
+
                         Center(
                           child: Column(
                             children: [
@@ -172,9 +189,9 @@ class _OTPScreenState extends State<OTPScreen> {
       width: 70,
       height: 70,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
       ),
       child: TextField(
         controller: _controllers[index],
@@ -182,7 +199,11 @@ class _OTPScreenState extends State<OTPScreen> {
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         maxLength: 1,
-        style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
         decoration: const InputDecoration(
           counterText: "",
           border: InputBorder.none,

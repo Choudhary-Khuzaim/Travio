@@ -161,7 +161,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
           border: Border.all(color: Colors.grey[300]!),
           boxShadow: isSelected || isOccupied ? null : [
              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
              ),

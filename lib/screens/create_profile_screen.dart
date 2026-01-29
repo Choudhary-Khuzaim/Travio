@@ -61,7 +61,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.3),
+                              color: AppColors.primary.withValues(alpha: 0.3),
                               blurRadius: 20,
                               offset: const Offset(0, 10),
                             ),
@@ -130,8 +130,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.3),
-                    AppColors.primary.withOpacity(0.9),
+                    Colors.black.withValues(alpha: 0.3),
+                    AppColors.primary.withValues(alpha: 0.9),
                   ],
                 ),
               ),
@@ -147,13 +147,13 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white.withOpacity(0.5), width: 2),
+                          border: Border.all(color: Colors.white.withValues(alpha: 0.5), width: 2),
                         ),
                         child: Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white, width: 3),
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                           ),
                           child: const CircleAvatar(
                             radius: 50,
@@ -172,7 +172,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withValues(alpha: 0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               ),
@@ -208,10 +208,10 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: AppColors.primary.withOpacity(0.1)),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.1)),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withOpacity(0.05),
+                color: AppColors.primary.withValues(alpha: 0.05),
                 blurRadius: 15,
                 offset: const Offset(0, 5),
               ),
@@ -222,11 +222,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
             keyboardType: keyboardType,
             style: const TextStyle(fontWeight: FontWeight.w500, color: AppColors.textPrimary),
             decoration: InputDecoration(
-              prefixIcon: Icon(icon, color: AppColors.primary.withOpacity(0.5), size: 22),
+              prefixIcon: Icon(icon, color: AppColors.primary.withValues(alpha: 0.5), size: 22),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               hintText: "Enter your $label",
-              hintStyle: TextStyle(color: Colors.grey.withOpacity(0.5)),
+              hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.5)),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {

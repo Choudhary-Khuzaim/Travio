@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'terms_of_service_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'data_usage_policy_screen.dart';
@@ -19,7 +17,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
   bool _publicProfile = true;
   bool _showLocation = true;
   bool _allowFriendRequests = true;
-  
+
   // Security Settings
   bool _twoFactorAuth = false;
   bool _biometricLogin = true;
@@ -39,28 +37,80 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                 children: [
                   _buildSectionHeader("Privacy"),
                   const SizedBox(height: 16),
-                  _buildToggleItem("Public Profile", "Make your profile visible to everyone", _publicProfile, (val) => setState(() => _publicProfile = val)),
-                  _buildToggleItem("Show Location", "Allow others to see your current city", _showLocation, (val) => setState(() => _showLocation = val)),
-                  _buildToggleItem("Allow Friend Requests", "Let others send you friend requests", _allowFriendRequests, (val) => setState(() => _allowFriendRequests = val)),
+                  _buildToggleItem(
+                    "Public Profile",
+                    "Make your profile visible to everyone",
+                    _publicProfile,
+                    (val) => setState(() => _publicProfile = val),
+                  ),
+                  _buildToggleItem(
+                    "Show Location",
+                    "Allow others to see your current city",
+                    _showLocation,
+                    (val) => setState(() => _showLocation = val),
+                  ),
+                  _buildToggleItem(
+                    "Allow Friend Requests",
+                    "Let others send you friend requests",
+                    _allowFriendRequests,
+                    (val) => setState(() => _allowFriendRequests = val),
+                  ),
 
                   const SizedBox(height: 32),
                   _buildSectionHeader("Security"),
                   const SizedBox(height: 16),
-                  _buildToggleItem("Two-Factor Authentication", "Add an extra layer of security", _twoFactorAuth, (val) => setState(() => _twoFactorAuth = val)),
-                  _buildToggleItem("Biometric Login", "Use FaceID/TouchID to log in", _biometricLogin, (val) => setState(() => _biometricLogin = val)),
+                  _buildToggleItem(
+                    "Two-Factor Authentication",
+                    "Add an extra layer of security",
+                    _twoFactorAuth,
+                    (val) => setState(() => _twoFactorAuth = val),
+                  ),
+                  _buildToggleItem(
+                    "Biometric Login",
+                    "Use FaceID/TouchID to log in",
+                    _biometricLogin,
+                    (val) => setState(() => _biometricLogin = val),
+                  ),
 
                   const SizedBox(height: 32),
                   _buildSectionHeader("Policies"),
                   const SizedBox(height: 16),
-                  _buildLinkItem("Terms of Service", Icons.description_outlined, onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const TermsOfServiceScreen()));
-                  }),
-                  _buildLinkItem("Privacy Policy", Icons.privacy_tip_outlined, onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()));
-                  }),
-                  _buildLinkItem("Data Usage & Cookie Policy", Icons.data_usage, onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const DataUsagePolicyScreen()));
-                  }),
+                  _buildLinkItem(
+                    "Terms of Service",
+                    Icons.description_outlined,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const TermsOfServiceScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildLinkItem(
+                    "Privacy Policy",
+                    Icons.privacy_tip_outlined,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const PrivacyPolicyScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildLinkItem(
+                    "Data Usage & Cookie Policy",
+                    Icons.data_usage,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const DataUsagePolicyScreen(),
+                        ),
+                      );
+                    },
+                  ),
 
                   const SizedBox(height: 40),
                   Center(
@@ -108,8 +158,8 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.3),
-                    AppColors.primary.withOpacity(0.9),
+                    Colors.black.withValues(alpha: 0.3),
+                    AppColors.primary.withValues(alpha: 0.9),
                   ],
                 ),
               ),
@@ -119,11 +169,17 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                 margin: const EdgeInsets.only(top: 60),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.white.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white.withOpacity(0.3)),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.3),
+                  ),
                 ),
-                child: const Icon(Icons.shield_outlined, size: 40, color: Colors.white),
+                child: const Icon(
+                  Icons.shield_outlined,
+                  size: 40,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
@@ -146,17 +202,22 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
     ).animate().fadeIn().slideX();
   }
 
-  Widget _buildToggleItem(String title, String subtitle, bool value, Function(bool) onChanged) {
+  Widget _buildToggleItem(
+    String title,
+    String subtitle,
+    bool value,
+    Function(bool) onChanged,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.primary.withOpacity(0.05)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.05),
+            color: AppColors.primary.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -171,12 +232,19 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.textPrimary),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: AppColors.textPrimary,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   subtitle,
-                  style: TextStyle(fontSize: 13, color: AppColors.textSecondary.withOpacity(0.8)),
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.textSecondary.withValues(alpha: 0.8),
+                  ),
                 ),
               ],
             ),
@@ -184,8 +252,8 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: AppColors.primary,
-            activeTrackColor: AppColors.primary.withOpacity(0.2),
+            activeThumbColor: AppColors.primary,
+            activeTrackColor: AppColors.primary.withValues(alpha: 0.2),
           ),
         ],
       ),
@@ -198,10 +266,10 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.primary.withOpacity(0.05)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.05),
+            color: AppColors.primary.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -212,26 +280,36 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.08),
+            color: AppColors.primary.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(icon, color: AppColors.primary, size: 20),
         ),
         title: Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppColors.textPrimary),
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 15,
+            color: AppColors.textPrimary,
+          ),
         ),
         trailing: Container(
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.arrow_forward_ios, size: 12, color: AppColors.textSecondary),
+          child: const Icon(
+            Icons.arrow_forward_ios,
+            size: 12,
+            color: AppColors.textSecondary,
+          ),
         ),
-        onTap: onTap ?? () {
-          // Placeholder for web view or navigation
-        },
+        onTap:
+            onTap ??
+            () {
+              // Placeholder for web view or navigation
+            },
       ),
     ).animate().fadeIn().slideX(begin: 0.1);
   }

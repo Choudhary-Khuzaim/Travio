@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../core/colors.dart';
 
 class TicketWidget extends StatelessWidget {
   final Widget child;
@@ -17,10 +16,7 @@ class TicketWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipPath(
       clipper: TicketClipper(),
-      child: Container(
-        color: color,
-        child: child,
-      ),
+      child: Container(color: color, child: child),
     );
   }
 }
@@ -33,8 +29,15 @@ class TicketClipper extends CustomClipper<Path> {
     path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0.0);
 
-    path.addOval(Rect.fromCircle(center: Offset(0.0, size.height / 2), radius: 20.0));
-    path.addOval(Rect.fromCircle(center: Offset(size.width, size.height / 2), radius: 20.0));
+    path.addOval(
+      Rect.fromCircle(center: Offset(0.0, size.height / 2), radius: 20.0),
+    );
+    path.addOval(
+      Rect.fromCircle(
+        center: Offset(size.width, size.height / 2),
+        radius: 20.0,
+      ),
+    );
 
     return path..fillType = PathFillType.evenOdd;
   }

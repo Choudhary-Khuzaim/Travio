@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../core/colors.dart';
@@ -40,7 +39,7 @@ class HotelDetailsScreen extends StatelessWidget {
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: CircleAvatar(
-          backgroundColor: Colors.black.withOpacity(0.3),
+          backgroundColor: Colors.black.withValues(alpha: 0.3),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white, size: 20),
             onPressed: () => Navigator.pop(context),
@@ -51,9 +50,13 @@ class HotelDetailsScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: Colors.black.withOpacity(0.3),
+            backgroundColor: Colors.black.withValues(alpha: 0.3),
             child: IconButton(
-              icon: const Icon(Icons.favorite_border, color: Colors.white, size: 20),
+              icon: const Icon(
+                Icons.favorite_border,
+                color: Colors.white,
+                size: 20,
+              ),
               onPressed: () {},
             ),
           ),
@@ -61,9 +64,13 @@ class HotelDetailsScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: Colors.black.withOpacity(0.3),
+            backgroundColor: Colors.black.withValues(alpha: 0.3),
             child: IconButton(
-              icon: const Icon(Icons.share_outlined, color: Colors.white, size: 20),
+              icon: const Icon(
+                Icons.share_outlined,
+                color: Colors.white,
+                size: 20,
+              ),
               onPressed: () {},
             ),
           ),
@@ -83,9 +90,9 @@ class HotelDetailsScreen extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.3),
+                    Colors.black.withValues(alpha: 0.3),
                     Colors.transparent,
-                    Colors.black.withOpacity(0.6),
+                    Colors.black.withValues(alpha: 0.6),
                   ],
                 ),
               ),
@@ -107,14 +114,21 @@ class HotelDetailsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.1),
+                    color: AppColors.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
                     hotel['tags']?[0] ?? "Luxury Hotel",
-                    style: const TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Row(
@@ -123,7 +137,10 @@ class HotelDetailsScreen extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       hotel['rating'].toString(),
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                     Text(
                       " (128 reviews)",
@@ -136,12 +153,20 @@ class HotelDetailsScreen extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               hotel['name'],
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: AppColors.textPrimary),
+              style: const TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w900,
+                color: AppColors.textPrimary,
+              ),
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                const Icon(Icons.location_on, color: AppColors.primary, size: 18),
+                const Icon(
+                  Icons.location_on,
+                  color: AppColors.primary,
+                  size: 18,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   hotel['location'],
@@ -170,7 +195,10 @@ class HotelDetailsScreen extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 24),
-            child: Text("Amenities", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            child: Text(
+              "Amenities",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(height: 16),
           SizedBox(
@@ -191,9 +219,18 @@ class HotelDetailsScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(amenities[index]['icon'] as IconData, color: AppColors.primary),
+                      Icon(
+                        amenities[index]['icon'] as IconData,
+                        color: AppColors.primary,
+                      ),
                       const SizedBox(height: 8),
-                      Text(amenities[index]['label'] as String, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
+                      Text(
+                        amenities[index]['label'] as String,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ],
                   ),
                 );
@@ -212,11 +249,18 @@ class HotelDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("About the Hotel", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(
+              "About the Hotel",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 12),
             Text(
               "Experience the pinnacle of luxury and hospitality. Located in the heart of the city, this hotel offers breathtaking views, world-class dining, and unparalleled comfort. Whether you're here for business or leisure, our dedicated team ensures your stay is nothing short of extraordinary.",
-              style: TextStyle(color: Colors.black54, height: 1.6, fontSize: 15),
+              style: TextStyle(
+                color: Colors.black54,
+                height: 1.6,
+                fontSize: 15,
+              ),
             ),
           ],
         ),
@@ -231,31 +275,44 @@ class HotelDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Location", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const Text(
+              "Location",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 16),
             Container(
               height: 180,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
                 image: const DecorationImage(
-                  image: NetworkImage('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=800'),
+                  image: NetworkImage(
+                    'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=800',
+                  ),
                   fit: BoxFit.cover,
                 ),
               ),
               child: Center(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
-                    boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
+                    boxShadow: [
+                      BoxShadow(color: Colors.black26, blurRadius: 10),
+                    ],
                   ),
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.map_outlined, color: AppColors.primary),
                       SizedBox(width: 8),
-                      Text("View on Map", style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text(
+                        "View on Map",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ),
@@ -278,7 +335,7 @@ class HotelDetailsScreen extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 20,
               offset: const Offset(0, -5),
             ),
@@ -290,10 +347,17 @@ class HotelDetailsScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Total Price", style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+                Text(
+                  "Total Price",
+                  style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                ),
                 Text(
                   hotel['price'],
-                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: AppColors.primary),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w900,
+                    color: AppColors.primary,
+                  ),
                 ),
               ],
             ),
@@ -304,7 +368,8 @@ class HotelDetailsScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HotelBookingFormScreen(hotel: hotel),
+                      builder: (context) =>
+                          HotelBookingFormScreen(hotel: hotel),
                     ),
                   );
                 },
@@ -312,16 +377,26 @@ class HotelDetailsScreen extends StatelessWidget {
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 18),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   elevation: 10,
-                  shadowColor: AppColors.primary.withOpacity(0.4),
+                  shadowColor: AppColors.primary.withValues(alpha: 0.4),
                 ),
-                child: const Text("Book Now", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                child: const Text(
+                  "Book Now",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ],
         ),
       ),
-    ).animate().slideY(begin: 1.0, end: 0, duration: 600.ms, curve: Curves.easeOut);
+    ).animate().slideY(
+      begin: 1.0,
+      end: 0,
+      duration: 600.ms,
+      curve: Curves.easeOut,
+    );
   }
 }

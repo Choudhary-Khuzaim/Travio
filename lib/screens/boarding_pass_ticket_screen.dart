@@ -19,7 +19,10 @@ class BoardingPassTicketScreen extends StatelessWidget {
           icon: const Icon(Icons.close, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text("Digital Boarding Pass", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: const Text(
+          "Digital Boarding Pass",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -33,12 +36,14 @@ class BoardingPassTicketScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                   // Airline & Route
+                  // Airline & Route
                   Container(
                     padding: const EdgeInsets.all(24),
                     decoration: const BoxDecoration(
                       color: Color(0xFFF9FAFB),
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(30),
+                      ),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,11 +51,27 @@ class BoardingPassTicketScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(trip['airline'], style: const TextStyle(fontWeight: FontWeight.w900, color: AppColors.primary, fontSize: 18)),
-                            Text(trip['flightNo'], style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+                            Text(
+                              trip['airline'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w900,
+                                color: AppColors.primary,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              trip['flightNo'],
+                              style: TextStyle(
+                                color: Colors.grey[500],
+                                fontSize: 12,
+                              ),
+                            ),
                           ],
                         ),
-                        const Icon(Icons.flight_takeoff, color: AppColors.primary),
+                        const Icon(
+                          Icons.flight_takeoff,
+                          color: AppColors.primary,
+                        ),
                       ],
                     ),
                   ),
@@ -63,11 +84,34 @@ class BoardingPassTicketScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildCityBlock(trip['from_code'], trip['from_city'], CrossAxisAlignment.start),
-                        const Icon(Icons.circle, size: 8, color: AppColors.primary),
-                        const Expanded(child: Divider(color: AppColors.primary, thickness: 1, indent: 8, endIndent: 8)),
-                        const Icon(Icons.circle, size: 8, color: AppColors.primary),
-                        _buildCityBlock(trip['to_code'], trip['to_city'], CrossAxisAlignment.end),
+                        _buildCityBlock(
+                          trip['from_code'],
+                          trip['from_city'],
+                          CrossAxisAlignment.start,
+                        ),
+                        const Icon(
+                          Icons.circle,
+                          size: 8,
+                          color: AppColors.primary,
+                        ),
+                        const Expanded(
+                          child: Divider(
+                            color: AppColors.primary,
+                            thickness: 1,
+                            indent: 8,
+                            endIndent: 8,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.circle,
+                          size: 8,
+                          color: AppColors.primary,
+                        ),
+                        _buildCityBlock(
+                          trip['to_code'],
+                          trip['to_city'],
+                          CrossAxisAlignment.end,
+                        ),
                       ],
                     ),
                   ),
@@ -77,9 +121,35 @@ class BoardingPassTicketScreen extends StatelessWidget {
                   // Dashed Line with Cutouts
                   Row(
                     children: [
-                      Container(width: 20, height: 40, decoration: const BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.horizontal(right: Radius.circular(20)))),
-                      const Expanded(child: Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Divider(color: Color(0xFFE5E7EB), thickness: 2))),
-                      Container(width: 20, height: 40, decoration: const BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.horizontal(left: Radius.circular(20)))),
+                      Container(
+                        width: 20,
+                        height: 40,
+                        decoration: const BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.horizontal(
+                            right: Radius.circular(20),
+                          ),
+                        ),
+                      ),
+                      const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: Divider(
+                            color: Color(0xFFE5E7EB),
+                            thickness: 2,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 20,
+                        height: 40,
+                        decoration: const BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.horizontal(
+                            left: Radius.circular(20),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
 
@@ -101,16 +171,16 @@ class BoardingPassTicketScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                             _buildInfoItem("DATE", trip['date']),
-                             _buildInfoItem("TIME", trip['time']),
+                            _buildInfoItem("DATE", trip['date']),
+                            _buildInfoItem("TIME", trip['time']),
                           ],
                         ),
-                         const SizedBox(height: 24),
+                        const SizedBox(height: 24),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                             _buildInfoItem("GATE", trip['gate']),
-                             _buildInfoItem("SEAT", trip['seat']),
+                            _buildInfoItem("GATE", trip['gate']),
+                            _buildInfoItem("SEAT", trip['seat']),
                           ],
                         ),
                       ],
@@ -128,22 +198,38 @@ class BoardingPassTicketScreen extends StatelessWidget {
                           data: "${trip['flightNo']}-${trip['seat']}-KHUZAIM",
                           version: QrVersions.auto,
                           size: 150.0,
-                          foregroundColor: AppColors.textPrimary,
+                          eyeStyle: const QrEyeStyle(
+                            eyeShape: QrEyeShape.square,
+                            color: AppColors.textPrimary,
+                          ),
+                          dataModuleStyle: const QrDataModuleStyle(
+                            dataModuleShape: QrDataModuleShape.square,
+                            color: AppColors.textPrimary,
+                          ),
                         ),
                         const SizedBox(height: 12),
-                        const Text("Scan at boarding gate", style: TextStyle(color: Colors.grey, fontSize: 12)),
+                        const Text(
+                          "Scan at boarding gate",
+                          style: TextStyle(color: Colors.grey, fontSize: 12),
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
             ).animate().slideY(begin: 0.1, duration: 600.ms).fadeIn(),
-            
+
             const SizedBox(height: 40),
-             TextButton.icon(
+            TextButton.icon(
               onPressed: () {},
               icon: const Icon(Icons.download, color: Colors.white),
-              label: const Text("Save to Phone", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              label: const Text(
+                "Save to Phone",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),
@@ -155,7 +241,14 @@ class BoardingPassTicketScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: align,
       children: [
-        Text(code, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: AppColors.textPrimary)),
+        Text(
+          code,
+          style: const TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.w900,
+            color: AppColors.textPrimary,
+          ),
+        ),
         Text(city, style: TextStyle(color: Colors.grey[500], fontSize: 13)),
       ],
     );
@@ -165,9 +258,24 @@ class BoardingPassTicketScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(color: Colors.grey[400], fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 1)),
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.grey[400],
+            fontSize: 10,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 1,
+          ),
+        ),
         const SizedBox(height: 4),
-        Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppColors.textPrimary)),
+        Text(
+          value,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            color: AppColors.textPrimary,
+          ),
+        ),
       ],
     );
   }

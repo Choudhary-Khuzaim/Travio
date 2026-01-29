@@ -31,107 +31,186 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 24),
                   _buildStatsRow(),
                   const SizedBox(height: 32),
-                    _buildSectionHeader("Account"),
-                    const SizedBox(height: 12),
-                    _buildSettingsGroup([
-                      _buildSettingsItem(Icons.person_outline, "Edit Profile", onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfileScreen()));
-                      }),
-                      _buildSettingsItem(Icons.lock_outline, "Change Password", onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const ChangePasswordScreen()));
-                      }),
-                      _buildSettingsItem(Icons.privacy_tip_outlined, "Privacy & Security", onTap: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacySecurityScreen()));
-                      }),
-                    ]),
-                    
-                    const SizedBox(height: 32),
-                    _buildSectionHeader("My Travel"),
-                    const SizedBox(height: 12),
-                    _buildSettingsGroup([
-                       _buildSettingsItem(Icons.confirmation_number_outlined, "My Trips", onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const MyTripsScreen()));
-                      }),
-                      _buildSettingsItem(Icons.menu_book_outlined, "Travel Guide", onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const TravelGuideScreen()));
-                      }),
-                    ]),
+                  _buildSectionHeader("Account"),
+                  const SizedBox(height: 12),
+                  _buildSettingsGroup([
+                    _buildSettingsItem(
+                      Icons.person_outline,
+                      "Edit Profile",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const EditProfileScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildSettingsItem(
+                      Icons.lock_outline,
+                      "Change Password",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ChangePasswordScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildSettingsItem(
+                      Icons.privacy_tip_outlined,
+                      "Privacy & Security",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const PrivacySecurityScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ]),
 
-                    const SizedBox(height: 32),
-                    _buildSectionHeader("Preferences"),
-                    const SizedBox(height: 12),
-                    _buildSettingsGroup([
-                      _buildSettingsItem(Icons.settings_outlined, "Settings", onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen()));
-                      }),
-                    ]),
+                  const SizedBox(height: 32),
+                  _buildSectionHeader("My Travel"),
+                  const SizedBox(height: 12),
+                  _buildSettingsGroup([
+                    _buildSettingsItem(
+                      Icons.confirmation_number_outlined,
+                      "My Trips",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const MyTripsScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildSettingsItem(
+                      Icons.menu_book_outlined,
+                      "Travel Guide",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const TravelGuideScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ]),
 
-                    const SizedBox(height: 32),
-                    _buildSectionHeader("Community"),
-                    const SizedBox(height: 12),
-                    _buildSettingsGroup([
-                       _buildSettingsItem(Icons.person_add_outlined, "Invite Friends", onTap: () {
-                         Share.share('Hey! Check out Travio, the best app for travel planning. ✈️🌍\n\nDownload it now: https://travio.app');
-                      }),
-                    ]),
+                  const SizedBox(height: 32),
+                  _buildSectionHeader("Preferences"),
+                  const SizedBox(height: 12),
+                  _buildSettingsGroup([
+                    _buildSettingsItem(
+                      Icons.settings_outlined,
+                      "Settings",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SettingsScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ]),
 
-                    const SizedBox(height: 32),
-                    _buildSectionHeader("Support"),
-                    const SizedBox(height: 12),
-                    _buildSettingsGroup([
-                      _buildSettingsItem(Icons.help_outline, "Help & Support", onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => const HelpSupportScreen()));
-                      }),
-                      _buildSettingsItem(Icons.info_outline, "About App"),
-                    ]),
+                  const SizedBox(height: 32),
+                  _buildSectionHeader("Community"),
+                  const SizedBox(height: 12),
+                  _buildSettingsGroup([
+                    _buildSettingsItem(
+                      Icons.person_add_outlined,
+                      "Invite Friends",
+                      onTap: () {
+                        Share.share(
+                          'Check out this amazing travel app - Travio!',
+                        );
+                      },
+                    ),
+                  ]),
 
-                     const SizedBox(height: 40),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.redAccent.withOpacity(0.2),
-                              blurRadius: 15,
-                              offset: const Offset(0, 8),
+                  const SizedBox(height: 32),
+                  _buildSectionHeader("Support"),
+                  const SizedBox(height: 12),
+                  _buildSettingsGroup([
+                    _buildSettingsItem(
+                      Icons.help_outline,
+                      "Help & Support",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const HelpSupportScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildSettingsItem(Icons.info_outline, "About App"),
+                  ]),
+
+                  const SizedBox(height: 40),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.redAccent.withValues(alpha: 0.2),
+                            blurRadius: 15,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
+                      ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const LoginScreen(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.redAccent,
+                          padding: const EdgeInsets.symmetric(vertical: 18),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: BorderSide(
+                              color: Colors.redAccent.withValues(alpha: 0.2),
+                            ),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.logout_rounded),
+                            const SizedBox(width: 12),
+                            const Text(
+                              "Log Out",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (_) => const LoginScreen()),
-                            );
-                          },
-                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.redAccent,
-                            padding: const EdgeInsets.symmetric(vertical: 18),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(color: Colors.redAccent.withOpacity(0.2)),
-                            ),
-                            elevation: 0,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(Icons.logout_rounded),
-                              const SizedBox(width: 12),
-                              const Text("Log Out", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ),
                       ),
-                    ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
-                    const SizedBox(height: 100),
-                  ],
-                ),
+                    ),
+                  ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
+                  const SizedBox(height: 100),
+                ],
               ),
             ),
+          ),
         ],
       ),
     );
@@ -152,12 +231,18 @@ class ProfileScreen extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.edit_note, color: Colors.white),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfileScreen()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+            );
           },
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
-        stretchModes: const [StretchMode.zoomBackground, StretchMode.blurBackground],
+        stretchModes: const [
+          StretchMode.zoomBackground,
+          StretchMode.blurBackground,
+        ],
         background: Stack(
           fit: StackFit.expand,
           children: [
@@ -173,8 +258,8 @@ class ProfileScreen extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.3),
-                    AppColors.primary.withOpacity(0.9),
+                    Colors.black.withValues(alpha: 0.3),
+                    AppColors.primary.withValues(alpha: 0.9),
                   ],
                 ),
               ),
@@ -188,7 +273,7 @@ class ProfileScreen extends StatelessWidget {
                 height: 150,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.05),
+                  color: Colors.white.withValues(alpha: 0.05),
                 ),
               ),
             ),
@@ -201,10 +286,13 @@ class ProfileScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white.withOpacity(0.5), width: 2),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.5),
+                      width: 2,
+                    ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha: 0.2),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -220,7 +308,8 @@ class ProfileScreen extends StatelessWidget {
                       child: const CircleAvatar(
                         radius: 55,
                         backgroundImage: NetworkImage(
-                            'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1780&auto=format&fit=crop'),
+                          'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1780&auto=format&fit=crop',
+                        ),
                       ),
                     ),
                   ),
@@ -240,7 +329,7 @@ class ProfileScreen extends StatelessWidget {
                   "john.doe@example.com",
                   style: TextStyle(
                     fontSize: 15,
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     fontWeight: FontWeight.w400,
                   ),
                 ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.3, end: 0),
@@ -260,7 +349,7 @@ class ProfileScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.08),
+            color: AppColors.primary.withValues(alpha: 0.08),
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),
@@ -295,7 +384,7 @@ class ProfileScreen extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 14,
-            color: AppColors.textSecondary.withOpacity(0.7),
+            color: AppColors.textSecondary.withValues(alpha: 0.7),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -307,7 +396,7 @@ class ProfileScreen extends StatelessWidget {
     return Container(
       height: 30,
       width: 1,
-      color: Colors.grey.withOpacity(0.2),
+      color: Colors.grey.withValues(alpha: 0.2),
     );
   }
 
@@ -331,12 +420,12 @@ class ProfileScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.primary.withOpacity(0.05)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
         boxShadow: [
           BoxShadow(
-             color: AppColors.primary.withOpacity(0.05),
-             blurRadius: 20,
-             offset: const Offset(0, 4),
+            color: AppColors.primary.withValues(alpha: 0.05),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -350,7 +439,10 @@ class ProfileScreen extends StatelessWidget {
                 if (index < items.length - 1)
                   Padding(
                     padding: const EdgeInsets.only(left: 64, right: 16),
-                    child: Divider(height: 1, color: Colors.grey.withOpacity(0.1)),
+                    child: Divider(
+                      height: 1,
+                      color: Colors.grey.withValues(alpha: 0.1),
+                    ),
                   ),
               ],
             );
@@ -360,33 +452,41 @@ class ProfileScreen extends StatelessWidget {
     ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.1);
   }
 
-  Widget _buildSettingsItem(IconData icon, String title, {VoidCallback? onTap}) {
+  Widget _buildSettingsItem(
+    IconData icon,
+    String title, {
+    VoidCallback? onTap,
+  }) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       onTap: onTap ?? () {},
       leading: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.08),
+          color: AppColors.primary.withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Icon(icon, color: AppColors.primary, size: 22),
       ),
       title: Text(
-         title,
-         style: const TextStyle(
-           fontWeight: FontWeight.w600, 
-           color: AppColors.textPrimary, 
-           fontSize: 16,
-         ),
+        title,
+        style: const TextStyle(
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
+          fontSize: 16,
+        ),
       ),
       trailing: Container(
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.1),
+          color: Colors.grey.withValues(alpha: 0.1),
           shape: BoxShape.circle,
         ),
-        child: const Icon(Icons.arrow_forward_ios, size: 12, color: AppColors.textSecondary),
+        child: const Icon(
+          Icons.arrow_forward_ios,
+          size: 12,
+          color: AppColors.textSecondary,
+        ),
       ),
     );
   }

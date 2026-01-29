@@ -3,108 +3,142 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
   <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart">
-  <img src="https://img.shields.io/badge/Version-1.0.0-orange?style=for-the-badge" alt="Version">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/Status-Complete-brightgreen?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
+</p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Choudhary-Khuzaim&repo=travio&theme=radical" alt="Repo Stats">
 </p>
 
 ---
 
 ## 🌎 Overview
 
-**Travio** is a cutting-edge, comprehensive travel companion designed to redefine the way travelers explore, plan, and book their journeys. Built with Flutter, it offers a seamless, high-performance experience across multiple platforms, ensuring that your next adventure is just a few taps away. Whether you're looking for hidden gems, booking luxury stays, or managing your flight tickets, Travio is your all-in-one travel ecosystem.
-
-## 📖 Detailed Description
-
-In a world where travel planning can often be fragmented and stressful, **Travio** bridges the gap between inspiration and execution. Our mission is to empower travelers with a unified platform that integrates destination discovery, real-time mapping, and robust booking systems for flights, hotels, and local transportation.
-
-Travio uses sophisticated UI/UX principles to provide a "premium-first" feel. From animated transitions using `flutter_animate` to high-resolution mapping with `flutter_map`, every interaction is crafted for elegance and speed. The application simplifies complex tasks like seat selection and itinerary management into an intuitive, visually pleasing interface.
+**Travio** is a cutting-edge, high-fidelity travel ecosystem designed to revolutionize the way people explore, plan, and book their journeys. Built with the "Premium-First" philosophy, Travio seamlessly integrates destination discovery, luxury hotel reservations, flight management, and interactive mapping into a single, cohesive mobile experience.
 
 ---
 
-## ✨ Core Features
+## ✨ Premium Features & Modules
 
-### 🔍 Seamless Exploration
-*   **Curated Destinations:** Explore a wide range of hand-picked attractions and events.
-*   **Smart Search:** Advanced search functionality to find exactly what you're looking for.
-*   **Interactive Maps:** Visual exploration of destinations using high-performance map integrations.
+### 🔐 Seamless Onboarding & Security
+- **Dynamic Onboarding:** Engaging visual experience powered by `flutter_animate`.
+- **Advanced Auth:** Support for Login, Signup, OTP Verification, and Forgot Password flows.
+- **Profile Customization:** User-centric profile creation and management.
 
-### 🎫 Advanced Booking Systems
-*   **Flight Booking:** Select flights, choose your preferred seats, and manage your tickets.
-*   **Hotel Reservations:** Discover featured hotels with detailed reviews and easy booking forms.
-*   **Cab & Transport:** Book local transportation directly through the app for a hassle-free commute.
+### �️ Smart Exploration
+- **3D Destination Carousel:** A unique, immersive way to browse popular spots.
+- **Interactive Mapping:** Real-time destination visualization via `flutter_map`.
+- **Intelligent Search:** Quick access to cities, attractions, and global destinations.
+- **Events & Attractions:** Stay updated with local events and curated travel guides.
 
-### 👤 Personalized Experience
-*   **Travel Profiles:** Manage your personal information, saved destinations, and past trips.
-*   **Boarding Passes:** Digital access to your tickets and QR codes for quick check-ins.
-*   **Trip Management:** Keep track of all your upcoming and past adventures in one place.
+### 🎫 Elite Booking Hub
+- **Hotel Reservations:** Comprehensive booking system with filters (Luxury, Boutique, etc.), detailed profiles, and integrated booking forms.
+- **Flight Management:** Dedicated seat selection and flight detail tracking.
+- **Cab Services:** Hassle-free local transport booking module.
+- **Reviews & Ratings:** Native read/write review system with premium UI interactions.
 
-### 🛠️ Utilities & Security
-*   **QR Integration:** Quick access to tickets and information via QR scanners.
-*   **Secure Payments:** Integrated payment screens for safe and easy transactions.
-*   **Privacy First:** Comprehensive controls for data usage and privacy settings.
+### 👤 Personal Travel Concierge
+- **Digital Boarding Passes:** High-performance QR-coded tickets for seamless check-ins.
+- **Trips Management:** Track upcoming and past journeys in a clean, timeline-based view.
+- **Saved Treasures:** Bookmark your favorite spots for future reference.
+- **Privacy First:** Full-featured settings for data usage, policies, and account security.
 
 ---
 
-## 📱 App Interfaces
+## 📸 Visual Showcase
 
 <p align="center">
-  <img src="assets/images/readme/explore_mockup.png" alt="Explore Screen" width="45%">
-  <img src="assets/images/readme/booking_mockup.png" alt="Booking Screen" width="45%">
+  <img src="assets/images/readme/explore_mockup.png" alt="Explore Screen" width="48%">
+  <img src="assets/images/readme/booking_mockup.png" alt="Booking Screen" width="48%">
 </p>
 
-*Note: The images above are high-fidelity mockups. Please replace them with actual application screenshots for production documentation.*
+---
+
+## 🛠️ Technical Architecture
+
+### Core Stack
+- **Framework:** [Flutter SDK](https://flutter.dev) (v3.35.7+)
+- **Language:** [Dart](https://dart.dev) (v3.9.2+)
+- **Architecture:** Clean UI separation with modular screen management.
+
+### Elite Integrations
+- **Animations:** `flutter_animate` for high-performance micro-interactions.
+- **Typography:** `google_fonts` (Poppins & Outfit).
+- **Location:** `flutter_map` with `latlong2` & `geolocator`.
+- **Utilities:** `qr_flutter`, `share_plus`, `url_launcher`, `intl`.
 
 ---
 
-## 🚀 Getting Started
+## 📂 Project Structure
+
+```text
+lib/
+├── core/               # App Design System (Colors, Theme, Shapes)
+├── models/             # Business Logic Objects (Destination, Hotel, Trip)
+├── screens/            # 40+ Premium UI Screens
+│   ├── auth/           # Login, Signup, OTP
+│   ├── booking/        # Hotels, Flights, Cabs
+│   ├── explorer/       # Maps, Search, Events
+│   └── profile/        # Settings, Digital Pass, Privacy
+├── widgets/            # Reusable High-end Components
+└── main.dart           # Application Entry Point
+```
+
+---
+
+## 🚀 Deployment & Setup
 
 ### Prerequisites
-*   Flutter SDK: `^3.9.2`
-*   Dart SDK: `^3.0.0`
-*   An IDE (VS Code, Android Studio, or IntelliJ)
+- Ensure you have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed and configured on your machine.
 
-### Installation
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/yourusername/travio.git
-    ```
-2.  **Navigate to Project Directory:**
-    ```bash
-    cd travio
-    ```
-3.  **Install Dependencies:**
-    ```bash
-    flutter pub get
-    ```
-4.  **Run the Application:**
-    ```bash
-    flutter run
-    ```
+### Local Installation
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Choudhary-Khuzaim/travio.git
+   ```
+2. **Navigate to the directory:**
+   ```bash
+   cd travio
+   ```
+3. **Download dependencies:**
+   ```bash
+   flutter pub get
+   ```
+4. **Run the application:**
+   ```bash
+   flutter run
+   ```
 
 ---
 
-## 📜 Version Log
-
-### [1.0.0] - 2026-01-28
-#### Added
-*   Initial release of the Travio Travel Ecosystem.
-*   Complete Onboarding and Authentication flow (Login/Signup/OTP).
-*   Dynamic Exploration module with Featured Destinations and Attractions.
-*   Full-featured Booking systems (Flights, Hotels, Cabs).
-*   Interactive Map integration for destination visualization.
-*   Seat selection and Boarding Pass generation.
-*   User Profile management and Settings.
-*   Integrated Payment and Review systems.
+## 📜 Roadmap
+- [x] Immersive 3D Destination Carousel
+- [x] Digital QR Boarding Pass Module
+- [x] Professional Auth & Profile Flow
+- [ ] AI-Powered Itinerary Generator
+- [ ] Global Payment Gateway Integration
+- [ ] Multi-language Support (RTL/LTR)
 
 ---
 
-## 🛠️ Developed With
-*   [Flutter](https://flutter.dev) - UI Toolkit
-*   [Google Fonts](https://pub.dev/packages/google_fonts) - Professional Typography
-*   [Flutter Animate](https://pub.dev/packages/flutter_animate) - Smooth Transitions
-*   [Flutter Map](https://pub.dev/packages/flutter_map) - Interactive Mapping
-*   [Geolocator](https://pub.dev/packages/geolocator) - Location Services
+## 🤝 Contributing & Support
+We love contributions! If you have any ideas to improve Travio:
+1. Fork the repo.
+2. Create your branch (`git checkout -b feature/NewIdea`).
+3. Commit changes (`git commit -m 'Add NewIdea'`).
+4. Push to branch (`git push origin feature/NewIdea`).
+5. Open a Pull Request.
 
 ---
 
-<p align="center"> Developed with ❤️ by <b>Khuzaim Sajjad</b> </p>
+## 📄 License
+This project is licensed under the **MIT License**.
+
+---
+
+<p align="center">
+  <b>Designed & Crafted with Perfection by</b><br>
+  <a href="https://github.com/Choudhary-Khuzaim">Khuzaim Sajjad</a><br><br>
+  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+</p>

@@ -249,7 +249,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -324,9 +324,9 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Colors.white.withOpacity(0.3),
+                      Colors.white.withValues(alpha: 0.3),
                       Colors.transparent,
-                      Colors.white.withOpacity(0.4),
+                      Colors.white.withValues(alpha: 0.4),
                       Colors.white,
                     ],
                     stops: const [0, 0.4, 0.8, 1],
@@ -367,7 +367,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -402,7 +402,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -425,7 +425,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
             child: SizedBox(
               height: 20,
               child: CustomPaint(
-                painter: DashLinePainter(color: Colors.grey.withOpacity(0.3)),
+                painter: DashLinePainter(color: Colors.grey.withValues(alpha: 0.3)),
               ),
             ),
           ),
@@ -509,7 +509,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -551,7 +551,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
@@ -622,7 +622,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                   width: 2,
                 ),
                 boxShadow: isSelected
-                    ? [BoxShadow(color: AppColors.primary.withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 4))]
+                    ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 10, offset: const Offset(0, 4))]
                     : null,
               ),
               child: Column(
@@ -701,7 +701,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isSelected ? AppColors.primary.withOpacity(0.05) : Colors.white,
+                        color: isSelected ? AppColors.primary.withValues(alpha: 0.05) : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
                           color: isSelected ? AppColors.primary : Colors.grey.shade200,
@@ -713,7 +713,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: isSelected ? AppColors.primary.withOpacity(0.1) : Colors.grey.shade50,
+                              color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : Colors.grey.shade50,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Icon(

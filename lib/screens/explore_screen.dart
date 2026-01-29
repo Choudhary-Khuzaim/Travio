@@ -117,7 +117,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     top: -50,
                     child: CircleAvatar(
                       radius: 100,
-                      backgroundColor: Colors.white.withOpacity(0.05),
+                      backgroundColor: Colors.white.withValues(alpha: 0.05),
                     ),
                   ),
                 ],
@@ -139,7 +139,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: Colors.black.withValues(alpha: 0.05),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -184,11 +184,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             color: isSelected ? AppColors.primary : Colors.white,
                             borderRadius: BorderRadius.circular(25),
                             border: Border.all(
-                              color: isSelected ? AppColors.primary : Colors.grey.withOpacity(0.3),
+                              color: isSelected ? AppColors.primary : Colors.grey.withValues(alpha: 0.3),
                             ),
                             boxShadow: isSelected ? [
                               BoxShadow(
-                                color: AppColors.primary.withOpacity(0.3),
+                                color: AppColors.primary.withValues(alpha: 0.3),
                                 blurRadius: 8,
                                 offset: const Offset(0, 4),
                               )
@@ -262,7 +262,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -294,7 +294,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white.withValues(alpha: 0.9),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(

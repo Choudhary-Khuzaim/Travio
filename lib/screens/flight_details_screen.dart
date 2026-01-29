@@ -77,7 +77,7 @@ class FlightDetailsScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Icon(Icons.flight_takeoff, color: AppColors.primary, size: 24),
@@ -143,7 +143,7 @@ class FlightDetailsScreen extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 2),
           height: 1,
-          color: index % 2 == 0 ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+          color: index % 2 == 0 ? Colors.grey.withValues(alpha: 0.3) : Colors.transparent,
         ),
       )),
     );
@@ -228,7 +228,7 @@ class FlightDetailsScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
                   elevation: 8,
-                  shadowColor: AppColors.primary.withOpacity(0.4),
+                  shadowColor: AppColors.primary.withValues(alpha: 0.4),
                 ),
                 child: const Text('Book Now',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
