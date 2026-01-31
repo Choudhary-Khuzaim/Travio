@@ -21,20 +21,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         children: [
           // Background Image with Blur
           Positioned.fill(
-            child: Image.network(
-              'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop',
+            child: Image.asset(
+              'assets/images/forgot_password_bg.png',
               fit: BoxFit.cover,
+              filterQuality: FilterQuality.medium,
             ),
           ),
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                color: Colors.black.withValues(alpha: 0.4),
-              ),
+              child: Container(color: Colors.black.withValues(alpha: 0.4)),
             ),
           ),
-          
+
           SafeArea(
             child: Column(
               children: [
@@ -43,7 +42,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      ),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ),
@@ -74,17 +76,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             height: 1.5,
                           ),
                         ).animate().fadeIn(delay: 200.ms).slideX(),
-                        
+
                         const SizedBox(height: 48),
-                        
+
                         _buildGlassTextField(
                           controller: _emailController,
                           hint: "Email Address",
                           icon: Icons.email_outlined,
                         ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
-                        
+
                         const SizedBox(height: 40),
-                        
+
                         SizedBox(
                           width: double.infinity,
                           height: 56,
@@ -92,7 +94,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             onPressed: () {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text("Reset link sent to your email!"),
+                                  content: Text(
+                                    "Reset link sent to your email!",
+                                  ),
                                   backgroundColor: AppColors.primary,
                                 ),
                               );
@@ -101,12 +105,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,
                               foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                               elevation: 0,
                             ),
                             child: const Text(
                               "Send Link",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ).animate().fadeIn(delay: 600.ms).scale(),
@@ -141,7 +150,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.5)),
           prefixIcon: Icon(icon, color: Colors.white.withValues(alpha: 0.8)),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16,
+          ),
         ),
       ),
     );

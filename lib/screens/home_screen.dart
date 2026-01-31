@@ -112,9 +112,10 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Image.network(
-              'https://images.unsplash.com/photo-1518005068251-37900150dfca?q=80&w=600&auto=format&fit=crop',
+            child: Image.asset(
+              'assets/images/home_header.png',
               fit: BoxFit.cover,
+              filterQuality: FilterQuality.medium,
               errorBuilder: (context, error, stackTrace) => Container(
                 color: Colors.grey[300],
                 child: const Icon(

@@ -17,25 +17,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<Map<String, String>> _slides = [
     {
-      'image':
-          'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop',
-      'title': 'Discover\nWorld with us.',
+      'image': 'assets/images/hunza_onboarding.png',
+      'title': 'Discover\nHunza Valley',
       'subtitle':
-          'Explore the best places in the world and capture your best moments with us.',
+          'Explore the majestic mountains and breathtaking landscapes of Hunza Valley.',
     },
     {
-      'image':
-          'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop',
+      'image': 'assets/images/islamabad_onboarding.png',
       'title': 'Book Your\nDream Flight',
       'subtitle':
-          'Find the best deals on flights to your favorite destinations instantly.',
+          'Find the best deals on flights to Islamabad and your favorite destinations.',
     },
     {
-      'image':
-          'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop',
+      'image': 'assets/images/quetta_onboarding.png',
       'title': 'Enjoy Your\nBest Vacation',
       'subtitle':
-          'Relax and enjoy your holiday with our premium travel packages.',
+          'Relax and enjoy your holiday with our premium travel packages in Quetta.',
     },
   ];
 
@@ -52,13 +49,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               key: ValueKey<int>(_currentPage),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(_slides[_currentPage]['image']!),
+                  image: AssetImage(_slides[_currentPage]['image']!),
                   fit: BoxFit.cover,
+                  filterQuality: FilterQuality.medium,
+                  isAntiAlias: true,
                 ),
               ),
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                child: Container(color: Colors.black.withValues(alpha: 0.5)),
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(color: Colors.black.withValues(alpha: 0.4)),
               ),
             ),
           ),
@@ -153,26 +152,31 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildSlideCard(Map<String, String> slide, bool isActive) {
-    return AnimatedContainer(
+    return AnimatedScale(
+      scale: isActive ? 1.0 : 0.85,
       duration: const Duration(milliseconds: 400),
-      curve: Curves.easeOutBack,
-      margin: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: isActive ? 0 : 30, // Scale effect
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+      curve: Curves.easeOutQuart,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.4),
+              blurRadius: 25,
+              offset: const Offset(0, 15),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: Image.asset(
+            slide['image']!,
+            fit: BoxFit.cover,
+            filterQuality: FilterQuality.medium,
+            isAntiAlias: true,
           ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
-        child: Image.network(slide['image']!, fit: BoxFit.cover),
+        ),
       ),
     );
   }

@@ -26,20 +26,19 @@ class _SignupScreenState extends State<SignupScreen> {
         children: [
           // Background Image with Blur
           Positioned.fill(
-            child: Image.network(
-              'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop',
+            child: Image.asset(
+              'assets/images/signup_bg.png',
               fit: BoxFit.cover,
+              filterQuality: FilterQuality.medium,
             ),
           ),
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                color: Colors.black.withValues(alpha: 0.4),
-              ),
+              child: Container(color: Colors.black.withValues(alpha: 0.4)),
             ),
           ),
-          
+
           SafeArea(
             child: Column(
               children: [
@@ -48,7 +47,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      ),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ),
@@ -73,45 +75,46 @@ class _SignupScreenState extends State<SignupScreen> {
                         const SizedBox(height: 12),
                         const Text(
                           "Start your journey with us today",
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 16,
-                          ),
+                          style: TextStyle(color: Colors.white70, fontSize: 16),
                         ).animate().fadeIn(delay: 200.ms).slideX(),
-                        
+
                         const SizedBox(height: 48),
-                        
-                        
+
                         _buildGlassTextField(
                           controller: _emailController,
                           hint: "Email Address",
                           icon: Icons.email_outlined,
                         ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.2),
-                        
+
                         const SizedBox(height: 20),
-                        
+
                         _buildGlassTextField(
                           controller: _passwordController,
                           hint: "Password",
                           icon: Icons.lock_outline,
                           isPassword: true,
                           obscureText: _obscurePassword,
-                          onTogglePassword: () => setState(() => _obscurePassword = !_obscurePassword),
+                          onTogglePassword: () => setState(
+                            () => _obscurePassword = !_obscurePassword,
+                          ),
                         ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.2),
-                        
+
                         const SizedBox(height: 20),
-                        
+
                         _buildGlassTextField(
                           controller: _confirmPasswordController,
                           hint: "Confirm Password",
                           icon: Icons.lock_reset,
                           isPassword: true,
                           obscureText: _obscureConfirmPassword,
-                          onTogglePassword: () => setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
+                          onTogglePassword: () => setState(
+                            () => _obscureConfirmPassword =
+                                !_obscureConfirmPassword,
+                          ),
                         ).animate().fadeIn(delay: 900.ms).slideY(begin: 0.2),
-                        
+
                         const SizedBox(height: 40),
-                        
+
                         SizedBox(
                           width: double.infinity,
                           height: 56,
@@ -119,24 +122,31 @@ class _SignupScreenState extends State<SignupScreen> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (_) => const OTPScreen()),
+                                MaterialPageRoute(
+                                  builder: (_) => const OTPScreen(),
+                                ),
                               );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,
                               foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                               elevation: 0,
                             ),
                             child: const Text(
                               "Sign Up",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ).animate().fadeIn(delay: 1000.ms).scale(),
-                        
+
                         const SizedBox(height: 32),
-                        
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -195,14 +205,19 @@ class _SignupScreenState extends State<SignupScreen> {
           suffixIcon: isPassword
               ? IconButton(
                   icon: Icon(
-                    obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                    obscureText
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                     color: Colors.white.withValues(alpha: 0.8),
                   ),
                   onPressed: onTogglePassword,
                 )
               : null,
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16,
+          ),
         ),
       ),
     );

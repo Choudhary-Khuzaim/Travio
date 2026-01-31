@@ -26,20 +26,19 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           // Background Image with Blur
           Positioned.fill(
-            child: Image.network(
-              'https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?q=80&w=2070&auto=format&fit=crop',
+            child: Image.asset(
+              'assets/images/login_bg.png',
               fit: BoxFit.cover,
+              filterQuality: FilterQuality.medium,
             ),
           ),
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                color: Colors.black.withValues(alpha: 0.4),
-              ),
+              child: Container(color: Colors.black.withValues(alpha: 0.4)),
             ),
           ),
-          
+
           SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -49,19 +48,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 60),
                   // Logo or Icon
                   Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
-                      ),
-                      child: const Icon(
-                        Icons.travel_explore,
-                        size: 60,
-                        color: Colors.white,
-                      ),
-                    ).animate().scale(duration: 600.ms, curve: Curves.easeOutBack),
+                    child:
+                        Container(
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.2),
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.5),
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.travel_explore,
+                            size: 60,
+                            color: Colors.white,
+                          ),
+                        ).animate().scale(
+                          duration: 600.ms,
+                          curve: Curves.easeOutBack,
+                        ),
                   ),
                   const SizedBox(height: 32),
                   const Text(
@@ -75,41 +80,41 @@ class _LoginScreenState extends State<LoginScreen> {
                   ).animate().fadeIn(delay: 200.ms).slideX(),
                   const Text(
                     "Log in to continue your journey",
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
                   ).animate().fadeIn(delay: 400.ms).slideX(),
-                  
+
                   const SizedBox(height: 48),
-                  
+
                   // Text Fields with Glassmorphism
                   _buildGlassTextField(
                     controller: _emailController,
                     hint: "Username",
                     icon: Icons.person_outline,
                   ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.2),
-                  
+
                   const SizedBox(height: 20),
-                  
+
                   _buildGlassTextField(
                     controller: _passwordController,
                     hint: "Password",
                     icon: Icons.lock_outline,
                     isPassword: true,
                     obscureText: _obscurePassword,
-                    onTogglePassword: () => setState(() => _obscurePassword = !_obscurePassword),
+                    onTogglePassword: () =>
+                        setState(() => _obscurePassword = !_obscurePassword),
                   ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.2),
-                  
+
                   const SizedBox(height: 12),
-                  
+
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const ForgotPasswordScreen()),
+                          MaterialPageRoute(
+                            builder: (_) => const ForgotPasswordScreen(),
+                          ),
                         );
                       },
                       child: const Text(
@@ -118,9 +123,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ).animate().fadeIn(delay: 900.ms),
-                  
+
                   const SizedBox(height: 32),
-                  
+
                   // Login Button
                   SizedBox(
                     width: double.infinity,
@@ -131,12 +136,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             _passwordController.text == 'admin') {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (_) => const HomeScreen()),
+                            MaterialPageRoute(
+                              builder: (_) => const HomeScreen(),
+                            ),
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text("Invalid username or password! (Use 'admin')"),
+                              content: Text(
+                                "Invalid username or password! (Use 'admin')",
+                              ),
                               backgroundColor: Colors.redAccent,
                             ),
                           );
@@ -145,28 +154,36 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                         elevation: 0,
                       ),
                       child: const Text(
                         "Log In",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ).animate().fadeIn(delay: 1000.ms).scale(),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Social Logins
                   Center(
                     child: Text(
                       "Or continue with",
-                      style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 14),
+                      style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.6),
+                        fontSize: 14,
+                      ),
                     ),
                   ).animate().fadeIn(delay: 1100.ms),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -177,9 +194,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       _buildSocialButton(Icons.facebook, () {}),
                     ],
                   ).animate().fadeIn(delay: 1200.ms).slideY(begin: 0.2),
-                  
+
                   const SizedBox(height: 40),
-                  
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -191,7 +208,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => const SignupScreen()),
+                            MaterialPageRoute(
+                              builder: (_) => const SignupScreen(),
+                            ),
                           );
                         },
                         child: const Text(
@@ -240,14 +259,19 @@ class _LoginScreenState extends State<LoginScreen> {
           suffixIcon: isPassword
               ? IconButton(
                   icon: Icon(
-                    obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                    obscureText
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                     color: Colors.white.withValues(alpha: 0.8),
                   ),
                   onPressed: onTogglePassword,
                 )
               : null,
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16,
+          ),
         ),
       ),
     );
