@@ -102,7 +102,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Icons.info_outline,
                     "About Travio",
                     "Version and build info",
-                    "v1.0.0",
+                    "v2.3.0",
                   ),
                   _buildListTile(
                     Icons.star_outline,
