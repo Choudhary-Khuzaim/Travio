@@ -30,16 +30,41 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
 
   final TextEditingController _pickupController = TextEditingController();
   final TextEditingController _dropoffController = TextEditingController();
-  
+
   final FocusNode _pickupFocusNode = FocusNode();
   final FocusNode _dropoffFocusNode = FocusNode();
 
   final List<Map<String, dynamic>> _cabs = [
-    {'name': 'Economy', 'price': 'Rs. 1,250', 'time': '3 min', 'icon': Icons.directions_car_filled},
-    {'name': 'Premium', 'price': 'Rs. 1,800', 'time': '5 min', 'icon': Icons.directions_car},
-    {'name': 'LUX', 'price': 'Rs. 3,500', 'time': '8 min', 'icon': Icons.airport_shuttle},
-    {'name': 'Van', 'price': 'Rs. 4,500', 'time': '12 min', 'icon': Icons.airport_shuttle_outlined},
-    {'name': 'Mini', 'price': 'Rs. 1,000', 'time': '2 min', 'icon': Icons.local_taxi},
+    {
+      'name': 'Economy',
+      'price': 'Rs. 1,250',
+      'time': '3 min',
+      'icon': Icons.directions_car_filled,
+    },
+    {
+      'name': 'Premium',
+      'price': 'Rs. 1,800',
+      'time': '5 min',
+      'icon': Icons.directions_car,
+    },
+    {
+      'name': 'LUX',
+      'price': 'Rs. 3,500',
+      'time': '8 min',
+      'icon': Icons.airport_shuttle,
+    },
+    {
+      'name': 'Van',
+      'price': 'Rs. 4,500',
+      'time': '12 min',
+      'icon': Icons.airport_shuttle_outlined,
+    },
+    {
+      'name': 'Mini',
+      'price': 'Rs. 1,000',
+      'time': '2 min',
+      'icon': Icons.local_taxi,
+    },
   ];
 
   @override
@@ -55,9 +80,9 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
   @override
   void initState() {
     super.initState();
-    // Start with a default location (e.g., London) if needed, 
+    // Start with a default location (e.g., London) if needed,
     // or just wait for user to click the button.
-    _currentPosition = const LatLng(51.509364, -0.128928);
+    _currentPosition = const LatLng(24.8607, 67.0011);
   }
 
   Future<bool> _handleLocationPermission() async {
@@ -67,8 +92,13 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Location services are disabled. Please enable the services')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Location services are disabled. Please enable the services',
+            ),
+          ),
+        );
       }
       return false;
     }
@@ -78,15 +108,21 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
       if (permission == LocationPermission.denied) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Location permissions are denied')));
+            const SnackBar(content: Text('Location permissions are denied')),
+          );
         }
         return false;
       }
     }
     if (permission == LocationPermission.deniedForever) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Location permissions are permanently denied, we cannot request permissions.')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Location permissions are permanently denied, we cannot request permissions.',
+            ),
+          ),
+        );
       }
       return false;
     }
@@ -110,29 +146,33 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
     );
 
     _positionStreamSubscription =
-        Geolocator.getPositionStream(locationSettings: locationSettings)
-            .listen((Position position) {
-      setState(() {
-        _currentPosition = LatLng(position.latitude, position.longitude);
-        _isLoadingLocation = false;
-      });
+        Geolocator.getPositionStream(locationSettings: locationSettings).listen(
+          (Position position) {
+            setState(() {
+              _currentPosition = LatLng(position.latitude, position.longitude);
+              _isLoadingLocation = false;
+            });
 
-      _mapController.move(_currentPosition!, 15.0);
-    }, onError: (e) {
-      setState(() => _isLoadingLocation = false);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error getting location updates: $e')));
-      }
-    });
+            _mapController.move(_currentPosition!, 15.0);
+          },
+          onError: (e) {
+            setState(() => _isLoadingLocation = false);
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Error getting location updates: $e')),
+              );
+            }
+          },
+        );
   }
 
   Future<void> _updateRoute() async {
     if (_pickupLocation != null && _dropoffLocation != null) {
       setState(() => _isLoadingRoute = true);
-      
+
       try {
-        final url = 'https://router.project-osrm.org/route/v1/driving/'
+        final url =
+            'https://router.project-osrm.org/route/v1/driving/'
             '${_pickupLocation!.longitude},${_pickupLocation!.latitude};'
             '${_dropoffLocation!.longitude},${_dropoffLocation!.latitude}'
             '?overview=full&geometries=geojson';
@@ -142,18 +182,26 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
         if (response.statusCode == 200) {
           final data = json.decode(response.body);
           if (data['routes'] != null && data['routes'].isNotEmpty) {
-            final geometry = data['routes'][0]['geometry']['coordinates'] as List;
+            final geometry =
+                data['routes'][0]['geometry']['coordinates'] as List;
             setState(() {
-              _routePoints = geometry.map((coord) => LatLng(coord[1].toDouble(), coord[0].toDouble())).toList();
+              _routePoints = geometry
+                  .map(
+                    (coord) => LatLng(coord[1].toDouble(), coord[0].toDouble()),
+                  )
+                  .toList();
             });
-            
+
             // Zoom map to fit the entire route
             final bounds = LatLngBounds.fromPoints(_routePoints);
             Future.delayed(const Duration(milliseconds: 100), () {
               _mapController.fitCamera(
                 CameraFit.bounds(
-                  bounds: bounds, 
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 150),
+                  bounds: bounds,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 50,
+                    vertical: 150,
+                  ),
                 ),
               );
             });
@@ -206,14 +254,30 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
       } else {
         _dropoffLocation = found;
       }
-      
+
       // Update suggestions if text is not empty and not an exact match
       if (value.isNotEmpty && found == null) {
         final List<String> allCities = [
-          'Karachi', 'Lahore', 'Islamabad', 'Quetta', 'Peshawar', 'Multan', 'Faisalabad', 'Sialkot', 
-          'Malir', 'Gulshan-e-Iqbal', 'Clifton', 'DHA', 'North Nazimabad', 'Nazimabad', 'Bahadurabad', 'Tariq Road'
+          'Karachi',
+          'Lahore',
+          'Islamabad',
+          'Quetta',
+          'Peshawar',
+          'Multan',
+          'Faisalabad',
+          'Sialkot',
+          'Malir',
+          'Gulshan-e-Iqbal',
+          'Clifton',
+          'DHA',
+          'North Nazimabad',
+          'Nazimabad',
+          'Bahadurabad',
+          'Tariq Road',
         ];
-        _suggestions = allCities.where((c) => c.toLowerCase().contains(query)).toList();
+        _suggestions = allCities
+            .where((c) => c.toLowerCase().contains(query))
+            .toList();
       } else {
         _suggestions = [];
       }
@@ -256,7 +320,11 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
             ],
           ),
           child: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.textPrimary),
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              size: 18,
+              color: AppColors.textPrimary,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -268,7 +336,8 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
             child: FlutterMap(
               mapController: _mapController,
               options: MapOptions(
-                initialCenter: _currentPosition ?? const LatLng(51.509364, -0.128928),
+                initialCenter:
+                    _currentPosition ?? const LatLng(24.8607, 67.0011),
                 initialZoom: 13.0,
               ),
               children: [
@@ -276,7 +345,9 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   userAgentPackageName: 'com.example.travio',
                 ),
-                if (_currentPosition != null || _pickupLocation != null || _dropoffLocation != null)
+                if (_currentPosition != null ||
+                    _pickupLocation != null ||
+                    _dropoffLocation != null)
                   MarkerLayer(
                     markers: [
                       if (_currentPosition != null && _pickupLocation == null)
@@ -284,21 +355,33 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                           point: _currentPosition!,
                           width: 80,
                           height: 80,
-                          child: const Icon(Icons.my_location, color: Colors.blue, size: 30),
+                          child: const Icon(
+                            Icons.my_location,
+                            color: Colors.blue,
+                            size: 30,
+                          ),
                         ),
                       if (_pickupLocation != null)
                         Marker(
                           point: _pickupLocation!,
                           width: 80,
                           height: 80,
-                          child: const Icon(Icons.location_on, color: Colors.blue, size: 40),
+                          child: const Icon(
+                            Icons.location_on,
+                            color: Colors.blue,
+                            size: 40,
+                          ),
                         ),
                       if (_dropoffLocation != null)
                         Marker(
                           point: _dropoffLocation!,
                           width: 80,
                           height: 80,
-                          child: const Icon(Icons.location_on, color: Colors.red, size: 40),
+                          child: const Icon(
+                            Icons.location_on,
+                            color: Colors.red,
+                            size: 40,
+                          ),
                         ),
                     ],
                   ),
@@ -341,7 +424,8 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
               children: [
                 const SizedBox(height: 10),
                 _buildRouteCard(),
-                if (_suggestions.isNotEmpty && (_pickupFocusNode.hasFocus || _dropoffFocusNode.hasFocus))
+                if (_suggestions.isNotEmpty &&
+                    (_pickupFocusNode.hasFocus || _dropoffFocusNode.hasFocus))
                   _buildSuggestionsList(),
                 const Spacer(),
                 Padding(
@@ -384,9 +468,16 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                 ? const SizedBox(
                     width: 24,
                     height: 24,
-                    child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.primary),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: AppColors.primary,
+                    ),
                   )
-                : const Icon(Icons.my_location, color: AppColors.primary, size: 24),
+                : const Icon(
+                    Icons.my_location,
+                    color: AppColors.primary,
+                    size: 24,
+                  ),
           ),
         ),
       ),
@@ -425,7 +516,9 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
             child: SizedBox(
               height: 20,
               child: CustomPaint(
-                painter: DashLinePainter(color: Colors.grey.withValues(alpha: 0.3)),
+                painter: DashLinePainter(
+                  color: Colors.grey.withValues(alpha: 0.3),
+                ),
               ),
             ),
           ),
@@ -444,18 +537,27 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: _isLoadingRoute ? null : _searchCompleteRoute,
-              icon: _isLoadingRoute 
-                  ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+              icon: _isLoadingRoute
+                  ? const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
                   : const Icon(Icons.search, size: 18),
               label: Text(
-                _isLoadingRoute ? "Fetching Route..." : "Search Route", 
-                style: const TextStyle(fontWeight: FontWeight.bold)
+                _isLoadingRoute ? "Fetching Route..." : "Search Route",
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 elevation: 0,
               ),
             ),
@@ -492,7 +594,10 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
               labelText: label,
               hintText: hint,
               border: InputBorder.none,
-              labelStyle: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+              labelStyle: const TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 12,
+              ),
               hintStyle: const TextStyle(color: Colors.black26),
             ),
           ),
@@ -519,12 +624,20 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
         shrinkWrap: true,
         padding: EdgeInsets.zero,
         itemCount: _suggestions.length,
-        separatorBuilder: (_, __) => Divider(height: 1, color: Colors.grey[100]),
+        separatorBuilder: (_, __) =>
+            Divider(height: 1, color: Colors.grey[100]),
         itemBuilder: (context, index) {
           final suggestion = _suggestions[index];
           return ListTile(
-            leading: const Icon(Icons.location_on_outlined, color: AppColors.primary, size: 20),
-            title: Text(suggestion, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+            leading: const Icon(
+              Icons.location_on_outlined,
+              color: AppColors.primary,
+              size: 20,
+            ),
+            title: Text(
+              suggestion,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+            ),
             onTap: () {
               if (_pickupFocusNode.hasFocus) {
                 _pickupController.text = suggestion;
@@ -566,11 +679,21 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
             children: [
               const Text(
                 "Available Cabs",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
               ),
               TextButton(
                 onPressed: _showAllCabsModal,
-                child: const Text("View All", style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+                child: const Text(
+                  "View All",
+                  style: TextStyle(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ).animate().fadeIn().slideX(),
@@ -586,7 +709,9 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
                 elevation: 0,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
               child: const Text(
                 "Confirm Booking",
@@ -604,7 +729,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
       height: 120,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: _cabs.length, 
+        itemCount: _cabs.length,
         separatorBuilder: (_, __) => const SizedBox(width: 12),
         itemBuilder: (context, index) {
           final cab = _cabs[index];
@@ -622,7 +747,13 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                   width: 2,
                 ),
                 boxShadow: isSelected
-                    ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 10, offset: const Offset(0, 4))]
+                    ? [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.3),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]
                     : null,
               ),
               child: Column(
@@ -646,7 +777,9 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                     cab['price'] as String,
                     style: TextStyle(
                       fontSize: 12,
-                      color: isSelected ? Colors.white70 : AppColors.textSecondary,
+                      color: isSelected
+                          ? Colors.white70
+                          : AppColors.textSecondary,
                     ),
                   ),
                 ],
@@ -683,7 +816,11 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
             const SizedBox(height: 24),
             const Text(
               "Select a Cab",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+              ),
             ),
             const SizedBox(height: 20),
             Expanded(
@@ -701,10 +838,14 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isSelected ? AppColors.primary.withValues(alpha: 0.05) : Colors.white,
+                        color: isSelected
+                            ? AppColors.primary.withValues(alpha: 0.05)
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: isSelected ? AppColors.primary : Colors.grey.shade200,
+                          color: isSelected
+                              ? AppColors.primary
+                              : Colors.grey.shade200,
                           width: 1.5,
                         ),
                       ),
@@ -713,12 +854,16 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : Colors.grey.shade50,
+                              color: isSelected
+                                  ? AppColors.primary.withValues(alpha: 0.1)
+                                  : Colors.grey.shade50,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Icon(
                               cab['icon'] as IconData,
-                              color: isSelected ? AppColors.primary : AppColors.textSecondary,
+                              color: isSelected
+                                  ? AppColors.primary
+                                  : AppColors.textSecondary,
                               size: 28,
                             ),
                           ),
@@ -729,19 +874,28 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
                               children: [
                                 Text(
                                   cab['name'] as String,
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   "${cab['time']} away",
-                                  style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    color: AppColors.textSecondary,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           Text(
                             cab['price'] as String,
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                         ],
                       ),
@@ -761,7 +915,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
     final priceString = cab['price'] as String;
     // Remove '$' and any other non-numeric chars except dot
     final price = double.parse(priceString.replaceAll(RegExp(r'[^0-9.]'), ''));
-    
+
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -770,8 +924,12 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
           amount: price,
           data: {
             'cab_name': cab['name'],
-            'pickup': _pickupController.text.isEmpty ? "Current Location" : _pickupController.text,
-            'dropoff': _dropoffController.text.isEmpty ? "Not specified" : _dropoffController.text,
+            'pickup': _pickupController.text.isEmpty
+                ? "Current Location"
+                : _pickupController.text,
+            'dropoff': _dropoffController.text.isEmpty
+                ? "Not specified"
+                : _dropoffController.text,
             'est_time': cab['time'],
           },
         ),
@@ -779,6 +937,7 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
     );
   }
 }
+
 class DashLinePainter extends CustomPainter {
   final Color color;
   DashLinePainter({required this.color});
@@ -798,4 +957,3 @@ class DashLinePainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
-

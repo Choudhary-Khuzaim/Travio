@@ -128,8 +128,10 @@ class ProfileScreen extends StatelessWidget {
                       Icons.person_add_outlined,
                       "Invite Friends",
                       onTap: () {
-                        Share.share(
-                          'Check out this amazing travel app - Travio!',
+                        SharePlus.instance.share(
+                          ShareParams(
+                            text: 'Check out this amazing travel app - Travio!',
+                          ),
                         );
                       },
                     ),

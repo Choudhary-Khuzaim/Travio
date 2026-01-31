@@ -9,8 +9,13 @@ import 'attractions_screen.dart';
 
 class DestinationDetailsScreen extends StatelessWidget {
   final Destination destination;
+  final String? heroTag;
 
-  const DestinationDetailsScreen({super.key, required this.destination});
+  const DestinationDetailsScreen({
+    super.key,
+    required this.destination,
+    this.heroTag,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +41,15 @@ class DestinationDetailsScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.9),
                       shape: BoxShape.circle,
-                      boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
+                      boxShadow: const [
+                        BoxShadow(color: Colors.black12, blurRadius: 10),
+                      ],
                     ),
-                    child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.black87,
+                      size: 20,
+                    ),
                   ),
                 ),
                 actions: [
@@ -48,9 +59,15 @@ class DestinationDetailsScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.9),
                       shape: BoxShape.circle,
-                      boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
+                      boxShadow: const [
+                        BoxShadow(color: Colors.black12, blurRadius: 10),
+                      ],
                     ),
-                    child: const Icon(Icons.favorite_border, color: Colors.black87, size: 20),
+                    child: const Icon(
+                      Icons.favorite_border,
+                      color: Colors.black87,
+                      size: 20,
+                    ),
                   ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
@@ -58,15 +75,34 @@ class DestinationDetailsScreen extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       Hero(
-                        tag: 'destination-img-${destination.id}',
-                        child: Image.network(
-                          destination.imageUrl,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Container(
-                            color: Colors.grey[200],
-                            child: const Icon(Icons.broken_image, size: 50, color: Colors.grey),
-                          ),
-                        ),
+                        tag: heroTag ?? 'destination-img-${destination.id}',
+                        child: destination.imageUrl.startsWith('http')
+                            ? Image.network(
+                                destination.imageUrl,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Container(
+                                      color: Colors.grey[200],
+                                      child: const Icon(
+                                        Icons.broken_image,
+                                        size: 50,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                              )
+                            : Image.asset(
+                                destination.imageUrl,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Container(
+                                      color: Colors.grey[200],
+                                      child: const Icon(
+                                        Icons.broken_image,
+                                        size: 50,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                              ),
                       ),
                       // Gradient overlay for text readability if title was here
                       Container(
@@ -92,7 +128,9 @@ class DestinationDetailsScreen extends StatelessWidget {
                 child: Container(
                   decoration: const BoxDecoration(
                     color: AppColors.background,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(32),
+                    ),
                   ),
                   transform: Matrix4.translationValues(0, -30, 0),
                   child: Padding(
@@ -134,7 +172,11 @@ class DestinationDetailsScreen extends StatelessWidget {
                                   const SizedBox(height: 6),
                                   Row(
                                     children: [
-                                      const Icon(Icons.location_on, color: AppColors.primary, size: 16),
+                                      const Icon(
+                                        Icons.location_on,
+                                        color: AppColors.primary,
+                                        size: 16,
+                                      ),
                                       const SizedBox(width: 4),
                                       Text(
                                         destination.country,
@@ -151,14 +193,21 @@ class DestinationDetailsScreen extends StatelessWidget {
                             ),
                             // Rating Box
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.orange.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Row(
                                 children: [
-                                  const Icon(Icons.star, color: Colors.orange, size: 18),
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.orange,
+                                    size: 18,
+                                  ),
                                   const SizedBox(width: 4),
                                   Text(
                                     destination.rating.toString(),
@@ -181,11 +230,14 @@ class DestinationDetailsScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const ReviewsScreen()),
+                              MaterialPageRoute(
+                                builder: (_) => const ReviewsScreen(),
+                              ),
                             );
                           },
                           child: Container(
-                            color: Colors.transparent, // Hit test for full width
+                            color:
+                                Colors.transparent, // Hit test for full width
                             child: Row(
                               children: [
                                 SizedBox(
@@ -193,9 +245,18 @@ class DestinationDetailsScreen extends StatelessWidget {
                                   height: 30,
                                   child: Stack(
                                     children: [
-                                      _buildAvatar(0, "https://i.pravatar.cc/150?img=1"),
-                                      _buildAvatar(15, "https://i.pravatar.cc/150?img=5"),
-                                      _buildAvatar(30, "https://i.pravatar.cc/150?img=8"),
+                                      _buildAvatar(
+                                        0,
+                                        "https://i.pravatar.cc/150?img=1",
+                                      ),
+                                      _buildAvatar(
+                                        15,
+                                        "https://i.pravatar.cc/150?img=5",
+                                      ),
+                                      _buildAvatar(
+                                        30,
+                                        "https://i.pravatar.cc/150?img=8",
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -209,12 +270,16 @@ class DestinationDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const Spacer(),
-                                const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 14,
+                                  color: Colors.grey,
+                                ),
                               ],
                             ),
                           ),
                         ),
-                        
+
                         const SizedBox(height: 32),
 
                         // Facilities
@@ -231,14 +296,19 @@ class DestinationDetailsScreen extends StatelessWidget {
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             clipBehavior: Clip.none,
-                            child: Row(
-                              children: safeFacilities.map((facility) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(right: 12),
-                                  child: _buildFacilityCard(facility),
-                                );
-                              }).toList(),
-                            ).animate().slideX(begin: 0.2, end: 0, delay: 100.ms),
+                            child:
+                                Row(
+                                  children: safeFacilities.map((facility) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(right: 12),
+                                      child: _buildFacilityCard(facility),
+                                    );
+                                  }).toList(),
+                                ).animate().slideX(
+                                  begin: 0.2,
+                                  end: 0,
+                                  delay: 100.ms,
+                                ),
                           ),
                           const SizedBox(height: 32),
                         ],
@@ -254,9 +324,9 @@ class DestinationDetailsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          (destination.description ?? "").isNotEmpty 
-                            ? destination.description! 
-                            : "Experience the true beauty of ${destination.city}. This destination offers a blend of adventure, culture, and relaxation, making it the perfect getaway for travelers seeking a unique experience.",
+                          (destination.description ?? "").isNotEmpty
+                              ? destination.description!
+                              : "Experience the true beauty of ${destination.city}. This destination offers a blend of adventure, culture, and relaxation, making it the perfect getaway for travelers seeking a unique experience.",
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[600],
@@ -264,7 +334,7 @@ class DestinationDetailsScreen extends StatelessWidget {
                             letterSpacing: 0.3,
                           ),
                         ),
-                        
+
                         const SizedBox(height: 32),
 
                         // Map Preview
@@ -273,7 +343,9 @@ class DestinationDetailsScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => DestinationMapScreen(destination: destination),
+                                builder: (_) => DestinationMapScreen(
+                                  destination: destination,
+                                ),
                               ),
                             );
                           },
@@ -282,22 +354,36 @@ class DestinationDetailsScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               image: const DecorationImage(
-                                image: NetworkImage("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=800&auto=format&fit=crop"),
+                                image: NetworkImage(
+                                  "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=800&auto=format&fit=crop",
+                                ),
                                 fit: BoxFit.cover,
                               ),
                             ),
                             child: Center(
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
-                                  boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: 10,
+                                    ),
+                                  ],
                                 ),
                                 child: const Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.map, color: AppColors.primary, size: 18),
+                                    Icon(
+                                      Icons.map,
+                                      color: AppColors.primary,
+                                      size: 18,
+                                    ),
                                     SizedBox(width: 8),
                                     Text(
                                       "See on Map",
@@ -317,17 +403,17 @@ class DestinationDetailsScreen extends StatelessWidget {
 
                         // Attractions
                         if (safeAttractions.isNotEmpty) ...[
-                           Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                               const Text(
-                                 "Top Attractions",
-                                 style: TextStyle(
-                                   fontSize: 18,
-                                   fontWeight: FontWeight.bold,
-                                   color: AppColors.textPrimary,
-                                 ),
-                               ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Top Attractions",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textPrimary,
+                                ),
+                              ),
                               TextButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -340,10 +426,13 @@ class DestinationDetailsScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                child: const Text("See All", style: TextStyle(color: AppColors.primary))
+                                child: const Text(
+                                  "See All",
+                                  style: TextStyle(color: AppColors.primary),
+                                ),
                               ),
-                             ],
-                           ),
+                            ],
+                          ),
                           const SizedBox(height: 12),
                           SizedBox(
                             height: 160,
@@ -355,14 +444,14 @@ class DestinationDetailsScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final attraction = safeAttractions[index];
                                 return _buildAttractionCard(
-                                  attraction['image'] ?? '', 
-                                  attraction['name'] ?? ''
+                                  attraction['image'] ?? '',
+                                  attraction['name'] ?? '',
                                 );
                               },
                             ),
                           ),
                         ],
-                        
+
                         const SizedBox(height: 120), // Bottom padding
                       ],
                     ),
@@ -377,71 +466,84 @@ class DestinationDetailsScreen extends StatelessWidget {
             bottom: 30,
             left: 24,
             right: 24,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1E1E1E), // Dark modern bar
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.3),
-                    blurRadius: 20,
-                    offset: const Offset(0, 10),
+            child:
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E1E1E), // Dark modern bar
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        blurRadius: 20,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Total Price",
-                          style: TextStyle(color: Colors.white54, fontSize: 12),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Total Price",
+                              style: TextStyle(
+                                color: Colors.white54,
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              destination.price ?? "Rs. 45,000",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          destination.price ?? "Rs. 45,000",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                      ),
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  BookingChoiceScreen(destination: destination),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 32,
+                            vertical: 16,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          child: const Text(
+                            "Book Now",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => BookingChoiceScreen(destination: destination),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(18),
                       ),
-                      child: const Text(
-                        "Book Now",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ).animate().slideY(begin: 1, end: 0, delay: 200.ms, curve: Curves.easeOutBack),
+                ).animate().slideY(
+                  begin: 1,
+                  end: 0,
+                  delay: 200.ms,
+                  curve: Curves.easeOutBack,
+                ),
           ),
         ],
       ),
@@ -499,7 +601,9 @@ class DestinationDetailsScreen extends StatelessWidget {
           image: NetworkImage(imageUrl),
           fit: BoxFit.cover,
         ),
-        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 4))],
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 4)),
+        ],
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -528,28 +632,49 @@ class DestinationDetailsScreen extends StatelessWidget {
   }
 
   IconData _getIconForFacility(String facility) {
-     switch (facility.toLowerCase()) {
-      case 'wifi': return Icons.wifi;
-      case 'dinner': return Icons.restaurant;
-      case 'food': return Icons.restaurant_menu;
-      case 'tub': return Icons.bathtub;
-      case 'pool': return Icons.pool;
-      case 'hiking': return Icons.hiking;
-      case 'bonfire': return Icons.local_fire_department;
-      case 'breakfast': return Icons.free_breakfast;
-      case 'jeep ride': return Icons.directions_car_filled;
-      case 'camping': return Icons.nights_stay;
-      case 'guide': return Icons.person;
-      case 'museum': return Icons.museum;
-      case 'hotel': return Icons.hotel;
-      case 'parks': return Icons.park;
-      case 'restaurants': return Icons.restaurant;
-      case 'river view': return Icons.water;
-      case 'heater': return Icons.ac_unit;
-      case 'beach': return Icons.beach_access;
-      case 'seaview': return Icons.waves;
-      case 'mall': return Icons.shopping_bag;
-      default: return Icons.star;
+    switch (facility.toLowerCase()) {
+      case 'wifi':
+        return Icons.wifi;
+      case 'dinner':
+        return Icons.restaurant;
+      case 'food':
+        return Icons.restaurant_menu;
+      case 'tub':
+        return Icons.bathtub;
+      case 'pool':
+        return Icons.pool;
+      case 'hiking':
+        return Icons.hiking;
+      case 'bonfire':
+        return Icons.local_fire_department;
+      case 'breakfast':
+        return Icons.free_breakfast;
+      case 'jeep ride':
+        return Icons.directions_car_filled;
+      case 'camping':
+        return Icons.nights_stay;
+      case 'guide':
+        return Icons.person;
+      case 'museum':
+        return Icons.museum;
+      case 'hotel':
+        return Icons.hotel;
+      case 'parks':
+        return Icons.park;
+      case 'restaurants':
+        return Icons.restaurant;
+      case 'river view':
+        return Icons.water;
+      case 'heater':
+        return Icons.ac_unit;
+      case 'beach':
+        return Icons.beach_access;
+      case 'seaview':
+        return Icons.waves;
+      case 'mall':
+        return Icons.shopping_bag;
+      default:
+        return Icons.star;
     }
   }
 }

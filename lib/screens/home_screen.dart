@@ -371,7 +371,10 @@ class _HomeScreenState extends State<HomeScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => DestinationDetailsScreen(destination: dest),
+            builder: (_) => DestinationDetailsScreen(
+              destination: dest,
+              heroTag: 'destination-img-${dest.id}',
+            ),
           ),
         );
       },
@@ -587,7 +590,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => DestinationDetailsScreen(destination: dest),
+                  builder: (_) => DestinationDetailsScreen(
+                    destination: dest,
+                    heroTag: 'destination-img-explore-${dest.id}',
+                  ),
                 ),
               );
             },
