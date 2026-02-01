@@ -164,17 +164,25 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                         ),
                       ),
                     )
-                  : Image.network(
-                      attraction['image'] ?? '',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
-                        color: Colors.grey[200],
-                        child: const Icon(
-                          Icons.broken_image,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
+                  : ((attraction['image'] ?? '').startsWith('http')
+                        ? Image.network(
+                            attraction['image']!,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) => Container(
+                              color: Colors.grey[200],
+                              child: const Icon(
+                                Icons.broken_image,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          )
+                        : Container(
+                            color: Colors.grey[200],
+                            child: const Icon(
+                              Icons.broken_image,
+                              color: Colors.grey,
+                            ),
+                          )),
             ),
           ),
           Padding(

@@ -137,7 +137,7 @@ final List<Destination> destinationsList = [
       {
         'name': 'Rakaposhi',
         'image':
-            'https://images.unsplash.com/photo-1594950664878-382944bb978e?q=80&w=400',
+            'https://images.unsplash.com/photo-1739676882863-f087febf073d?q=80&w=400',
       },
     ],
     latitude: 36.3167,
@@ -157,7 +157,7 @@ final List<Destination> destinationsList = [
       {
         'name': 'Shangrila Resort',
         'image':
-            'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+            'https://images.unsplash.com/photo-1621251910609-b14a29a59560?q=80&w=400',
       },
       {
         'name': 'Deosai Plains',
@@ -167,7 +167,7 @@ final List<Destination> destinationsList = [
       {
         'name': 'Upper Kachura Lake',
         'image':
-            'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=400',
+            'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=400',
       },
     ],
     latitude: 35.2971,

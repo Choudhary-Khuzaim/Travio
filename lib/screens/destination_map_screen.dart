@@ -37,7 +37,9 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Location services are disabled.')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Location services are disabled.')),
+        );
       }
       return;
     }
@@ -47,7 +49,9 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Location permissions are denied')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Location permissions are denied')),
+          );
         }
         return;
       }
@@ -55,7 +59,13 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
 
     if (permission == LocationPermission.deniedForever) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Location permissions are permanently denied, we cannot request permissions.')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Location permissions are permanently denied, we cannot request permissions.',
+            ),
+          ),
+        );
       }
       return;
     }
@@ -79,14 +89,18 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
       await launchUrl(appleMapsUrl);
     } else {
       // Fallback for browser
-       final browserUrl = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$lat,$lng");
-       if (await canLaunchUrl(browserUrl)) {
-         await launchUrl(browserUrl, mode: LaunchMode.externalApplication);
-       } else {
-         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Could not launch maps.')));
-         }
-       }
+      final browserUrl = Uri.parse(
+        "https://www.google.com/maps/dir/?api=1&destination=$lat,$lng",
+      );
+      if (await canLaunchUrl(browserUrl)) {
+        await launchUrl(browserUrl, mode: LaunchMode.externalApplication);
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Could not launch maps.')),
+          );
+        }
+      }
     }
   }
 
@@ -117,7 +131,10 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
           FlutterMap(
             mapController: _mapController,
             options: MapOptions(
-              initialCenter: LatLng(widget.destination.latitude, widget.destination.longitude),
+              initialCenter: LatLng(
+                widget.destination.latitude,
+                widget.destination.longitude,
+              ),
               initialZoom: _currentZoom,
               interactionOptions: const InteractionOptions(
                 flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
@@ -130,7 +147,7 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                 tileBuilder: (context, widget, tile) {
                   return ColorFiltered(
                     colorFilter: const ColorFilter.mode(
-                      Colors.transparent, 
+                      Colors.transparent,
                       BlendMode.saturation,
                     ), // Clean raw tiles
                     child: widget,
@@ -140,8 +157,11 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
               MarkerLayer(
                 markers: [
                   Marker(
-                    point: LatLng(widget.destination.latitude, widget.destination.longitude),
-                    width: 120,
+                    point: LatLng(
+                      widget.destination.latitude,
+                      widget.destination.longitude,
+                    ),
+                    width: 200,
                     height: 120,
                     child: _buildCustomMarker(),
                   ),
@@ -164,7 +184,9 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                               color: Colors.blue,
                               shape: BoxShape.circle,
                               border: Border.all(color: Colors.white, width: 2),
-                              boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 4)],
+                              boxShadow: const [
+                                BoxShadow(color: Colors.black26, blurRadius: 4),
+                              ],
                             ),
                           ),
                         ),
@@ -179,41 +201,60 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
           Positioned(
             top: 50,
             left: 20,
-            child: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.1),
-                      blurRadius: 10,
-                      offset: const Offset(0, 5),
+            child:
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
                     ),
-                  ],
+                    child: const Icon(Icons.arrow_back, color: Colors.black87),
+                  ),
+                ).animate().slideX(
+                  begin: -1,
+                  end: 0,
+                  duration: 400.ms,
+                  curve: Curves.easeOutBack,
                 ),
-                child: const Icon(Icons.arrow_back, color: Colors.black87),
-              ),
-            ).animate().slideX(begin: -1, end: 0, duration: 400.ms, curve: Curves.easeOutBack),
           ),
 
           // 3. Right Side Controls
           Positioned(
             top: MediaQuery.of(context).size.height * 0.4,
             right: 20,
-            child: Column(
-              children: [
-                _buildMapControl(Icons.add, _zoomIn),
-                const SizedBox(height: 12),
-                _buildMapControl(Icons.remove, _zoomOut),
-                const SizedBox(height: 12),
-                _buildMapControl(Icons.my_location, _determinePosition), // Current Location
-                 const SizedBox(height: 12),
-                _buildMapControl(Icons.center_focus_strong, _recenter), // Recenter on Destination
-              ],
-            ).animate().slideX(begin: 1, end: 0, delay: 200.ms, duration: 400.ms, curve: Curves.easeOutBack),
+            child:
+                Column(
+                  children: [
+                    _buildMapControl(Icons.add, _zoomIn),
+                    const SizedBox(height: 12),
+                    _buildMapControl(Icons.remove, _zoomOut),
+                    const SizedBox(height: 12),
+                    _buildMapControl(
+                      Icons.my_location,
+                      _determinePosition,
+                    ), // Current Location
+                    const SizedBox(height: 12),
+                    _buildMapControl(
+                      Icons.center_focus_strong,
+                      _recenter,
+                    ), // Recenter on Destination
+                  ],
+                ).animate().slideX(
+                  begin: 1,
+                  end: 0,
+                  delay: 200.ms,
+                  duration: 400.ms,
+                  curve: Curves.easeOutBack,
+                ),
           ),
 
           // 4. Bottom Info Card
@@ -229,6 +270,10 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
   }
 
   Widget _buildCustomMarker() {
+    final imageProvider = widget.destination.imageUrl.startsWith('assets')
+        ? AssetImage(widget.destination.imageUrl) as ImageProvider
+        : NetworkImage(widget.destination.imageUrl);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -237,20 +282,35 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
-            boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 4))],
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 8,
+                offset: Offset(0, 4),
+              ),
+            ],
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                widget.destination.city,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              Flexible(
+                child: Text(
+                  widget.destination.city,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               const SizedBox(width: 4),
               const Icon(Icons.star, color: Colors.orange, size: 14),
               Text(
                 widget.destination.rating.toString(),
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
               ),
             ],
           ),
@@ -269,7 +329,7 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                   shape: BoxShape.circle,
                   color: Colors.white,
                   image: DecorationImage(
-                    image: NetworkImage(widget.destination.imageUrl),
+                    image: imageProvider,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -326,12 +386,37 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-                  widget.destination.imageUrl,
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
-                ),
+                child: widget.destination.imageUrl.startsWith('assets')
+                    ? Image.asset(
+                        widget.destination.imageUrl,
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          width: 80,
+                          height: 80,
+                          color: Colors.grey[200],
+                          child: const Icon(
+                            Icons.broken_image,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      )
+                    : Image.network(
+                        widget.destination.imageUrl,
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          width: 80,
+                          height: 80,
+                          color: Colors.grey[200],
+                          child: const Icon(
+                            Icons.broken_image,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -357,7 +442,11 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        const Icon(Icons.access_time_filled, size: 16, color: AppColors.primary),
+                        const Icon(
+                          Icons.access_time_filled,
+                          size: 16,
+                          color: AppColors.primary,
+                        ),
                         const SizedBox(width: 4),
                         const Text(
                           "Open 24/7",
@@ -378,7 +467,10 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () => _openMap(widget.destination.latitude, widget.destination.longitude),
+                    onTap: () => _openMap(
+                      widget.destination.latitude,
+                      widget.destination.longitude,
+                    ),
                     child: Container(
                       width: 50,
                       height: 50,
@@ -386,20 +478,37 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                         color: AppColors.primary,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
-                           BoxShadow(color: AppColors.primary.withValues(alpha: 0.4), blurRadius: 10, offset: const Offset(0,4))
+                          BoxShadow(
+                            color: AppColors.primary.withValues(alpha: 0.4),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
                         ],
                       ),
                       child: const Icon(Icons.directions, color: Colors.white),
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text("Go", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: AppColors.textPrimary))
+                  const Text(
+                    "Go",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
                 ],
               ),
             ],
           ),
         ),
       ),
-    ).animate().slideY(begin: 1, end: 0, delay: 300.ms, duration: 500.ms, curve: Curves.easeOutBack);
+    ).animate().slideY(
+      begin: 1,
+      end: 0,
+      delay: 300.ms,
+      duration: 500.ms,
+      curve: Curves.easeOutBack,
+    );
   }
 }
