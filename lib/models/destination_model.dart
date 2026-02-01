@@ -39,21 +39,9 @@ final List<Destination> destinationsList = [
         'The beautiful capital city of Pakistan, known for its greenery, Margalla Hills, and peaceful atmosphere.',
     facilities: ['Hiking', 'Parks', 'Wifi', 'Restaurants'],
     attractions: [
-      {
-        'name': 'Faisal Mosque',
-        'image':
-            'https://images.unsplash.com/photo-1627814760205-59b48c08af7e?q=80&w=400',
-      },
-      {
-        'name': 'Daman-e-Koh',
-        'image':
-            'https://images.unsplash.com/photo-1549646401-499317d54e4f?q=80&w=400',
-      },
-      {
-        'name': 'Monal',
-        'image':
-            'https://images.unsplash.com/photo-1590685955113-75b253b89088?q=80&w=400',
-      },
+      {'name': 'Faisal Mosque', 'image': 'assets/images/faisal_mosque.png'},
+      {'name': 'Daman-e-Koh', 'image': 'assets/images/daman_e_koh.png'},
+      {'name': 'Monal', 'image': 'assets/images/monal.png'},
     ],
     latitude: 33.6844,
     longitude: 73.0479,
@@ -69,21 +57,9 @@ final List<Destination> destinationsList = [
         'The city of lights and the economic hub of Pakistan. Famous for its beaches, nightlife, and diverse food culture.',
     facilities: ['Beach', 'Seaview', 'Wifi', 'Mall'],
     attractions: [
-      {
-        'name': 'Clifton Beach',
-        'image':
-            'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400',
-      },
-      {
-        'name': 'Mazar-e-Quaid',
-        'image':
-            'https://images.unsplash.com/photo-1623862211475-14df6385a86d?q=80&w=400',
-      },
-      {
-        'name': 'Dolmen Mall',
-        'image':
-            'https://images.unsplash.com/photo-1590685955113-75b253b89088?q=80&w=400',
-      },
+      {'name': 'Clifton Beach', 'image': 'assets/images/clifton_beach.png'},
+      {'name': 'Mazar-e-Quaid', 'image': 'assets/images/mazar_e_quaid.png'},
+      {'name': 'Dolmen Mall', 'image': 'assets/images/dolmen_mall.png'},
     ],
     latitude: 24.8607,
     longitude: 67.0011,
@@ -99,20 +75,11 @@ final List<Destination> destinationsList = [
         'Lahore is the heart of Pakistan. Known for its rich history, vibrant culture, and delicious food street.',
     facilities: ['Museum', 'Food', 'Wifi', 'Hotel'],
     attractions: [
-      {
-        'name': 'Badshahi Mosque',
-        'image':
-            'https://images.unsplash.com/photo-1594950664878-382944bb978e?q=80&w=400',
-      },
-      {
-        'name': 'Lahore Fort',
-        'image':
-            'https://images.unsplash.com/photo-1518005068251-37900150dfca?q=80&w=400',
-      },
+      {'name': 'Badshahi Mosque', 'image': 'assets/images/badshahi_mosque.png'},
+      {'name': 'Lahore Fort', 'image': 'assets/images/lahore_fort.png'},
       {
         'name': 'Minar-e-Pakistan',
-        'image':
-            'https://images.unsplash.com/photo-1627814760205-59b48c08af7e?q=80&w=400',
+        'image': 'assets/images/minar_e_pakistan.png',
       },
     ],
     latitude: 31.5204,
@@ -129,21 +96,9 @@ final List<Destination> destinationsList = [
         'The Fruit Garden of Pakistan, Quetta is famous for its delicious fruits, dry fruits, and the majestic Quetta Serena Hotel.',
     facilities: ['Fruit Markets', 'Mountains', 'Wifi', 'Hotel'],
     attractions: [
-      {
-        'name': 'Hanna Lake',
-        'image':
-            'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=400',
-      },
-      {
-        'name': 'Quetta Museum',
-        'image':
-            'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=400',
-      },
-      {
-        'name': 'Pishin Valley',
-        'image':
-            'https://images.unsplash.com/photo-1582719478250-c89cae4df85b?q=80&w=400',
-      },
+      {'name': 'Hanna Lake', 'image': 'assets/images/hanna_lake.png'},
+      {'name': 'Quetta Museum', 'image': 'assets/images/quetta_museum.png'},
+      {'name': 'Pishin Valley', 'image': 'assets/images/pishin_valley.png'},
     ],
     latitude: 30.1798,
     longitude: 66.9750,
@@ -159,21 +114,9 @@ final List<Destination> destinationsList = [
         'Known as the Switzerland of the East, Swat offers lush green valleys, rivers, and snow-capped mountains.',
     facilities: ['River View', 'Heater', 'Camping', 'Food'],
     attractions: [
-      {
-        'name': 'Malam Jabba',
-        'image':
-            'https://images.unsplash.com/photo-1518005068251-37900150dfca?q=80&w=400',
-      },
-      {
-        'name': 'Kalam',
-        'image':
-            'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=400',
-      },
-      {
-        'name': 'White Palace',
-        'image':
-            'https://images.unsplash.com/photo-1627814760205-59b48c08af7e?q=80&w=400',
-      },
+      {'name': 'Malam Jabba', 'image': 'assets/images/malam_jabba.png'},
+      {'name': 'Kalam', 'image': 'assets/images/kalam.png'},
+      {'name': 'White Palace', 'image': 'assets/images/white_palace.png'},
     ],
     latitude: 35.2220,
     longitude: 72.4258,
@@ -189,16 +132,8 @@ final List<Destination> destinationsList = [
         'Experience the breathtaking beauty of Hunza Valley. Known as heaven on earth, it serves rich culture, hospitality, and majestic views of Rakaposhi.',
     facilities: ['Hiking', 'Bonfire', 'Wifi', 'Breakfast'],
     attractions: [
-      {
-        'name': 'Baltit Fort',
-        'image':
-            'https://images.unsplash.com/photo-1627814760205-59b48c08af7e?q=80&w=400',
-      },
-      {
-        'name': 'Attabad Lake',
-        'image':
-            'https://images.unsplash.com/photo-1518005068251-37900150dfca?q=80&w=400',
-      },
+      {'name': 'Baltit Fort', 'image': 'assets/images/baltit_fort.png'},
+      {'name': 'Attabad Lake', 'image': 'assets/images/attabad_lake.png'},
       {
         'name': 'Rakaposhi',
         'image':
@@ -222,45 +157,20 @@ final List<Destination> destinationsList = [
       {
         'name': 'Shangrila Resort',
         'image':
-            'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=400',
+            'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
       },
       {
         'name': 'Deosai Plains',
         'image':
-            'https://images.unsplash.com/photo-1549646401-499317d54e4f?q=80&w=400',
+            'https://images.unsplash.com/photo-1627896157734-4d7d4388f24b?q=80&w=400',
       },
       {
-        'name': 'Upper Kachura',
+        'name': 'Upper Kachura Lake',
         'image':
-            'https://images.unsplash.com/photo-1590685955113-75b253b89088?q=80&w=400',
+            'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=400',
       },
     ],
     latitude: 35.2971,
     longitude: 75.6333,
-  ),
-  Destination(
-    id: '8',
-    city: 'Ziarat',
-    country: 'Pakistan',
-    imageUrl: 'assets/images/ziarat.jpg',
-    rating: 4.8,
-    price: 'Rs. 15,000',
-    description:
-        'Home to the second largest Juniper forest in the world and the historic Quaid-e-Azam Residency.',
-    facilities: ['Forest', 'Hiking', 'Residency', 'Guide'],
-    attractions: [
-      {
-        'name': 'Juniper Forest',
-        'image':
-            'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=400',
-      },
-      {
-        'name': 'Quaid Residency',
-        'image':
-            'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=400',
-      },
-    ],
-    latitude: 30.3811,
-    longitude: 67.7258,
   ),
 ];

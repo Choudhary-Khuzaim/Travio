@@ -26,15 +26,6 @@ class _TravelGuideScreenState extends State<TravelGuideScreen> {
           'Experience the beauty of Quetta, from the historic Hanna Lake to the bustling Liaquat Bazaar. Discover the best Sajji and local crafts.',
     },
     {
-      'title': 'Ziarat: Juniper Forests',
-      'category': 'Adventure',
-      'image': 'assets/images/ziarat.jpg',
-      'rating': '5.0',
-      'author': 'Gul Bibi',
-      'description':
-          'Visit the historic Quaid-e-Azam Residency and walk through the ancient Juniper forests. A serene getaway unlike any other in Pakistan.',
-    },
-    {
       'title': 'Hunza Valley: A Local Perspective',
       'category': 'Adventure',
       'image':
