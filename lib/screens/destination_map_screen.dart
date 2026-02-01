@@ -270,10 +270,6 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
   }
 
   Widget _buildCustomMarker() {
-    final imageProvider = widget.destination.imageUrl.startsWith('assets')
-        ? AssetImage(widget.destination.imageUrl) as ImageProvider
-        : NetworkImage(widget.destination.imageUrl);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -325,19 +321,66 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
               child: Container(
                 width: 24,
                 height: 24,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
+                ),
+                child: ClipOval(
+                  child: _buildSafeImage(widget.destination.imageUrl, 24, 24),
                 ),
               ),
             ),
           ],
         ).animate().scale(curve: Curves.elasticOut, duration: 1000.ms),
       ],
+    );
+  }
+
+  Widget _buildSafeImage(String imageUrl, double width, double height) {
+    if (imageUrl.startsWith('assets')) {
+      return Image.asset(
+        imageUrl,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) =>
+            _buildErrorPlaceholder(width, height),
+      );
+    } else if (imageUrl.startsWith('http')) {
+      return Image.network(
+        imageUrl,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) =>
+            _buildErrorPlaceholder(width, height),
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Container(
+            width: width,
+            height: height,
+            color: Colors.grey[200],
+            child: const Center(
+              child: SizedBox(
+                width: 10,
+                height: 10,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            ),
+          );
+        },
+      );
+    } else {
+      return _buildErrorPlaceholder(width, height);
+    }
+  }
+
+  Widget _buildErrorPlaceholder(double width, double height) {
+    return Container(
+      width: width,
+      height: height,
+      color: Colors.grey[200],
+      child: Icon(Icons.broken_image, color: Colors.grey, size: width * 0.5),
     );
   }
 
@@ -386,37 +429,7 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: widget.destination.imageUrl.startsWith('assets')
-                    ? Image.asset(
-                        widget.destination.imageUrl,
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Container(
-                          width: 80,
-                          height: 80,
-                          color: Colors.grey[200],
-                          child: const Icon(
-                            Icons.broken_image,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      )
-                    : Image.network(
-                        widget.destination.imageUrl,
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Container(
-                          width: 80,
-                          height: 80,
-                          color: Colors.grey[200],
-                          child: const Icon(
-                            Icons.broken_image,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
+                child: _buildSafeImage(widget.destination.imageUrl, 80, 80),
               ),
               const SizedBox(width: 16),
               Expanded(
