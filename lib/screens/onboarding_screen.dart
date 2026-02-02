@@ -68,8 +68,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 const Spacer(flex: 1),
                 // Card Carousel
-                SizedBox(
-                  height: 480,
+                Expanded(
+                  flex: 12,
                   child: PageView.builder(
                     controller: _pageController,
                     itemCount: _slides.length,
@@ -91,8 +91,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                 // Content & Controls
                 Padding(
-                  padding: const EdgeInsets.all(32.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32.0,
+                    vertical: 24.0,
+                  ),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 300),
@@ -120,7 +124,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 28,
+                                fontSize: 26,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Poppins',
                               ),
@@ -129,16 +133,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Text(
                               _slides[_currentPage]['subtitle']!,
                               textAlign: TextAlign.center,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 color: Colors.white70,
-                                fontSize: 14,
-                                height: 1.5,
+                                fontSize: 13,
+                                height: 1.4,
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 32),
                       _buildControls(),
                     ],
                   ),

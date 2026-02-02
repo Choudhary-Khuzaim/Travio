@@ -11,20 +11,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:travio/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Onboarding screen smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const TravioApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that onboarding screen content is present.
+    // The first slide has "Discover Hunza Valley"
+    expect(find.textContaining('Discover'), findsOneWidget);
+    expect(find.textContaining('Hunza Valley'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Check for the next button icon
+    expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
   });
 }
