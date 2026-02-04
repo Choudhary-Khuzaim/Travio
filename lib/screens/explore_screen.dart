@@ -73,16 +73,28 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: [
-          // 1. Premium SliverAppBar with Search
+          // 1. Premium SliverAppBar
           SliverAppBar(
-            expandedHeight: 180,
+            expandedHeight: 160,
             floating: false,
             pinned: true,
             backgroundColor: AppColors.primary,
             elevation: 0,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              icon: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
               onPressed: () => Navigator.pop(context),
             ),
             flexibleSpace: FlexibleSpaceBar(
@@ -90,8 +102,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 "Explore Pakistan",
                 style: TextStyle(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 20,
+                  letterSpacing: 0.5,
                 ),
               ),
               centerTitle: true,
@@ -101,36 +114,26 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [AppColors.primary, Color(0xFF064E3B)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [AppColors.primary, Color(0xFF065F46)],
                       ),
                     ),
                   ),
                   Positioned(
-                    right: -40,
-                    top: 10,
-                    bottom: -10,
-                    width: 250,
-                    child: Opacity(
-                      opacity: 0.2,
-                      child: Image.network(
-                        'https://cdn.pixabay.com/photo/2013/07/12/17/51/pakistan-152579_1280.png',
-                        color: Colors.white,
-                        colorBlendMode: BlendMode.srcIn,
-                        fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) {
-                          return const SizedBox.shrink();
-                        },
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: -50,
-                    top: -50,
+                    right: -30,
+                    top: -20,
                     child: CircleAvatar(
-                      radius: 100,
+                      radius: 80,
                       backgroundColor: Colors.white.withValues(alpha: 0.05),
+                    ),
+                  ),
+                  Positioned(
+                    left: -20,
+                    bottom: -10,
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundColor: Colors.white.withValues(alpha: 0.03),
                     ),
                   ),
                 ],
@@ -141,49 +144,72 @@ class _ExploreScreenState extends State<ExploreScreen> {
           // 2. Search & Categories Header
           SliverToBoxAdapter(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 // Search Bar
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Container(
+                    height: 55,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(18),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.05),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+                          color: AppColors.primary.withValues(alpha: 0.08),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
                         ),
                       ],
                     ),
                     child: TextField(
                       controller: _searchController,
+                      style: const TextStyle(fontSize: 16),
                       decoration: InputDecoration(
-                        hintText: "Where do you want to go?",
-                        hintStyle: const TextStyle(color: Colors.grey),
+                        hintText: "Search for cities or landmarks...",
+                        hintStyle: TextStyle(
+                          color: Colors.grey.withValues(alpha: 0.6),
+                          fontSize: 15,
+                        ),
                         prefixIcon: const Icon(
-                          Icons.search,
+                          Icons.search_rounded,
                           color: AppColors.primary,
+                          size: 24,
                         ),
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.symmetric(
-                          vertical: 15,
+                          vertical: 18,
                         ),
                       ),
                     ),
                   ),
-                ).animate().slideY(begin: 1, end: 0, duration: 400.ms),
+                ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.2, end: 0),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 28),
 
-                // Categories
+                // Categories Label
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  child: Text(
+                    "Top Categories",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ).animate().fadeIn(delay: 200.ms),
+
+                const SizedBox(height: 16),
+
+                // Categories List
                 SizedBox(
-                  height: 40,
+                  height: 44,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     itemCount: _categories.length,
                     itemBuilder: (context, index) {
                       final category = _categories[index];
@@ -195,26 +221,28 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             _applyFilters();
                           });
                         },
-                        child: Container(
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
                           margin: const EdgeInsets.only(right: 12),
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? AppColors.primary
                                 : Colors.white,
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(14),
                             border: Border.all(
                               color: isSelected
                                   ? AppColors.primary
                                   : Colors.grey.withValues(alpha: 0.3),
+                              width: 1.5,
                             ),
                             boxShadow: isSelected
                                 ? [
                                     BoxShadow(
                                       color: AppColors.primary.withValues(
-                                        alpha: 0.3,
+                                        alpha: 0.2,
                                       ),
-                                      blurRadius: 8,
+                                      blurRadius: 10,
                                       offset: const Offset(0, 4),
                                     ),
                                   ]
@@ -226,10 +254,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               style: TextStyle(
                                 color: isSelected
                                     ? Colors.white
-                                    : AppColors.textSecondary,
+                                    : Colors.grey[600],
                                 fontWeight: isSelected
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
+                                    ? FontWeight.w700
+                                    : FontWeight.w500,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -237,21 +266,62 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       );
                     },
                   ),
-                ).animate().slideX(begin: 1, end: 0, delay: 200.ms),
+                ).animate().fadeIn(delay: 300.ms).slideX(begin: 0.1, end: 0),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
+
+                // Destinations Label
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        _selectedCategory == "All"
+                            ? "All Destinations"
+                            : "$_selectedCategory Destinations",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                      Text(
+                        "${_filteredDestinations.length} found",
+                        style: TextStyle(fontSize: 14, color: Colors.grey[500]),
+                      ),
+                    ],
+                  ),
+                ).animate().fadeIn(delay: 400.ms),
+
+                const SizedBox(height: 16),
               ],
             ),
           ),
 
-          // 3. Grid of Destinations
+          // 3. Immersive Grid of Destinations
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             sliver: _filteredDestinations.isEmpty
-                ? const SliverFillRemaining(
+                ? SliverFillRemaining(
                     child: Center(
-                      child: Text(
-                        "No destinations found matching your criteria.",
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.map_outlined,
+                            size: 64,
+                            color: Colors.grey[300],
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            "No destinations found.",
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   )
@@ -259,9 +329,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          mainAxisSpacing: 16,
-                          crossAxisSpacing: 16,
-                          childAspectRatio: 0.72,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 20,
+                          childAspectRatio: 0.75,
                         ),
                     delegate: SliverChildBuilderDelegate((context, index) {
                       final dest = _filteredDestinations[index];
@@ -278,151 +348,195 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   Widget _buildExploreCard(BuildContext context, Destination dest, int index) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => DestinationDetailsScreen(
-              destination: dest,
-              heroTag: 'explore-grid-${dest.id}',
-            ),
-          ),
-        );
-      },
-      child:
-          Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.05),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => DestinationDetailsScreen(
+                  destination: dest,
+                  heroTag: 'explore-grid-${dest.id}',
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Image
-                    Expanded(
-                      flex: 3,
-                      child: Stack(
+              ),
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.1),
+                  blurRadius: 15,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  // Image
+                  Hero(
+                    tag: 'explore-grid-${dest.id}',
+                    child: dest.imageUrl.startsWith('http')
+                        ? Image.network(dest.imageUrl, fit: BoxFit.cover)
+                        : Image.asset(dest.imageUrl, fit: BoxFit.cover),
+                  ),
+
+                  // Gradient Overlay
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withValues(alpha: 0.1),
+                            Colors.black.withValues(alpha: 0.8),
+                          ],
+                          stops: const [0.5, 0.7, 1.0],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // Rating Tag
+                  Positioned(
+                    top: 12,
+                    right: 12,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.9),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Hero(
-                            tag: 'explore-grid-${dest.id}',
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.vertical(
-                                  top: Radius.circular(20),
-                                ),
-                                image: dest.imageUrl.startsWith('http')
-                                    ? DecorationImage(
-                                        image: NetworkImage(dest.imageUrl),
-                                        fit: BoxFit.cover,
-                                      )
-                                    : DecorationImage(
-                                        image: AssetImage(dest.imageUrl),
-                                        fit: BoxFit.cover,
-                                      ),
-                              ),
+                          const Icon(
+                            Icons.star_rounded,
+                            size: 16,
+                            color: Color(0xFFFFD700),
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            dest.rating.toString(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.textPrimary,
                             ),
                           ),
-                          Positioned(
-                            top: 10,
-                            right: 10,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Featured Tag
+                  if (dest.rating >= 4.9)
+                    Positioned(
+                      top: 12,
+                      left: 12,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Text(
+                          "FEATURED",
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  // Info Content
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            dest.city,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 18,
+                              letterSpacing: 0.3,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 2),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on_outlined,
+                                color: Colors.white70,
+                                size: 12,
                               ),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.9),
-                                borderRadius: BorderRadius.circular(10),
+                              const SizedBox(width: 4),
+                              Text(
+                                dest.country,
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 13,
+                                ),
                               ),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.star,
-                                    size: 14,
-                                    color: Color(0xFFFFD700),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    dest.rating.toString(),
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.textPrimary,
-                                    ),
-                                  ),
-                                ],
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              dest.price ?? 'Explore Now',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    // Info
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  dest.city,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    color: AppColors.textPrimary,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(
-                                  dest.country,
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    color: AppColors.textSecondary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  dest.price ?? 'Contact Us',
-                                  style: const TextStyle(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 12,
-                                  color: Colors.grey,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-              .animate()
-              .fadeIn(delay: (index * 100).ms)
-              .scale(begin: const Offset(0.9, 0.9), end: const Offset(1, 1)),
-    );
+                  ),
+                ],
+              ),
+            ),
+          ),
+        )
+        .animate()
+        .fadeIn(delay: (index * 50).ms)
+        .scale(
+          begin: const Offset(0.95, 0.95),
+          end: const Offset(1, 1),
+          duration: 400.ms,
+          curve: Curves.easeOutBack,
+        );
   }
 }
