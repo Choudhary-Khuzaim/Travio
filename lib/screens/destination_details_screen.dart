@@ -607,6 +607,10 @@ class DestinationDetailsScreen extends StatelessWidget {
               attractionName: title,
               attractionImage: imageUrl,
               heroTag: 'attraction-$title',
+              description: destination.attractions?.firstWhere(
+                (a) => a['name'] == title,
+                orElse: () => {},
+              )['description'],
             ),
           ),
         );

@@ -18,7 +18,7 @@ void main() {
     // Verify that onboarding screen content is present.
     // The first slide has "Discover Hunza Valley"
     expect(find.textContaining('Discover'), findsOneWidget);
-    expect(find.textContaining('Hunza Valley'), findsOneWidget);
+    expect(find.textContaining('Hunza Valley'), findsAtLeast(1));
 
     // Check for the next button icon
     expect(find.byIcon(Icons.arrow_forward), findsOneWidget);

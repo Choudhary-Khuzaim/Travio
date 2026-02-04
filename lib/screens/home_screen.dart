@@ -148,8 +148,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildTopBar(),
-                  const SizedBox(height: 20),
                   const Text(
                     "Explore the",
                     style: TextStyle(
@@ -216,38 +214,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2);
-  }
-
-  Widget _buildTopBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const ProfileScreen()),
-            );
-          },
-          child: Container(
-            height: 44,
-            width: 44,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.2),
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white30),
-            ),
-            padding: const EdgeInsets.all(2), // Add padding for border
-            child: ClipOval(
-              child: Image.network(
-                'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1780&auto=format&fit=crop',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 
   Widget _buildCategoryPills() {

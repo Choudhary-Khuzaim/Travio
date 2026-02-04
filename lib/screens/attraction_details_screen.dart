@@ -6,12 +6,14 @@ class AttractionDetailsScreen extends StatelessWidget {
   final String attractionName;
   final String attractionImage;
   final String heroTag;
+  final String? description;
 
   const AttractionDetailsScreen({
     super.key,
     required this.attractionName,
     required this.attractionImage,
     required this.heroTag,
+    this.description,
   });
 
   @override
@@ -149,7 +151,8 @@ class AttractionDetailsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          "Experience the mesmerizing beauty of $attractionName. Known for its breathtaking views and rich history, this is a must-visit spot for any traveler. Whether you are looking for adventure or tranquility, $attractionName offers an unforgettable experience.",
+                          description ??
+                              "Experience the mesmerizing beauty of $attractionName. Known for its breathtaking views and rich history, this is a must-visit spot for any traveler. Whether you are looking for adventure or tranquility, $attractionName offers an unforgettable experience.",
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[600],
