@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../core/colors.dart';
 
 class AttractionDetailsScreen extends StatelessWidget {
@@ -15,6 +17,33 @@ class AttractionDetailsScreen extends StatelessWidget {
     required this.heroTag,
     this.description,
   });
+
+  Future<void> _shareAttraction() async {
+    final text =
+        "Check out $attractionName on Travio! 🌍\n\n${description ?? 'Explore this amazing place with me.'}";
+    await Share.share(text);
+  }
+
+  Future<void> _openMap() async {
+    final query = Uri.encodeComponent(attractionName);
+    final googleMapsUrl =
+        "https://www.google.com/maps/search/?api=1&query=$query";
+    final url = Uri.parse(googleMapsUrl);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  void _planVisit(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Amazing! $attractionName has been added to your plan."),
+        backgroundColor: AppColors.primary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +77,31 @@ class AttractionDetailsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                actions: [
+                  GestureDetector(
+                    onTap: _shareAttraction,
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        right: 16,
+                        top: 4,
+                        bottom: 4,
+                      ),
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.9),
+                        shape: BoxShape.circle,
+                        boxShadow: const [
+                          BoxShadow(color: Colors.black12, blurRadius: 10),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.ios_share,
+                        color: Colors.black87,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                ],
                 flexibleSpace: FlexibleSpaceBar(
                   background: Stack(
                     fit: StackFit.expand,
@@ -223,35 +277,78 @@ class AttractionDetailsScreen extends StatelessWidget {
             ],
           ),
 
-          // Bottom Action Button
+          // 3. Premium Action Bar
           Positioned(
             bottom: 30,
             left: 20,
             right: 20,
             child:
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                Row(
+                  children: [
+                    // Secondary Action: Check Map
+                    Container(
+                      height: 56,
+                      width: 56,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(18),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.05),
+                            blurRadius: 15,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: AppColors.primary.withValues(alpha: 0.1),
+                        ),
+                      ),
+                      child: IconButton(
+                        onPressed: _openMap,
+                        icon: const Icon(
+                          Icons.map_outlined,
+                          color: AppColors.primary,
+                          size: 26,
+                        ),
+                      ),
                     ),
-                    elevation: 8,
-                    shadowColor: AppColors.primary.withValues(alpha: 0.4),
-                  ),
-                  child: const Text(
-                    "Get Directions",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                    const SizedBox(width: 16),
+                    // Primary Action: Plan/Book
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () => _planVisit(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 18),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          elevation: 8,
+                          shadowColor: AppColors.primary.withValues(alpha: 0.4),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.calendar_month_outlined, size: 20),
+                            SizedBox(width: 10),
+                            Text(
+                              "Plan Your Visit",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ).animate().slideY(
                   begin: 1,
                   end: 0,
-                  delay: 500.ms,
+                  delay: 400.ms,
                   curve: Curves.easeOutBack,
                 ),
           ),
