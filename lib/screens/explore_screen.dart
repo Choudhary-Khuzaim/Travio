@@ -59,9 +59,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
           matchesCategory =
               dest.city == "Lahore" ||
               dest.city == "Islamabad" ||
-              dest.city == "Karachi";
+              dest.city == "Karachi" ||
+              dest.city == "Peshawar" ||
+              dest.city == "Multan" ||
+              dest.city == "Quetta";
+        } else if (_selectedCategory == "Cultural") {
+          matchesCategory =
+              dest.city == "Lahore" ||
+              dest.city == "Peshawar" ||
+              dest.city == "Multan" ||
+              dest.city == "Hyderabad";
         }
-        // Simplified category logic for mock data
 
         return matchesSearch && matchesCategory;
       }).toList();

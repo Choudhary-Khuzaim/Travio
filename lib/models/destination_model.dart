@@ -228,8 +228,7 @@ final List<Destination> destinationsList = [
     id: '10',
     city: 'Peshawar',
     country: 'Pakistan',
-    imageUrl:
-        'https://images.unsplash.com/photo-1626078299034-969408017042?q=80&w=800', // Verified working high-res image
+    imageUrl: 'assets/images/peshawar.jpg',
     rating: 4.8,
     price: 'Rs. 14,000',
     description:
@@ -238,36 +237,31 @@ final List<Destination> destinationsList = [
     attractions: [
       {
         'name': 'Khyber Pass',
-        'image':
-            'https://images.unsplash.com/photo-1627663243954-d891632007d3?q=80&w=400',
+        'image': 'assets/images/khyber_pass.jpg',
         'description':
             'The Khyber Pass is a mountain pass in the northwest of Pakistan, on the border with Afghanistan. It has been a vital trade route and a strategic military location for centuries.',
       },
       {
         'name': 'Islamia College',
-        'image':
-            'https://images.unsplash.com/photo-1627663243283-da4c49d01f9b?q=80&w=400',
+        'image': 'assets/images/islamia_college.jpg',
         'description':
             'Islamia College Peshawar is a renowned educational institution known for its magnificent red-brick Mughal-style architecture and its role in the educational history of the region.',
       },
       {
         'name': 'Qissa Khwani Bazaar',
-        'image':
-            'https://images.unsplash.com/photo-1627663242637-cd58e652432d?q=80&w=400',
+        'image': 'assets/images/qissa_khwani.jpg',
         'description':
             'The "Bazaar of Storytellers" is a historic market in Peshawar where travelers and traders used to gather to share stories over cups of Kahwa (green tea).',
       },
       {
         'name': 'Mahabat Khan Mosque',
-        'image':
-            'https://images.unsplash.com/photo-1627663242137-0cf791873733?q=80&w=400',
+        'image': 'assets/images/mahabat_khan.jpg',
         'description':
             'This 17th-century Mughal-era mosque is famous for its intricate architecture, geometric patterns, and beautiful white marble facade.',
       },
       {
         'name': 'Peshawar Museum',
-        'image':
-            'https://images.unsplash.com/photo-1518998053502-5190a3915a25?q=80&w=400',
+        'image': 'assets/images/peshawar_museum.jpg',
         'description':
             'Known for its extensive collection of Gandharan Buddhist art, the Peshawar Museum is housed in a beautiful Victorian-style building.',
       },
@@ -279,8 +273,7 @@ final List<Destination> destinationsList = [
     id: '15',
     city: 'Gilgit',
     country: 'Pakistan',
-    imageUrl:
-        'https://images.unsplash.com/photo-1548263514-a2387102e35a?q=80&w=800', // Gilgit Mountains
+    imageUrl: 'assets/images/gilgit.jpg',
     rating: 4.9,
     price: 'Rs. 28,000',
     description:
@@ -289,29 +282,26 @@ final List<Destination> destinationsList = [
     attractions: [
       {
         'name': 'Naltar Valley',
-        'image':
-            'https://images.unsplash.com/photo-1621251910609-b14a29a59560?q=80&w=400',
+        'image': 'assets/images/naltar_valley.jpg',
         'description':
             'Naltar Valley is famous for its colorful lakes and lush green forests. It is one of the most beautiful spots near Gilgit, accessible by 4x4 vehicles.',
       },
       {
         'name': 'Rakaposhi View Point',
-        'image':
-            'https://images.unsplash.com/photo-1739676882863-f087febf073d?q=80&w=400',
+        'image': 'assets/images/rakaposhi.jpg',
         'description':
             'The Rakaposhi View Point offers a majestic view of the snow-capped Rakaposhi peak, which is part of the Karakoram mountain range.',
       },
       {
         'name': 'Kargah Buddha',
-        'image':
-            'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=400',
+        'image': 'assets/images/kargah_buddha.jpg',
         'description':
             'Kargah Buddha is an archaeological site featuring a large standing Buddha figure carved into a cliffside, dating back to the 7th century.',
       },
       {
         'name': 'Danyore Suspension Bridge',
         'image':
-            'https://images.unsplash.com/photo-1518998053502-5190a3915a25?q=80&w=400',
+            'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800',
         'description':
             'The Danyore Suspension Bridge is a thrilling and historic bridge connecting Gilgit to the Danyore valley, offering views of the Gilgit River.',
       },
@@ -323,8 +313,7 @@ final List<Destination> destinationsList = [
     id: '11',
     city: 'Hyderabad',
     country: 'Pakistan',
-    imageUrl:
-        'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=800', // Pacco Qillo/City view
+    imageUrl: 'assets/images/hyderabad.png',
     rating: 4.7,
     price: 'Rs. 10,000',
     description:
@@ -367,8 +356,7 @@ final List<Destination> destinationsList = [
     id: '12',
     city: 'Multan',
     country: 'Pakistan',
-    imageUrl:
-        'https://images.unsplash.com/photo-1621251910609-b14a29a59560?q=80&w=800', // Iconic shrine view
+    imageUrl: 'assets/images/multan.png',
     rating: 4.8,
     price: 'Rs. 13,000',
     description:
@@ -418,8 +406,7 @@ final List<Destination> destinationsList = [
     id: '13',
     city: 'Faisalabad',
     country: 'Pakistan',
-    imageUrl:
-        'https://images.unsplash.com/photo-1590001158193-790130abe86a?q=80&w=800', // City view
+    imageUrl: 'assets/images/faisalabad.png',
     rating: 4.6,
     price: 'Rs. 9,000',
     description:
@@ -539,8 +526,7 @@ final List<Destination> destinationsList = [
     id: '14',
     city: 'Gwadar',
     country: 'Pakistan',
-    imageUrl:
-        'https://images.unsplash.com/photo-1627663243954-d891632007d3?q=80&w=800', // Aerial view of Gwadar
+    imageUrl: 'assets/images/gawader.png',
     rating: 4.8,
     price: 'Rs. 30,000',
     description:
