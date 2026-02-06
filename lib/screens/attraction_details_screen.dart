@@ -234,38 +234,41 @@ class AttractionDetailsScreen extends StatelessWidget {
                         const SizedBox(height: 32),
 
                         // Location/Map placeholder
-                        Container(
-                          height: 180,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: const DecorationImage(
-                              image: NetworkImage(
-                                "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=800",
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.1),
-                                blurRadius: 10,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child:
-                                CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 25,
-                                  child: const Icon(
-                                    Icons.location_on,
-                                    color: AppColors.primary,
-                                    size: 28,
-                                  ),
-                                ).animate().scale(
-                                  duration: 800.ms,
-                                  curve: Curves.elasticOut,
+                        GestureDetector(
+                          onTap: _openMap,
+                          child: Container(
+                            height: 180,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: const DecorationImage(
+                                image: NetworkImage(
+                                  "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=800",
                                 ),
+                                fit: BoxFit.cover,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(alpha: 0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 5),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child:
+                                  CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 25,
+                                    child: const Icon(
+                                      Icons.location_on,
+                                      color: AppColors.primary,
+                                      size: 28,
+                                    ),
+                                  ).animate().scale(
+                                    duration: 800.ms,
+                                    curve: Curves.elasticOut,
+                                  ),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 100),

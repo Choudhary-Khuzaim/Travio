@@ -322,31 +322,33 @@ final List<Destination> destinationsList = [
     attractions: [
       {
         'name': 'Pacco Qillo',
-        'image':
-            'https://images.unsplash.com/photo-1562016335-9610f4435882?q=80&w=400',
+        'image': 'assets/images/pacco_qillo.png',
         'description':
             'Pacco Qillo (Strong Fort) is a historic fort built by Mian Ghulam Shah Kalhoro in 1768. It is one of the most prominent landmarks of Hyderabad.',
       },
       {
         'name': 'Sindh Museum',
-        'image':
-            'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=400',
+        'image': 'assets/images/sindh_museum.png',
         'description':
             'The Sindh Museum features a wide collection of artifacts and exhibits showcasing the history and culture of the Sindh region, from ancient times to the present.',
       },
       {
         'name': 'Rani Bagh',
-        'image':
-            'https://images.unsplash.com/photo-1516422317950-ad73562a2828?q=80&w=400',
+        'image': 'assets/images/rani_bagh.png',
         'description':
             'Rani Bagh is a historic zoo and park in Hyderabad named after Queen Victoria. It is a popular spot for families, offering a large green space and a zoo.',
       },
       {
         'name': 'Resham Gali',
-        'image':
-            'https://images.unsplash.com/photo-1590001158193-790130abe86a?q=80&w=400',
+        'image': 'assets/images/resham_gali.png',
         'description':
             'Resham Gali is a famous narrow street market in Hyderabad, known for its traditional clothing, embroidery, and vibrant atmosphere.',
+      },
+      {
+        'name': 'Tombs of Talpur Mirs',
+        'image': 'assets/images/tombs_of_talpur_mirs.png',
+        'description':
+            'The Tombs of Talpur Mirs are a complex of mausoleums housing the graves of the Talpur dynasty rulers. They are renowned for their impressive architecture and intricate Kashi tile work.',
       },
     ],
     latitude: 25.3960,
@@ -365,36 +367,31 @@ final List<Destination> destinationsList = [
     attractions: [
       {
         'name': 'Shah Rukn-e-Alam',
-        'image':
-            'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=400',
+        'image': 'assets/images/shah_rukn_e_alam.png',
         'description':
             'The Tomb of Shah Rukn-e-Alam is a masterpiece of Tughluq architecture and one of the most impressive shrines in the Indian subcontinent. It is a symbol of Multan’s spiritual heritage.',
       },
       {
         'name': 'Bahauddin Zakariya',
-        'image':
-            'https://images.unsplash.com/photo-1590001158193-790130abe86a?q=80&w=400',
+        'image': 'assets/images/bahauddin_zakariya.png',
         'description':
             'The shrine of the 13th-century Sufi saint Bahauddin Zakariya is a prominent historical and religious site, featuring traditional Multani tile work and a grand brick structure.',
       },
       {
         'name': 'Qila Kohna Multan',
-        'image':
-            'https://images.unsplash.com/photo-1562016335-9610f4435882?q=80&w=400',
+        'image': 'assets/images/qila_kohna_multan.png',
         'description':
             'Also known as Multan Fort, this ancient citadel sits on a high mound and houses several major shrines and historic landmarks of the city.',
       },
       {
         'name': 'Shah Shams Tabrez',
-        'image':
-            'https://images.unsplash.com/photo-1518998053502-5190a3915a25?q=80&w=400',
+        'image': 'assets/images/shah_shams_tabrez.png',
         'description':
             'The shrine of Shah Shams Tabrez is another significant spiritual site in Multan, known for its beautiful architecture and the legend of the saint who brought the sun closer.',
       },
       {
         'name': 'Ghanta Ghar Multan',
-        'image':
-            'https://images.unsplash.com/photo-1516422317950-ad73562a2828?q=80&w=400',
+        'image': 'assets/images/ghanta_ghar_multan.png',
         'description':
             'The Clock Tower (Ghanta Ghar) of Multan is a landmark building from the British era, located in the center of the city and now serving as a museum.',
       },
