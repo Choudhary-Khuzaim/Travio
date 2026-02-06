@@ -51,7 +51,7 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         slivers: [
           // 1. Premium Sliver Header
           SliverAppBar(
