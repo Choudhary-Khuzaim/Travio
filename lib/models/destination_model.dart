@@ -596,4 +596,41 @@ final List<Destination> destinationsList = [
     latitude: 25.1216,
     longitude: 62.3254,
   ),
+  Destination(
+    id: '15',
+    city: 'Ziarat',
+    country: 'Pakistan',
+    imageUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/e/e1/Quaid_e_Azam_Residency_Ziarat.jpg',
+    rating: 4.7,
+    price: 'Rs. 20,000',
+    description:
+        'Ziarat is a hill station in Balochistan, famous for the Quaid-e-Azam Residency and its ancient Juniper forests, which are among the oldest in the world.',
+    facilities: ['Residency', 'Forests', 'Hiking', 'Viewpoints'],
+    attractions: [
+      {
+        'name': 'Quaid-e-Azam Residency',
+        'image':
+            'https://upload.wikimedia.org/wikipedia/commons/e/e1/Quaid_e_Azam_Residency_Ziarat.jpg',
+        'description':
+            'The historical residence where Quaid-e-Azam spent his last days. It is a national monument and a beautiful example of wooden architecture.',
+      },
+      {
+        'name': 'Juniper Forest',
+        'image':
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Ziarat_Juniper_Forest%2C_Balochistan%2C_Pakistan.jpg/800px-Ziarat_Juniper_Forest%2C_Balochistan%2C_Pakistan.jpg',
+        'description':
+            'Ziarat is home to the second largest Juniper forest in the world. Some trees are over 5000 years old, offering a serene environment.',
+      },
+      {
+        'name': 'Prospect Point',
+        'image':
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Ziarat_Valley.jpg/800px-Ziarat_Valley.jpg',
+        'description':
+            'Prospect Point offers a breathtaking panoramic view of the entire Ziarat valley and surrounding mountains. A perfect spot for photography.',
+      },
+    ],
+    latitude: 30.3824,
+    longitude: 67.7256,
+  ),
 ];

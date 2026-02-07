@@ -318,7 +318,7 @@ class ProfileScreen extends StatelessWidget {
                 ).animate().scale(duration: 600.ms, curve: Curves.easeOutBack),
                 const SizedBox(height: 16),
                 const Text(
-                  "John Doe",
+                  "Khuzaim Sajjad",
                   style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
@@ -328,7 +328,7 @@ class ProfileScreen extends StatelessWidget {
                 ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.3, end: 0),
                 const SizedBox(height: 4),
                 Text(
-                  "john.doe@example.com",
+                  "khuzaim.sajjad@example.com",
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.white.withValues(alpha: 0.8),

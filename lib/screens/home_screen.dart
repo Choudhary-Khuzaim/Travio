@@ -66,49 +66,89 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildHomeContent() {
-    return SingleChildScrollView(
+    return CustomScrollView(
       controller: _scrollController,
-      padding: EdgeInsets.zero,
-      child: Column(
-        children: [
-          _buildImmersiveHeader(context),
-          const SizedBox(height: 24), // Added space below header image
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: _buildSectionHeader(
-              "Popular Destinations",
-              "See All",
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const ExploreScreen()),
+      slivers: [
+        SliverAppBar(
+          expandedHeight: 520, // Height of the expanded header
+          floating: false,
+          pinned: true, // This keeps it visible when scrolling up
+          backgroundColor: Colors.transparent,
+          flexibleSpace: FlexibleSpaceBar(
+            background: _buildImmersiveHeader(context),
+            collapseMode:
+                CollapseMode.parallax, // Parallax effect for better visual
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(0),
+            child: Container(), // Empty container to satisfy bottom widget
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              const SizedBox(height: 24), // Added space below header image
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _buildSectionHeader(
+                  "Popular Destinations",
+                  "See All",
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ExploreScreen()),
+                  ),
+                ),
               ),
-            ),
-          ),
-          const SizedBox(height: 20), // Added space between title and carousel
-          _build3DCarousel(),
+              const SizedBox(
+                height: 20,
+              ), // Added space between title and carousel
+              _build3DCarousel(),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: _buildSectionHeader(
-              "Explore",
-              "View All",
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const ExploreScreen()),
-              ), // Navigate to Search or Explore
-            ),
+              // --- NEW SECTION: PAKISTAN POPULAR HOTELS ---
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _buildSectionHeader(
+                  "Pakistan Popular Hotels",
+                  "See All",
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const HotelBookingScreen(),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildHotelList(),
+
+              // ---------------------------------------------
+              const SizedBox(height: 30),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _buildSectionHeader(
+                  "Explore",
+                  "View All",
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ExploreScreen()),
+                  ), // Navigate to Search or Explore
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildExploreList(),
+              const SizedBox(height: 120), // Bottom padding for glass bar
+            ],
           ),
-          const SizedBox(height: 16),
-          _buildExploreList(),
-          const SizedBox(height: 160), // Bottom padding for glass bar
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Widget _buildImmersiveHeader(BuildContext context) {
     return SizedBox(
-      height: 520,
+      height: 560,
       child: Stack(
         children: [
           Positioned.fill(
@@ -127,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Container(
-            height: 520,
+            height: 560,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -149,28 +189,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Explore the",
+                    "Explore",
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: 32,
                       fontWeight: FontWeight.w300,
                       color: Colors.white,
-                      letterSpacing: 1.2,
+                      letterSpacing: 1.5,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black26,
+                          offset: Offset(0, 2),
+                          blurRadius: 4,
+                        ),
+                      ],
                     ),
                   ).animate().fadeIn(duration: 600.ms).slideX(),
                   const Text(
-                    "Beautiful World!",
+                    "Beautiful Pakistan",
                     style: TextStyle(
-                      fontSize: 34,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 38,
+                      fontWeight: FontWeight.w800,
                       color: Colors.white,
-                      height: 1.2,
+                      height: 1.1,
                       letterSpacing: 0.5,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black38,
+                          offset: Offset(0, 4),
+                          blurRadius: 10,
+                        ),
+                      ],
                     ),
                   ).animate().fadeIn(duration: 800.ms, delay: 200.ms).slideX(),
 
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 55),
                   _buildSearchBar(),
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 55),
                   _buildCategoryPills(),
                 ],
               ),
@@ -826,5 +880,203 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  // --- NEW HOTEL DATA AND WIDGET ---
+
+  final List<Map<String, dynamic>> _popularHotels = [
+    {
+      'name': 'Serena Hotel',
+      'city': 'Islamabad',
+      'price': 'Rs. 48,000',
+      'rating': '4.9',
+      'image':
+          'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800',
+    },
+    {
+      'name': 'Pearl Continental',
+      'city': 'Lahore',
+      'price': 'Rs. 35,000',
+      'rating': '4.8',
+      'image':
+          'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800',
+    },
+    {
+      'name': 'Avari Towers',
+      'city': 'Karachi',
+      'price': 'Rs. 30,000',
+      'rating': '4.7',
+      'image':
+          'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=1200',
+    },
+    {
+      'name': 'Shangrila Resort',
+      'city': 'Skardu',
+      'price': 'Rs. 42,000',
+      'rating': '4.9',
+      'image':
+          'https://images.unsplash.com/photo-1582719478250-c89cae4df85b?q=80&w=800',
+    },
+    {
+      'name': 'Quetta Serena',
+      'city': 'Quetta',
+      'price': 'Rs. 45,000',
+      'rating': '4.9',
+      'image':
+          'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800',
+    },
+    {
+      'name': 'Ziarat Continental',
+      'city': 'Ziarat',
+      'price': 'Rs. 15,000',
+      'rating': '4.4',
+      'image':
+          'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1200',
+    },
+  ];
+
+  Widget _buildHotelList() {
+    return SizedBox(
+      height: 260,
+      child: ListView.builder(
+        padding: const EdgeInsets.only(left: 24, bottom: 20),
+        scrollDirection: Axis.horizontal,
+        itemCount: _popularHotels.length,
+        itemBuilder: (context, index) {
+          final hotel = _popularHotels[index];
+          return Container(
+            width: 200,
+            margin: const EdgeInsets.only(right: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.08),
+                  blurRadius: 15,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.network(
+                          hotel['image'],
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Container(
+                                color: Colors.grey[200],
+                                child: const Icon(
+                                  Icons.broken_image,
+                                  size: 30,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.orange,
+                                  size: 12,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  hotel['rating'],
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              hotel['name'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: AppColors.textPrimary,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on_outlined,
+                                  color: AppColors.textSecondary,
+                                  size: 12,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  hotel['city'],
+                                  style: const TextStyle(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Text(
+                          hotel['price'],
+                          style: const TextStyle(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    ).animate().fadeIn(delay: 500.ms).slideX();
   }
 }
