@@ -412,38 +412,45 @@ final List<Destination> destinationsList = [
     attractions: [
       {
         'name': 'Clock Tower',
-        'image':
-            'https://images.unsplash.com/photo-1516422317950-ad73562a2828?q=80&w=400',
+        'image': 'assets/images/faisalabad_clock_tower.png',
         'description':
             'The Faisalabad Clock Tower (Ghanta Ghar) is the oldest monument in the city. It was built during the British era and is unique because it is at the center of eight markets that form the Union Jack flag when viewed from above.',
       },
       {
         'name': 'Lyallpur Museum',
-        'image':
-            'https://images.unsplash.com/photo-1518998053502-5190a3915a25?q=80&w=400',
+        'image': 'assets/images/lyallpur_museum.png',
         'description':
             'The Lyallpur Museum preserves the regional history and culture of Faisalabad. It features several galleries showcasing ancient artifacts, local heritage, and the story of the city’s development.',
       },
       {
         'name': 'Gatwala Wildlife Park',
-        'image':
-            'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=400',
+        'image': 'assets/images/gatwala_wildlife_park.png',
         'description':
             'Gatwala Wildlife Park is a large botanical garden and wildlife preserve. It is a popular picnic spot, featuring a lake, forest area, and various bird and animal species.',
       },
       {
         'name': 'Jinnah Garden',
-        'image':
-            'https://images.unsplash.com/photo-1562016335-9610f4435882?q=80&w=400',
+        'image': 'assets/images/jinnah_garden_faisalabad.png',
         'description':
             'Jinnah Garden, also known as Dhobi Ghat Park, is one of the oldest and largest parks in Faisalabad. It is a central green space used for public gatherings and recreation.',
       },
       {
         'name': 'Chenab Club',
-        'image':
-            'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=400',
+        'image': 'assets/images/chenab_club_faisalabad.png',
         'description':
             'Established in 1910, the Chenab Club is a historic social club in Faisalabad, representing the colonial era’s architecture and lifestyle.',
+      },
+      {
+        'name': 'D Ground Market',
+        'image': 'assets/images/d_ground_market.png',
+        'description':
+            'D Ground is the modern shopping and food hub of Faisalabad. It comes alive in the evenings with families enjoying food streets, fashion outlets, and a vibrant nightlife.',
+      },
+      {
+        'name': 'Qaisery Gate',
+        'image': 'assets/images/qaisery_gate.png',
+        'description':
+            'Built in 1897, the Qaisery Gate is a historical entrance to the bazaars of Faisalabad. It is a magnificent example of colonial architecture and a gateway to the city’s bustling markets.',
       },
     ],
     latitude: 31.4504,
@@ -502,18 +509,45 @@ final List<Destination> destinationsList = [
     attractions: [
       {
         'name': 'Shangrila Resort',
-        'image':
-            'https://images.unsplash.com/photo-1621251910609-b14a29a59560?q=80&w=400',
+        'image': 'assets/images/shangrila_resort_skardu.png',
+        'description':
+            'Shangrila Resort, also known as "Heaven on Earth", is famous for its unique restaurant built on the fuselage of an aircraft and its heart-shaped Lower Kachura Lake.',
       },
       {
         'name': 'Deosai Plains',
-        'image':
-            'https://images.unsplash.com/photo-1627896157734-4d7d4388f24b?q=80&w=400',
+        'image': 'assets/images/deosai_plains_skardu.png',
+        'description':
+            'The Deosai National Park is a high-altitude alpine plain and national park. Known as the "Land of Giants", it is famous for its rich flora and fauna, including the Himalayan brown bear.',
       },
       {
         'name': 'Upper Kachura Lake',
-        'image':
-            'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=400',
+        'image': 'assets/images/upper_kachura_lake_skardu.png',
+        'description':
+            'Upper Kachura Lake is a captivating lake with crystal clear water, surrounded by dramatic rock formations and wild apricot trees. It offers boating and a peaceful atmosphere.',
+      },
+      {
+        'name': 'Mantoka Waterfall',
+        'image': 'assets/images/mantoka_waterfall_skardu.png',
+        'description':
+            'Mantoka Waterfall is a stunning waterfall located in the Kharmang district. The water falls from a great height into a lush green valley, creating a mesmerizing view.',
+      },
+      {
+        'name': 'Shigar Fort',
+        'image': 'assets/images/shigar_fort_skardu.png',
+        'description':
+            'Shigar Fort, built in the 17th century, is a historic fort in Shigar Valley. It has been restored and converted into a museum and luxury hotel, showcasing traditional Balti architecture.',
+      },
+      {
+        'name': 'Katpana Cold Desert',
+        'image': 'assets/images/katpana_cold_desert_skardu.png',
+        'description':
+            'The Katpana Desert, also known as the "Cold Desert", is a high-altitude desert located near Skardu. Its sand dunes are sometimes covered in snow during winter, offering a unique landscape.',
+      },
+      {
+        'name': 'Satpara Lake',
+        'image': 'assets/images/satpara_lake_skardu.png',
+        'description':
+            'Satpara Lake is a natural lake near Skardu that supplies water to the Skardu Valley. It is fed by the Satpara Stream and offers beautiful turquoise waters scenic views.',
       },
     ],
     latitude: 35.2971,
