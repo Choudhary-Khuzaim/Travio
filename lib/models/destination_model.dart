@@ -566,29 +566,25 @@ final List<Destination> destinationsList = [
     attractions: [
       {
         'name': 'Gwadar Port',
-        'image':
-            'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=400',
+        'image': 'assets/images/gwadar_port.png',
         'description':
             'The Gwadar Deep Water Port is the centerpiece of the city’s development. It is one of the deepest ports in the world and offers impressive views of maritime traffic.',
       },
       {
         'name': 'Marine Drive',
-        'image':
-            'https://images.unsplash.com/photo-1590001158193-790130abe86a?q=80&w=400',
+        'image': 'assets/images/marine_drive.png',
         'description':
             'Gwadar’s Marine Drive is a beautiful coastal road along the Arabian Sea, perfect for evening walks and enjoying the sea breeze with a view of the sunset.',
       },
       {
         'name': 'Hammerhead',
-        'image':
-            'https://images.unsplash.com/photo-1518998053502-5190a3915a25?q=80&w=400',
+        'image': 'assets/images/hammerhead.png',
         'description':
             'The Hammerhead is a unique landform that looks like a hammerhead shark from above. It provides a natural harbor for the city and is a significant geological feature.',
       },
       {
         'name': 'Koh-e-Batil',
-        'image':
-            'https://images.unsplash.com/photo-1516422317950-ad73562a2828?q=80&w=400',
+        'image': 'assets/images/koh_e_batil.png',
         'description':
             'Koh-e-Batil is a famous hill in Gwadar. Climbing to the top offers breathtaking panoramic views of the entire Gwadar city, the port, and the surrounding ocean.',
       },
@@ -597,11 +593,10 @@ final List<Destination> destinationsList = [
     longitude: 62.3254,
   ),
   Destination(
-    id: '15',
+    id: '16',
     city: 'Ziarat',
     country: 'Pakistan',
-    imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/e/e1/Quaid_e_Azam_Residency_Ziarat.jpg',
+    imageUrl: 'assets/images/ziarat.png',
     rating: 4.7,
     price: 'Rs. 20,000',
     description:
@@ -610,22 +605,19 @@ final List<Destination> destinationsList = [
     attractions: [
       {
         'name': 'Quaid-e-Azam Residency',
-        'image':
-            'https://upload.wikimedia.org/wikipedia/commons/e/e1/Quaid_e_Azam_Residency_Ziarat.jpg',
+        'image': 'assets/images/quaid_e_azam_residency.png',
         'description':
             'The historical residence where Quaid-e-Azam spent his last days. It is a national monument and a beautiful example of wooden architecture.',
       },
       {
         'name': 'Juniper Forest',
-        'image':
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Ziarat_Juniper_Forest%2C_Balochistan%2C_Pakistan.jpg/800px-Ziarat_Juniper_Forest%2C_Balochistan%2C_Pakistan.jpg',
+        'image': 'assets/images/juniper_forest.png',
         'description':
             'Ziarat is home to the second largest Juniper forest in the world. Some trees are over 5000 years old, offering a serene environment.',
       },
       {
         'name': 'Prospect Point',
-        'image':
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Ziarat_Valley.jpg/800px-Ziarat_Valley.jpg',
+        'image': 'assets/images/prospect_point.png',
         'description':
             'Prospect Point offers a breathtaking panoramic view of the entire Ziarat valley and surrounding mountains. A perfect spot for photography.',
       },
