@@ -3,7 +3,18 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../core/colors.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  final String initialName;
+  final String initialEmail;
+  final String initialPhone;
+  final String initialLocation;
+
+  const EditProfileScreen({
+    super.key,
+    this.initialName = '',
+    this.initialEmail = '',
+    this.initialPhone = '',
+    this.initialLocation = '',
+  });
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -18,16 +29,61 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController _phoneController;
   late TextEditingController _locationController;
 
+  // Country Codes List
+  final List<Map<String, String>> _countryCodes = [
+    {'code': '+92', 'name': 'PK', 'flag': '🇵🇰', 'example': '312 3456789'},
+    {'code': '+1', 'name': 'US', 'flag': '🇺🇸', 'example': '202 555 0123'},
+    {'code': '+44', 'name': 'UK', 'flag': '🇬🇧', 'example': '7700 900077'},
+    {'code': '+91', 'name': 'IN', 'flag': '🇮🇳', 'example': '98765 43210'},
+    {'code': '+86', 'name': 'CN', 'flag': '🇨🇳', 'example': '139 1234 5678'},
+    {'code': '+971', 'name': 'AE', 'flag': '🇦🇪', 'example': '50 123 4567'},
+    {'code': '+966', 'name': 'SA', 'flag': '🇸🇦', 'example': '50 123 4567'},
+    {'code': '+61', 'name': 'AU', 'flag': '🇦🇺', 'example': '412 345 678'},
+    {'code': '+1', 'name': 'CA', 'flag': '🇨🇦', 'example': '416 555 0123'},
+    {'code': '+49', 'name': 'DE', 'flag': '🇩🇪', 'example': '151 23456789'},
+    {'code': '+33', 'name': 'FR', 'flag': '🇫🇷', 'example': '6 12 34 56 78'},
+    {'code': '+81', 'name': 'JP', 'flag': '🇯🇵', 'example': '90 1234 5678'},
+    {'code': '+90', 'name': 'TR', 'flag': '🇹🇷', 'example': '501 234 5678'},
+    {'code': '+98', 'name': 'IR', 'flag': '🇮🇷', 'example': '912 345 6789'},
+    {'code': '+93', 'name': 'AF', 'flag': '🇦🇫', 'example': '70 123 4567'},
+    {'code': '+880', 'name': 'BD', 'flag': '🇧🇩', 'example': '1712 345678'},
+    {'code': '+62', 'name': 'ID', 'flag': '🇮🇩', 'example': '812 3456 7890'},
+    {'code': '+60', 'name': 'MY', 'flag': '🇲🇾', 'example': '12 345 6789'},
+    {'code': '+94', 'name': 'LK', 'flag': '🇱🇰', 'example': '77 123 4567'},
+    {'code': '+977', 'name': 'NP', 'flag': '🇳🇵', 'example': '9841 234567'},
+    {'code': '+39', 'name': 'IT', 'flag': '🇮🇹', 'example': '320 123 4567'},
+    {'code': '+34', 'name': 'ES', 'flag': '🇪🇸', 'example': '612 34 56 78'},
+    {'code': '+7', 'name': 'RU', 'flag': '🇷🇺', 'example': '912 345-67-89'},
+    {'code': '+55', 'name': 'BR', 'flag': '🇧🇷', 'example': '11 91234-5678'},
+    {'code': '+27', 'name': 'ZA', 'flag': '🇿🇦', 'example': '72 123 4567'},
+  ];
+
+  String _selectedCountryIso = 'PK';
+
   @override
   void initState() {
     super.initState();
-    // Initialize with placeholder data
-    _nameController = TextEditingController(text: "Khuzaim Sajjad");
-    _emailController = TextEditingController(
-      text: "khuzaim.sajjad@example.com",
-    );
-    _phoneController = TextEditingController(text: "+1 234 567 890");
-    _locationController = TextEditingController(text: "New York, USA");
+    // Initialize with passed data
+    _nameController = TextEditingController(text: widget.initialName);
+    _emailController = TextEditingController(text: widget.initialEmail);
+    _locationController = TextEditingController(text: widget.initialLocation);
+
+    // Parse Phone Number
+    String phone = widget.initialPhone;
+    String matchedIso = 'PK';
+    String numberPart = phone;
+
+    // Try to match with existing codes
+    for (var country in _countryCodes) {
+      String code = country['code']!;
+      if (phone.startsWith(code)) {
+        matchedIso = country['name']!;
+        numberPart = phone.substring(code.length).trim();
+        break;
+      }
+    }
+    _selectedCountryIso = matchedIso;
+    _phoneController = TextEditingController(text: numberPart);
   }
 
   @override
@@ -67,12 +123,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 20),
-                    _buildTextField(
-                      "Phone Number",
-                      _phoneController,
-                      Icons.phone_outlined,
-                      keyboardType: TextInputType.phone,
-                    ),
+                    _buildPhoneField(),
                     const SizedBox(height: 20),
                     _buildTextField(
                       "Location",
@@ -98,8 +149,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  // TODO: Implement save logic
-                                  Navigator.pop(context);
+                                  // Find selected country code
+                                  final selectedCountry = _countryCodes
+                                      .firstWhere(
+                                        (c) => c['name'] == _selectedCountryIso,
+                                        orElse: () => _countryCodes[0],
+                                      );
+                                  final code = selectedCountry['code'];
+
+                                  Navigator.pop(context, {
+                                    'name': _nameController.text,
+                                    'email': _emailController.text,
+                                    'phone': '$code ${_phoneController.text}',
+                                    'location': _locationController.text,
+                                  });
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       content: Text(
@@ -167,8 +230,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           fit: StackFit.expand,
           children: [
             // Travel Background Image (same as profile)
-            Image.network(
-              'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+            Image.asset(
+              'assets/images/pakistan_flag_bg.png',
               fit: BoxFit.cover,
             ),
             // Gradient Overlay
@@ -248,6 +311,123 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildPhoneField() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 4),
+          child: Text(
+            "Phone Number",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+              fontSize: 15,
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.1)),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withValues(alpha: 0.05),
+                blurRadius: 15,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              // Country Code Dropdown
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      color: Colors.grey.withValues(alpha: 0.2),
+                    ),
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: _selectedCountryIso,
+                    menuMaxHeight: 300,
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: AppColors.primary,
+                    ),
+                    items: _countryCodes.map((Map<String, String> country) {
+                      return DropdownMenuItem<String>(
+                        value: country['name'],
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              country['flag']!,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              country['code']!,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textPrimary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedCountryIso = newValue!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              // Phone Input
+              Expanded(
+                child: TextFormField(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.textPrimary,
+                  ),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 16,
+                    ),
+                    hintText: _countryCodes.firstWhere(
+                      (c) => c['name'] == _selectedCountryIso,
+                      orElse: () => _countryCodes[0],
+                    )['example'],
+                    hintStyle: TextStyle(
+                      color: Colors.grey.withValues(alpha: 0.5),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter phone number';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ).animate().fadeIn(delay: 100.ms).slideX(begin: 0.1, end: 0);
   }
 
   Widget _buildTextField(

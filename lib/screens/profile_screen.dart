@@ -11,8 +11,19 @@ import 'edit_profile_screen.dart';
 import 'login_screen.dart';
 import '../core/colors.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  // User Data State
+  String _name = "Khuzaim Sajjad";
+  String _email = "khuzaim.sajjad@example.com";
+  String _phone = "+92 312 3456789";
+  String _location = "Multan, Pakistan";
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +48,27 @@ class ProfileScreen extends StatelessWidget {
                     _buildSettingsItem(
                       Icons.person_outline,
                       "Edit Profile",
-                      onTap: () {
-                        Navigator.push(
+                      onTap: () async {
+                        final result = await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const EditProfileScreen(),
+                            builder: (_) => EditProfileScreen(
+                              initialName: _name,
+                              initialEmail: _email,
+                              initialPhone: _phone,
+                              initialLocation: _location,
+                            ),
                           ),
                         );
+
+                        if (result != null && result is Map) {
+                          setState(() {
+                            _name = result['name'] ?? _name;
+                            _email = result['email'] ?? _email;
+                            _phone = result['phone'] ?? _phone;
+                            _location = result['location'] ?? _location;
+                          });
+                        }
                       },
                     ),
                     _buildSettingsItem(
@@ -232,11 +257,27 @@ class ProfileScreen extends StatelessWidget {
       actions: [
         IconButton(
           icon: const Icon(Icons.edit_note, color: Colors.white),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            final result = await Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+              MaterialPageRoute(
+                builder: (_) => EditProfileScreen(
+                  initialName: _name,
+                  initialEmail: _email,
+                  initialPhone: _phone,
+                  initialLocation: _location,
+                ),
+              ),
             );
+
+            if (result != null && result is Map) {
+              setState(() {
+                _name = result['name'] ?? _name;
+                _email = result['email'] ?? _email;
+                _phone = result['phone'] ?? _phone;
+                _location = result['location'] ?? _location;
+              });
+            }
           },
         ),
       ],
@@ -249,10 +290,7 @@ class ProfileScreen extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             // Travel Background Image
-            Image.network(
-              'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-              fit: BoxFit.cover,
-            ),
+            Image.asset('assets/images/pakistan_map_bg.png', fit: BoxFit.cover),
             // Gradient Overlay
             Container(
               decoration: BoxDecoration(
@@ -317,9 +355,9 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ).animate().scale(duration: 600.ms, curve: Curves.easeOutBack),
                 const SizedBox(height: 16),
-                const Text(
-                  "Khuzaim Sajjad",
-                  style: TextStyle(
+                Text(
+                  _name,
+                  style: const TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -328,13 +366,42 @@ class ProfileScreen extends StatelessWidget {
                 ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.3, end: 0),
                 const SizedBox(height: 4),
                 Text(
-                  "khuzaim.sajjad@example.com",
+                  _email,
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.white.withValues(alpha: 0.8),
                     fontWeight: FontWeight.w400,
                   ),
                 ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.3, end: 0),
+                const SizedBox(height: 4),
+                Text(
+                  _phone,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white.withValues(alpha: 0.8),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ).animate().fadeIn(delay: 350.ms).slideY(begin: 0.3, end: 0),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.location_on_outlined,
+                      color: Colors.white.withValues(alpha: 0.8),
+                      size: 16,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      _location,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white.withValues(alpha: 0.8),
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3, end: 0),
               ],
             ),
           ],
