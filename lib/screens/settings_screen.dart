@@ -141,10 +141,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         background: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-              fit: BoxFit.cover,
-            ),
+            Image.asset('assets/images/settings_bg.png', fit: BoxFit.cover),
             Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(

@@ -28,7 +28,7 @@ class HelpSupportScreen extends StatelessWidget {
                     "Can I cancel my booking?",
                     "Yes, you can cancel your booking from the 'My Trips' section. Cancellation fees may apply depending on the airline policy.",
                   ),
-                   _buildExpansionTile(
+                  _buildExpansionTile(
                     "How do I contact support?",
                     "You can contact our 24/7 support team via email or phone directly from this screen.",
                   ),
@@ -36,9 +36,17 @@ class HelpSupportScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   _buildSectionHeader("Reach Out to Us"),
                   const SizedBox(height: 8),
-                  _buildContactItem(Icons.email_outlined, "Email Support", "support@travio.com"),
-                  _buildContactItem(Icons.phone_outlined, "Call Center", "+1 (800) 123-4567"),
-                  
+                  _buildContactItem(
+                    Icons.email_outlined,
+                    "Email Support",
+                    "support@travio.com",
+                  ),
+                  _buildContactItem(
+                    Icons.phone_outlined,
+                    "Call Center",
+                    "+1 (800) 123-4567",
+                  ),
+
                   const SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,
@@ -57,10 +65,14 @@ class HelpSupportScreen extends StatelessWidget {
                         onPressed: () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: const Text("Thank you! Opening feedback form..."),
+                              content: const Text(
+                                "Thank you! Opening feedback form...",
+                              ),
                               behavior: SnackBarBehavior.floating,
                               backgroundColor: AppColors.primary,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
                           );
                         },
@@ -68,12 +80,17 @@ class HelpSupportScreen extends StatelessWidget {
                           backgroundColor: AppColors.primary,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 18),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           elevation: 0,
                         ),
                         child: const Text(
                           "Send Feedback",
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -107,10 +124,7 @@ class HelpSupportScreen extends StatelessWidget {
         background: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-              fit: BoxFit.cover,
-            ),
+            Image.asset('assets/images/help_support_bg.png', fit: BoxFit.cover),
             Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -130,9 +144,15 @@ class HelpSupportScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.3),
+                  ),
                 ),
-                child: const Icon(Icons.headset_mic_outlined, size: 40, color: Colors.white),
+                child: const Icon(
+                  Icons.headset_mic_outlined,
+                  size: 40,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
@@ -178,14 +198,22 @@ class HelpSupportScreen extends StatelessWidget {
           tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
           title: Text(
             title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.textPrimary),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: AppColors.textPrimary,
+            ),
           ),
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: Text(
                 content,
-                style: TextStyle(color: AppColors.textSecondary.withValues(alpha: 0.8), height: 1.6, fontSize: 14),
+                style: TextStyle(
+                  color: AppColors.textSecondary.withValues(alpha: 0.8),
+                  height: 1.6,
+                  fontSize: 14,
+                ),
               ),
             ),
           ],
@@ -221,11 +249,18 @@ class HelpSupportScreen extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary, fontSize: 16),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: AppColors.textPrimary,
+            fontSize: 16,
+          ),
         ),
         subtitle: Text(
           subtitle,
-          style: TextStyle(color: AppColors.textSecondary.withValues(alpha: 0.7), fontSize: 13),
+          style: TextStyle(
+            color: AppColors.textSecondary.withValues(alpha: 0.7),
+            fontSize: 13,
+          ),
         ),
         trailing: Container(
           padding: const EdgeInsets.all(4),
@@ -233,7 +268,11 @@ class HelpSupportScreen extends StatelessWidget {
             color: Colors.grey.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.arrow_forward_ios, size: 12, color: AppColors.textSecondary),
+          child: const Icon(
+            Icons.arrow_forward_ios,
+            size: 12,
+            color: AppColors.textSecondary,
+          ),
         ),
         onTap: () {},
       ),

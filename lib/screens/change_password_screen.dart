@@ -11,7 +11,7 @@ class ChangePasswordScreen extends StatefulWidget {
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final _formKey = GlobalKey<FormState>();
-  
+
   // Controllers
   final _currentPasswordController = TextEditingController();
   final _newPasswordController = TextEditingController();
@@ -51,16 +51,25 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       decoration: BoxDecoration(
                         color: AppColors.primary.withValues(alpha: 0.05),
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: AppColors.primary.withValues(alpha: 0.1)),
+                        border: Border.all(
+                          color: AppColors.primary.withValues(alpha: 0.1),
+                        ),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.info_outline, color: AppColors.primary),
+                          const Icon(
+                            Icons.info_outline,
+                            color: AppColors.primary,
+                          ),
                           const SizedBox(width: 12),
                           Expanded(
                             child: const Text(
                               "Your new password must be different from previous used passwords.",
-                              style: TextStyle(color: AppColors.textSecondary, fontSize: 13, height: 1.4),
+                              style: TextStyle(
+                                color: AppColors.textSecondary,
+                                fontSize: 13,
+                                height: 1.4,
+                              ),
                             ).animate().fadeIn(),
                           ),
                         ],
@@ -68,23 +77,23 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     const SizedBox(height: 32),
                     _buildPasswordField(
-                      "Current Password", 
-                      _currentPasswordController, 
+                      "Current Password",
+                      _currentPasswordController,
                       _obscureCurrent,
-                      () => setState(() => _obscureCurrent = !_obscureCurrent)
+                      () => setState(() => _obscureCurrent = !_obscureCurrent),
                     ),
                     const SizedBox(height: 24),
                     _buildPasswordField(
-                      "New Password", 
-                      _newPasswordController, 
-                      _obscureNew, 
-                      () => setState(() => _obscureNew = !_obscureNew)
+                      "New Password",
+                      _newPasswordController,
+                      _obscureNew,
+                      () => setState(() => _obscureNew = !_obscureNew),
                     ),
                     const SizedBox(height: 24),
                     _buildPasswordField(
-                      "Confirm New Password", 
-                      _confirmPasswordController, 
-                      _obscureConfirm, 
+                      "Confirm New Password",
+                      _confirmPasswordController,
+                      _obscureConfirm,
                       () => setState(() => _obscureConfirm = !_obscureConfirm),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -101,49 +110,70 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       padding: const EdgeInsets.only(left: 4),
                       child: const Text(
                         "Both passwords must match.",
-                        style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
 
                     const SizedBox(height: 48),
                     SizedBox(
-                      width: double.infinity,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.primary.withValues(alpha: 0.3),
-                              blurRadius: 20,
-                              offset: const Offset(0, 10),
-                            ),
-                          ],
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              // TODO: Implement password change logic
-                              Navigator.pop(context);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Password Changed Successfully!"),
-                                  behavior: SnackBarBehavior.floating,
-                                  backgroundColor: AppColors.primary,
+                          width: double.infinity,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.primary.withValues(
+                                    alpha: 0.3,
+                                  ),
+                                  blurRadius: 20,
+                                  offset: const Offset(0, 10),
                                 ),
-                              );
-                            }
-                          },
-                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            elevation: 0,
+                              ],
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  // TODO: Implement password change logic
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        "Password Changed Successfully!",
+                                      ),
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor: AppColors.primary,
+                                    ),
+                                  );
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 20,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                elevation: 0,
+                              ),
+                              child: const Text(
+                                "Update Password",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ),
                           ),
-                          child: const Text("Update Password", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
-                        ),
-                      ),
-                    ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.5, end: 0),
+                        )
+                        .animate()
+                        .fadeIn(delay: 300.ms)
+                        .slideY(begin: 0.5, end: 0),
                   ],
                 ),
               ),
@@ -173,8 +203,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         background: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              'https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+            Image.asset(
+              'assets/images/change_password_bg.png',
               fit: BoxFit.cover,
             ),
             Container(
@@ -196,9 +226,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.3),
+                  ),
                 ),
-                child: const Icon(Icons.lock_reset, size: 40, color: Colors.white),
+                child: const Icon(
+                  Icons.lock_reset,
+                  size: 40,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
@@ -207,7 +243,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     );
   }
 
-  Widget _buildPasswordField(String label, TextEditingController controller, bool obscureText, VoidCallback onVisibilityToggle, {String? Function(String?)? validator}) {
+  Widget _buildPasswordField(
+    String label,
+    TextEditingController controller,
+    bool obscureText,
+    VoidCallback onVisibilityToggle, {
+    String? Function(String?)? validator,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -215,7 +257,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           padding: const EdgeInsets.only(left: 4),
           child: Text(
             label,
-            style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary, fontSize: 15),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+              fontSize: 15,
+            ),
           ),
         ),
         const SizedBox(height: 10),
@@ -235,26 +281,43 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           child: TextFormField(
             controller: controller,
             obscureText: obscureText,
-            style: const TextStyle(fontWeight: FontWeight.w500, color: AppColors.textPrimary),
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              color: AppColors.textPrimary,
+            ),
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.lock_outline, color: AppColors.primary.withValues(alpha: 0.5), size: 22),
+              prefixIcon: Icon(
+                Icons.lock_outline,
+                color: AppColors.primary.withValues(alpha: 0.5),
+                size: 22,
+              ),
               suffixIcon: IconButton(
-                icon: Icon(obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined, color: AppColors.textSecondary),
+                icon: Icon(
+                  obscureText
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  color: AppColors.textSecondary,
+                ),
                 onPressed: onVisibilityToggle,
               ),
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 16,
+              ),
               hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.5)),
             ),
-            validator: validator ?? (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter $label';
-              }
-              if (value.length < 6) {
-                 return 'Password must be at least 6 characters';
-              }
-              return null;
-            },
+            validator:
+                validator ??
+                (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter $label';
+                  }
+                  if (value.length < 6) {
+                    return 'Password must be at least 6 characters';
+                  }
+                  return null;
+                },
           ),
         ),
       ],
