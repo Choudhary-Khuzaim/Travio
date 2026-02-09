@@ -120,11 +120,26 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 fit: StackFit.expand,
                 children: [
                   Container(
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
-                        colors: [AppColors.primary, Color(0xFF065F46)],
+                        colors: [
+                          AppColors.primary.withValues(alpha: 0.85),
+                          const Color(0xFF065F46).withValues(alpha: 0.75),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Center(
+                      child: Opacity(
+                        opacity: 0.15,
+                        child: Image.asset(
+                          'assets/images/pakistan_map.png',
+                          height: 140,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                   ),
