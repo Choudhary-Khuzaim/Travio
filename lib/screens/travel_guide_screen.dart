@@ -105,10 +105,7 @@ class _TravelGuideScreenState extends State<TravelGuideScreen> {
         background: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000',
-              fit: BoxFit.cover,
-            ),
+            Image.asset('assets/images/pakistan_map_bg.png', fit: BoxFit.cover),
             Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -129,7 +126,7 @@ class _TravelGuideScreenState extends State<TravelGuideScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Explore The",
+                    "Explore",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -138,7 +135,7 @@ class _TravelGuideScreenState extends State<TravelGuideScreen> {
                     ),
                   ),
                   Text(
-                    "World With Experts",
+                    "Pakistan With Experts",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
