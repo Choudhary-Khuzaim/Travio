@@ -341,7 +341,15 @@ class GuideDetailsScreen extends StatelessWidget {
       left: 24,
       right: 24,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Guide saved to your collection!"),
+              backgroundColor: AppColors.primary,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.textPrimary,
           foregroundColor: Colors.white,
