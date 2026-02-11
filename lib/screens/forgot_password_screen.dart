@@ -92,6 +92,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           height: 56,
                           child: ElevatedButton(
                             onPressed: () {
+                              if (_emailController.text.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Please enter your email"),
+                                    backgroundColor: Colors.redAccent,
+                                  ),
+                                );
+                                return;
+                              }
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text(

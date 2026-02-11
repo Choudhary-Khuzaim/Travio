@@ -213,7 +213,7 @@ class TripDetailsScreen extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             const SizedBox(height: 20),
-            _buildPassengerItem("Khuzaim Sajjad", "Adult", "12A"),
+            _buildPassengerItem("Khuzaim Sajjad", "Adult", trip['seat']),
             const Divider(height: 32),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

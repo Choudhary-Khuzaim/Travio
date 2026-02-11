@@ -120,6 +120,27 @@ class _SignupScreenState extends State<SignupScreen> {
                           height: 56,
                           child: ElevatedButton(
                             onPressed: () {
+                              if (_emailController.text.isEmpty ||
+                                  _passwordController.text.isEmpty ||
+                                  _confirmPasswordController.text.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Please fill all fields"),
+                                    backgroundColor: Colors.redAccent,
+                                  ),
+                                );
+                                return;
+                              }
+                              if (_passwordController.text !=
+                                  _confirmPasswordController.text) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Passwords do not match"),
+                                    backgroundColor: Colors.redAccent,
+                                  ),
+                                );
+                                return;
+                              }
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
