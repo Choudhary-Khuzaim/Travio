@@ -301,8 +301,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       'location': 'Islamabad',
       'price': 'Rs. 48k',
       'rating': '4.9',
-      'image':
-          'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800',
+      'image': 'assets/images/serena_hotel.png',
     },
     {
       'name': 'Pearl Continental',
@@ -744,10 +743,15 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(32),
-                                      child: Image.network(
-                                        hotel['image'],
-                                        fit: BoxFit.cover,
-                                      ),
+                                      child: hotel['image'].startsWith('http')
+                                          ? Image.network(
+                                              hotel['image'],
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.asset(
+                                              hotel['image'],
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                     Container(
                                       decoration: BoxDecoration(

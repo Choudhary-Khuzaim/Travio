@@ -340,42 +340,43 @@ class GuideDetailsScreen extends StatelessWidget {
       bottom: 30,
       left: 24,
       right: 24,
-      child: ElevatedButton(
-        onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Guide saved to your collection!"),
-              backgroundColor: AppColors.primary,
-              behavior: SnackBarBehavior.floating,
+      child:
+          ElevatedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Guide saved to your collection!"),
+                  backgroundColor: AppColors.primary,
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.textPrimary,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              elevation: 10,
             ),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.textPrimary,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.bookmark_add_outlined),
+                SizedBox(width: 12),
+                Text(
+                  "Save to My Guides",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ).animate().slideY(
+            begin: 1.0,
+            end: 0,
+            duration: 600.ms,
+            curve: Curves.easeOut,
           ),
-          elevation: 10,
-        ),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.bookmark_add_outlined),
-            SizedBox(width: 12),
-            Text(
-              "Save to My Guides",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ),
-    ).animate().slideY(
-      begin: 1.0,
-      end: 0,
-      duration: 600.ms,
-      curve: Curves.easeOut,
     );
   }
 }

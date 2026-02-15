@@ -890,8 +890,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'city': 'Islamabad',
       'price': 'Rs. 48,000',
       'rating': '4.9',
-      'image':
-          'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800',
+      'image': 'assets/images/serena_hotel.png',
     },
     {
       'name': 'Pearl Continental',
@@ -970,19 +969,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
-                        Image.network(
-                          hotel['image'],
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              Container(
-                                color: Colors.grey[200],
-                                child: const Icon(
-                                  Icons.broken_image,
-                                  size: 30,
-                                  color: Colors.grey,
-                                ),
+                        hotel['image'].startsWith('http')
+                            ? Image.network(
+                                hotel['image'],
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Container(
+                                      color: Colors.grey[200],
+                                      child: const Icon(
+                                        Icons.broken_image,
+                                        size: 30,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                              )
+                            : Image.asset(
+                                hotel['image'],
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Container(
+                                      color: Colors.grey[200],
+                                      child: const Icon(
+                                        Icons.broken_image,
+                                        size: 30,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                               ),
-                        ),
                         Positioned(
                           top: 10,
                           right: 10,

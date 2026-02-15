@@ -73,8 +73,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     String matchedIso = 'PK';
     String numberPart = phone;
 
-    // Try to match with existing codes
-    for (var country in _countryCodes) {
+    // Try to match with existing codes - finding longest match first
+    var sortedCodes = List<Map<String, String>>.from(_countryCodes);
+    sortedCodes.sort((a, b) => b['code']!.length.compareTo(a['code']!.length));
+
+    for (var country in sortedCodes) {
       String code = country['code']!;
       if (phone.startsWith(code)) {
         matchedIso = country['name']!;
@@ -418,6 +421,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter phone number';
+                    }
+                    if (!RegExp(r'^[0-9\s]+$').hasMatch(value)) {
+                      return 'Please enter valid digits';
                     }
                     return null;
                   },

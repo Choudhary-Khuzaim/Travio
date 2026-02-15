@@ -82,7 +82,9 @@ class HotelDetailsScreen extends StatelessWidget {
           children: [
             Hero(
               tag: 'hotel-${hotel['name']}',
-              child: Image.network(hotel['image'], fit: BoxFit.cover),
+              child: hotel['image'].startsWith('http')
+                  ? Image.network(hotel['image'], fit: BoxFit.cover)
+                  : Image.asset(hotel['image'], fit: BoxFit.cover),
             ),
             Container(
               decoration: BoxDecoration(
@@ -329,74 +331,78 @@ class HotelDetailsScreen extends StatelessWidget {
       bottom: 0,
       left: 0,
       right: 0,
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(24, 20, 24, 40),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 20,
-              offset: const Offset(0, -5),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Total Price",
-                  style: TextStyle(color: Colors.grey[600], fontSize: 12),
+      child:
+          Container(
+            padding: const EdgeInsets.fromLTRB(24, 20, 24, 40),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 20,
+                  offset: const Offset(0, -5),
                 ),
-                Text(
-                  hotel['price'],
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w900,
-                    color: AppColors.primary,
+              ],
+            ),
+            child: Row(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Total Price",
+                      style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                    ),
+                    Text(
+                      hotel['price'],
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 32),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              HotelBookingFormScreen(hotel: hotel),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 18),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      elevation: 10,
+                      shadowColor: AppColors.primary.withValues(alpha: 0.4),
+                    ),
+                    child: const Text(
+                      "Book Now",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(width: 32),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          HotelBookingFormScreen(hotel: hotel),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 18),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  elevation: 10,
-                  shadowColor: AppColors.primary.withValues(alpha: 0.4),
-                ),
-                child: const Text(
-                  "Book Now",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ).animate().slideY(
-      begin: 1.0,
-      end: 0,
-      duration: 600.ms,
-      curve: Curves.easeOut,
+          ).animate().slideY(
+            begin: 1.0,
+            end: 0,
+            duration: 600.ms,
+            curve: Curves.easeOut,
+          ),
     );
   }
 }

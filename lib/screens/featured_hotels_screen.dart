@@ -34,8 +34,12 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
   void _onSearchChanged() {
     setState(() {
       _filteredHotels = widget.featuredHotels.where((hotel) {
-        return hotel['name'].toLowerCase().contains(_searchController.text.toLowerCase()) ||
-               hotel['location'].toLowerCase().contains(_searchController.text.toLowerCase());
+        return hotel['name'].toLowerCase().contains(
+              _searchController.text.toLowerCase(),
+            ) ||
+            hotel['location'].toLowerCase().contains(
+              _searchController.text.toLowerCase(),
+            );
       }).toList();
     });
   }
@@ -88,7 +92,8 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
             Image.network(
               'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1600',
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Container(color: AppColors.primary),
+              errorBuilder: (context, error, stackTrace) =>
+                  Container(color: AppColors.primary),
             ),
             Container(
               decoration: BoxDecoration(
@@ -110,15 +115,34 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white24,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text("TOP PICKS", style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 2)),
+                    child: const Text(
+                      "TOP PICKS",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 8),
-                  const Text("Pakistan's\nBest Gems", style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold, height: 1.1)),
+                  const Text(
+                    "Pakistan's\nBest Gems",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      height: 1.1,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -168,15 +192,14 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 40),
       sliver: _filteredHotels.isEmpty
           ? const SliverFillRemaining(
-              child: Center(child: Text("No hotels found matching your search.")),
+              child: Center(
+                child: Text("No hotels found matching your search."),
+              ),
             )
           : SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return _buildPremiumHotelCard(_filteredHotels[index], index);
-                },
-                childCount: _filteredHotels.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return _buildPremiumHotelCard(_filteredHotels[index], index);
+              }, childCount: _filteredHotels.length),
             ),
     );
   }
@@ -211,8 +234,22 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
-                  child: Image.network(hotel['image'], height: 240, width: double.infinity, fit: BoxFit.cover),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(32),
+                  ),
+                  child: hotel['image'].startsWith('http')
+                      ? Image.network(
+                          hotel['image'],
+                          height: 240,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          hotel['image'],
+                          height: 240,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 // Glass Price Tag
                 Positioned(
@@ -223,13 +260,22 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white.withValues(alpha: 0.3),
                           border: Border.all(color: Colors.white30),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: Text("${hotel['price']}/night", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900)),
+                        child: Text(
+                          "${hotel['price']}/night",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -248,13 +294,30 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(hotel['name'], style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: AppColors.textPrimary)),
+                          Text(
+                            hotel['name'],
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
                           const SizedBox(height: 4),
                           Row(
                             children: [
-                              const Icon(Icons.location_on, color: AppColors.primary, size: 16),
+                              const Icon(
+                                Icons.location_on,
+                                color: AppColors.primary,
+                                size: 16,
+                              ),
                               const SizedBox(width: 4),
-                              Text(hotel['location'], style: TextStyle(color: Colors.grey[600], fontSize: 14)),
+                              Text(
+                                hotel['location'],
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 14,
+                                ),
+                              ),
                             ],
                           ),
                         ],
@@ -263,13 +326,29 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                          decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(16)),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.surface,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                           child: Row(
                             children: [
-                              const Icon(Icons.star, color: Colors.amber, size: 18),
+                              const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 18,
+                              ),
                               const SizedBox(width: 4),
-                              Text(hotel['rating'].toString(), style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16)),
+                              Text(
+                                hotel['rating'].toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 16,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -294,19 +373,31 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HotelBookingFormScreen(hotel: hotel),
+                              builder: (context) =>
+                                  HotelBookingFormScreen(hotel: hotel),
                             ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
                           foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 32,
+                            vertical: 16,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                           elevation: 10,
                           shadowColor: AppColors.primary.withValues(alpha: 0.4),
                         ),
-                        child: const Text("Reserve Now", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14)),
+                        child: const Text(
+                          "Reserve Now",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 14,
+                          ),
+                        ),
                       ),
                     ],
                   ),
