@@ -308,24 +308,21 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       'location': 'Lahore',
       'price': 'Rs. 35k',
       'rating': '4.8',
-      'image':
-          'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800',
+      'image': 'assets/images/pearl_continental_lahore.png',
     },
     {
       'name': 'Shangrila Skardu',
       'location': 'Kachura',
       'price': 'Rs. 42k',
       'rating': '4.9',
-      'image':
-          'https://images.unsplash.com/photo-1582719478250-c89cae4df85b?q=80&w=800',
+      'image': 'assets/images/shangrila_resort_skardu.png',
     },
     {
       'name': 'Quetta Serena Hotel',
       'location': 'Quetta, Balochistan',
       'price': 'Rs. 45k',
       'rating': '4.9',
-      'image':
-          'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800',
+      'image': 'assets/images/serena_hotel_quetta.png',
     },
   ];
 
