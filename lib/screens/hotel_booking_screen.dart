@@ -332,8 +332,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       'location': 'Karachi, Sindh',
       'price': 'Rs. 25,000',
       'rating': 4.7,
-      'image':
-          'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=1200',
+      'image': 'assets/images/avari_towers_karachi.png',
       'tags': ['Luxury', 'Top Rated'],
     },
     {
@@ -341,8 +340,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       'location': 'Pir Sohawa, Islamabad',
       'price': 'Rs. 18,000',
       'rating': 4.5,
-      'image':
-          'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=1200',
+      'image': 'assets/images/monal_resort_islamabad.png',
       'tags': ['Resort', 'View'],
     },
     {
@@ -350,8 +348,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       'location': 'Gulberg, Lahore',
       'price': 'Rs. 22,000',
       'rating': 4.6,
-      'image':
-          'https://images.unsplash.com/photo-1517840901100-8179e982ad4e?q=80&w=1200',
+      'image': 'assets/images/luxus_grand_lahore.png',
       'tags': ['Boutique', 'City'],
     },
     {
@@ -359,8 +356,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       'location': 'Quetta/Ziarat',
       'price': 'Rs. 15,000',
       'rating': 4.4,
-      'image':
-          'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1200',
+      'image': 'assets/images/ziarat_continental.png',
       'tags': ['View', 'Mountains'],
     },
     {
@@ -368,8 +364,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       'location': 'Lahore, Pakistan',
       'price': 'Rs. 5,000',
       'rating': 4.2,
-      'image':
-          'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1200',
+      'image': 'assets/images/bykea_hotel_lahore.png',
       'tags': ['Budget'],
     },
   ];
@@ -961,12 +956,19 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                           borderRadius: const BorderRadius.vertical(
                             top: Radius.circular(32),
                           ),
-                          child: Image.network(
-                            hotel['image'],
-                            height: 200,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
+                          child: hotel['image'].startsWith('http')
+                              ? Image.network(
+                                  hotel['image'],
+                                  height: 200,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  hotel['image'],
+                                  height: 200,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                         // Glass Price Tag
                         Positioned(

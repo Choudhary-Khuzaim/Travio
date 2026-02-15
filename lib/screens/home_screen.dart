@@ -904,8 +904,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'city': 'Karachi',
       'price': 'Rs. 30,000',
       'rating': '4.7',
-      'image':
-          'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=1200',
+      'image': 'assets/images/avari_towers_karachi.png',
     },
     {
       'name': 'Shangrila Resort',
@@ -926,8 +925,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'city': 'Ziarat',
       'price': 'Rs. 15,000',
       'rating': '4.4',
-      'image':
-          'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1200',
+      'image': 'assets/images/ziarat_continental.png',
     },
   ];
 
