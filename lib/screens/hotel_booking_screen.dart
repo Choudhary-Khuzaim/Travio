@@ -472,8 +472,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
         background: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1600',
+            Image.asset(
+              'assets/images/luxury_experience.png',
               fit: BoxFit.cover,
             ),
             Container(

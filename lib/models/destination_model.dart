@@ -9,6 +9,7 @@ class Destination {
   final List<String>?
   facilities; // Nullable to prevent crash if old data exists
   final List<Map<String, String>>? attractions; // Nullable
+  final List<Map<String, dynamic>>? hotels; // Nullable
   final double latitude;
   final double longitude;
 
@@ -22,6 +23,7 @@ class Destination {
     this.description = '', // Default empty string
     this.facilities = const [], // Default empty list
     this.attractions = const [], // Default empty list
+    this.hotels = const [], // Default empty list
     required this.latitude,
     required this.longitude,
   });
@@ -59,6 +61,36 @@ final List<Destination> destinationsList = [
       },
       {'name': 'Daman-e-Koh', 'image': 'assets/images/daman_e_koh.png'},
       {'name': 'Monal', 'image': 'assets/images/monal.png'},
+    ],
+    hotels: [
+      {
+        'name': 'Serena Hotel',
+        'image': 'assets/images/serena_hotel.png',
+        'rating': 4.9,
+        'price': 'Rs. 45,000',
+        'location': 'Khayaban-e-Suharwardy, Islamabad',
+      },
+      {
+        'name': 'Islamabad Marriott Hotel',
+        'image': 'assets/images/marriott_islamabad.png',
+        'rating': 4.8,
+        'price': 'Rs. 38,000',
+        'location': 'Aga Khan Rd, Islamabad',
+      },
+      {
+        'name': 'The Centaurus Hotel',
+        'image': 'assets/images/centauras_hotel.png',
+        'rating': 4.7,
+        'price': 'Rs. 30,000',
+        'location': 'Jinnah Avenue, Islamabad',
+      },
+      {
+        'name': 'Ramada by Wyndham',
+        'image': 'assets/images/ramada_islamabad.png',
+        'rating': 4.6,
+        'price': 'Rs. 25,000',
+        'location': 'Club Rd, Islamabad',
+      },
     ],
     latitude: 33.6844,
     longitude: 73.0479,
@@ -117,6 +149,36 @@ final List<Destination> destinationsList = [
             'Dolmen Mall Clifton is one of the most modern and upscale shopping malls in Karachi, featuring international brands, a large food court, and views of the Arabian Sea.',
       },
     ],
+    hotels: [
+      {
+        'name': 'Pearl Continental Hotel',
+        'image': 'assets/images/pc_karachi.png',
+        'rating': 4.7,
+        'price': 'Rs. 30,000',
+        'location': 'Club Rd, Karachi',
+      },
+      {
+        'name': 'Mövenpick Hotel',
+        'image': 'assets/images/movenpick_karachi.png',
+        'rating': 4.8,
+        'price': 'Rs. 32,000',
+        'location': 'Club Rd, Karachi',
+      },
+      {
+        'name': 'Avari Towers',
+        'image': 'assets/images/avari_towers_karachi.png',
+        'rating': 4.7,
+        'price': 'Rs. 28,000',
+        'location': 'Fatima Jinnah Rd, Karachi',
+      },
+      {
+        'name': 'Ramada Plaza',
+        'image': 'assets/images/ramada_karachi.png',
+        'rating': 4.5,
+        'price': 'Rs. 22,000',
+        'location': 'Star Avenue, Karachi',
+      },
+    ],
     latitude: 24.8607,
     longitude: 67.0011,
   ),
@@ -166,6 +228,36 @@ final List<Destination> destinationsList = [
         'image': 'assets/images/gawalmandi.png',
         'description':
             'Gawalmandi Food Street is the oldest food street in Lahore. It is a hub of traditional Lahori cuisine, offering a wide range of authentic dishes in a vibrant, historic atmosphere.',
+      },
+    ],
+    hotels: [
+      {
+        'name': 'Pearl Continental Lahore',
+        'image': 'assets/images/pearl_continental_lahore.png',
+        'rating': 4.8,
+        'price': 'Rs. 35,000',
+        'location': 'Shahrah-e-Quaid-e-Azam, Lahore',
+      },
+      {
+        'name': 'The Nishat Hotel',
+        'image': 'assets/images/nishat_hotel.png',
+        'rating': 4.9,
+        'price': 'Rs. 40,000',
+        'location': 'Gulberg III, Lahore',
+      },
+      {
+        'name': 'Avari Hotel',
+        'image': 'assets/images/avari_lahore.png',
+        'rating': 4.7,
+        'price': 'Rs. 28,000',
+        'location': 'Mall Rd, Lahore',
+      },
+      {
+        'name': 'Luxus Grand Hotel',
+        'image': 'assets/images/luxus_grand_lahore.png',
+        'rating': 4.6,
+        'price': 'Rs. 22,000',
+        'location': 'Egerton Rd, Lahore',
       },
     ],
     latitude: 31.5204,
@@ -221,6 +313,29 @@ final List<Destination> destinationsList = [
             'Prince Road is the culinary hub of Quetta, famous for traditional Balochi Sajji, Rosh, and a variety of other local delicacies that attract food lovers from across the city.',
       },
     ],
+    hotels: [
+      {
+        'name': 'Quetta Serena Hotel',
+        'image': 'assets/images/serena_hotel_quetta.png',
+        'rating': 4.9,
+        'price': 'Rs. 45,000',
+        'location': 'Shahrah-e-Zarghoon, Quetta',
+      },
+      {
+        'name': 'Hotel Bloom Star',
+        'image': 'assets/images/bloom_star.png',
+        'rating': 4.2,
+        'price': 'Rs. 12,000',
+        'location': 'Stewart Rd, Quetta',
+      },
+      {
+        'name': 'Quetta Club Limited',
+        'image': 'assets/images/quetta_club.png',
+        'rating': 4.5,
+        'price': 'Rs. 18,000',
+        'location': 'Cantonment, Quetta',
+      },
+    ],
     latitude: 30.1798,
     longitude: 66.9750,
   ),
@@ -266,6 +381,29 @@ final List<Destination> destinationsList = [
             'Known for its extensive collection of Gandharan Buddhist art, the Peshawar Museum is housed in a beautiful Victorian-style building.',
       },
     ],
+    hotels: [
+      {
+        'name': 'Pearl Continental Peshawar',
+        'image': 'assets/images/pc_peshawar.png',
+        'rating': 4.8,
+        'price': 'Rs. 32,000',
+        'location': 'Khyber Rd, Peshawar',
+      },
+      {
+        'name': 'Shelton\'s Rezidor',
+        'image': 'assets/images/sheltons_rezidor.png',
+        'rating': 4.3,
+        'price': 'Rs. 15,000',
+        'location': 'University Rd, Peshawar',
+      },
+      {
+        'name': 'Fortamour Hotel',
+        'image': 'assets/images/fortamour_hotel.png',
+        'rating': 4.2,
+        'price': 'Rs. 12,000',
+        'location': 'Saddar, Peshawar',
+      },
+    ],
     latitude: 34.0151,
     longitude: 71.5249,
   ),
@@ -304,6 +442,29 @@ final List<Destination> destinationsList = [
             'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800',
         'description':
             'The Danyore Suspension Bridge is a thrilling and historic bridge connecting Gilgit to the Danyore valley, offering views of the Gilgit River.',
+      },
+    ],
+    hotels: [
+      {
+        'name': 'Serena Gilgit Hotel',
+        'image': 'assets/images/serena_gilgit.png',
+        'rating': 4.8,
+        'price': 'Rs. 35,000',
+        'location': 'Sherullah Baig Rd, Gilgit',
+      },
+      {
+        'name': 'Gilgitan Hotel',
+        'image': 'assets/images/gilgitan_hotel.png',
+        'rating': 4.0,
+        'price': 'Rs. 8,000',
+        'location': 'Airport Rd, Gilgit',
+      },
+      {
+        'name': 'Rupal Inn',
+        'image': 'assets/images/rupal_inn.png',
+        'rating': 4.2,
+        'price': 'Rs. 10,000',
+        'location': 'Park Link Rd, Gilgit',
       },
     ],
     latitude: 35.9208,
@@ -351,6 +512,22 @@ final List<Destination> destinationsList = [
             'The Tombs of Talpur Mirs are a complex of mausoleums housing the graves of the Talpur dynasty rulers. They are renowned for their impressive architecture and intricate Kashi tile work.',
       },
     ],
+    hotels: [
+      {
+        'name': 'Indus Hotel',
+        'image': 'assets/images/indus_hotel.png',
+        'rating': 4.3,
+        'price': 'Rs. 15,000',
+        'location': 'Thandi Sarak, Hyderabad',
+      },
+      {
+        'name': 'Hotel Crown',
+        'image': 'assets/images/hotel_crown.png',
+        'rating': 4.0,
+        'price': 'Rs. 10,000',
+        'location': 'Cantonment, Hyderabad',
+      },
+    ],
     latitude: 25.3960,
     longitude: 68.3578,
   ),
@@ -394,6 +571,29 @@ final List<Destination> destinationsList = [
         'image': 'assets/images/ghanta_ghar_multan.png',
         'description':
             'The Clock Tower (Ghanta Ghar) of Multan is a landmark building from the British era, located in the center of the city and now serving as a museum.',
+      },
+    ],
+    hotels: [
+      {
+        'name': 'Ramada by Wyndham',
+        'image': 'assets/images/ramada_multan.png',
+        'rating': 4.7,
+        'price': 'Rs. 25,000',
+        'location': 'Abdali Rd, Multan',
+      },
+      {
+        'name': 'Avari Xpress',
+        'image': 'assets/images/avari_multan.png',
+        'rating': 4.5,
+        'price': 'Rs. 18,000',
+        'location': 'Old Bahawalpur Rd, Multan',
+      },
+      {
+        'name': 'Faletti\'s Grand',
+        'image': 'assets/images/falettis_multan.png',
+        'rating': 4.6,
+        'price': 'Rs. 22,000',
+        'location': 'Suraj Miani Rd, Multan',
       },
     ],
     latitude: 30.1575,
@@ -453,6 +653,29 @@ final List<Destination> destinationsList = [
             'Built in 1897, the Qaisery Gate is a historical entrance to the bazaars of Faisalabad. It is a magnificent example of colonial architecture and a gateway to the city’s bustling markets.',
       },
     ],
+    hotels: [
+      {
+        'name': 'Faisalabad Serena Hotel',
+        'image': 'assets/images/serena_faisalabad.png',
+        'rating': 4.8,
+        'price': 'Rs. 30,000',
+        'location': 'Club Rd, Faisalabad',
+      },
+      {
+        'name': 'West Inn Hotel',
+        'image': 'assets/images/west_inn_faisalabad.png',
+        'rating': 4.2,
+        'price': 'Rs. 12,000',
+        'location': 'West Canal Rd, Faisalabad',
+      },
+      {
+        'name': 'Hotel One',
+        'image': 'assets/images/hotel_one_faisalabad.png',
+        'rating': 4.3,
+        'price': 'Rs. 15,000',
+        'location': 'People\'s Colony, Faisalabad',
+      },
+    ],
     latitude: 31.4504,
     longitude: 73.1350,
   ),
@@ -470,6 +693,29 @@ final List<Destination> destinationsList = [
       {'name': 'Malam Jabba', 'image': 'assets/images/malam_jabba.png'},
       {'name': 'Kalam', 'image': 'assets/images/kalam.png'},
       {'name': 'White Palace', 'image': 'assets/images/white_palace.png'},
+    ],
+    hotels: [
+      {
+        'name': 'Swat Serena Hotel',
+        'image': 'assets/images/swat_serena.png',
+        'rating': 4.8,
+        'price': 'Rs. 35,000',
+        'location': 'Saidu Sharif, Swat',
+      },
+      {
+        'name': 'Pearl Continental Malam Jabba',
+        'image': 'assets/images/pc_malam_jabba.png',
+        'rating': 4.9,
+        'price': 'Rs. 45,000',
+        'location': 'Malam Jabba, Swat',
+      },
+      {
+        'name': 'Rock City Resort',
+        'image': 'assets/images/rock_city_resort.png',
+        'rating': 4.5,
+        'price': 'Rs. 18,000',
+        'location': 'Fizagat, Swat',
+      },
     ],
     latitude: 35.2220,
     longitude: 72.4258,
@@ -491,6 +737,29 @@ final List<Destination> destinationsList = [
         'name': 'Rakaposhi',
         'image':
             'https://images.unsplash.com/photo-1739676882863-f087febf073d?q=80&w=400',
+      },
+    ],
+    hotels: [
+      {
+        'name': 'Serena Altit Fort Residence',
+        'image': 'assets/images/serena_hunza.png',
+        'rating': 5.0,
+        'price': 'Rs. 55,000',
+        'location': 'Altit, Hunza',
+      },
+      {
+        'name': 'Luxus Hunza',
+        'image': 'assets/images/luxus_hunza.png',
+        'rating': 4.9,
+        'price': 'Rs. 60,000',
+        'location': 'Attabad Lake, Hunza',
+      },
+      {
+        'name': 'Darbar Hotel',
+        'image': 'assets/images/darbar_hotel.png',
+        'rating': 4.5,
+        'price': 'Rs. 25,000',
+        'location': 'Karimabad, Hunza',
       },
     ],
     latitude: 36.3167,
@@ -550,6 +819,29 @@ final List<Destination> destinationsList = [
             'Satpara Lake is a natural lake near Skardu that supplies water to the Skardu Valley. It is fed by the Satpara Stream and offers beautiful turquoise waters scenic views.',
       },
     ],
+    hotels: [
+      {
+        'name': 'Shangrila Resort',
+        'image': 'assets/images/shangrila_resort_skardu.png',
+        'rating': 4.9,
+        'price': 'Rs. 42,000',
+        'location': 'Kachura, Skardu',
+      },
+      {
+        'name': 'Serena Shigar Fort',
+        'image': 'assets/images/shigar_fort_hotel.png',
+        'rating': 4.9,
+        'price': 'Rs. 45,000',
+        'location': 'Shigar, Skardu',
+      },
+      {
+        'name': 'Hotel Dewanekhas',
+        'image': 'assets/images/dewanekhas_hotel.png',
+        'rating': 4.0,
+        'price': 'Rs. 12,000',
+        'location': 'Airport Rd, Skardu',
+      },
+    ],
     latitude: 35.2971,
     longitude: 75.6333,
   ),
@@ -589,6 +881,22 @@ final List<Destination> destinationsList = [
             'Koh-e-Batil is a famous hill in Gwadar. Climbing to the top offers breathtaking panoramic views of the entire Gwadar city, the port, and the surrounding ocean.',
       },
     ],
+    hotels: [
+      {
+        'name': 'Zaver Pearl Continental',
+        'image': 'assets/images/pc_gwadar.png',
+        'rating': 4.7,
+        'price': 'Rs. 28,000',
+        'location': 'Koh-e-Batil, Gwadar',
+      },
+      {
+        'name': 'Gwadar Business Center',
+        'image': 'assets/images/gwadar_business_hotel.png',
+        'rating': 4.0,
+        'price': 'Rs. 10,000',
+        'location': 'Airport Rd, Gwadar',
+      },
+    ],
     latitude: 25.1216,
     longitude: 62.3254,
   ),
@@ -620,6 +928,22 @@ final List<Destination> destinationsList = [
         'image': 'assets/images/prospect_point.png',
         'description':
             'Prospect Point offers a breathtaking panoramic view of the entire Ziarat valley and surrounding mountains. A perfect spot for photography.',
+      },
+    ],
+    hotels: [
+      {
+        'name': 'Ziarat Continental',
+        'image': 'assets/images/ziarat_continental.png',
+        'rating': 4.4,
+        'price': 'Rs. 15,000',
+        'location': 'Ziarat',
+      },
+      {
+        'name': 'PTDC Motel Ziarat',
+        'image': 'assets/images/ptdc_ziarat.png',
+        'rating': 4.0,
+        'price': 'Rs. 8,000',
+        'location': 'Ziarat',
       },
     ],
     latitude: 30.3824,

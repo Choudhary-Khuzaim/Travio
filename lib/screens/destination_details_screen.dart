@@ -7,6 +7,7 @@ import 'reviews_screen.dart';
 import 'destination_map_screen.dart';
 import 'attractions_screen.dart';
 import 'attraction_details_screen.dart';
+import 'hotel_details_screen.dart';
 
 class DestinationDetailsScreen extends StatelessWidget {
   final Destination destination;
@@ -454,6 +455,40 @@ class DestinationDetailsScreen extends StatelessWidget {
                           ),
                         ],
 
+                        const SizedBox(height: 32),
+
+                        // Hotels
+                        if (destination.hotels != null &&
+                            destination.hotels!.isNotEmpty) ...[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Top Hotels",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textPrimary,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            height: 220,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              padding: EdgeInsets.zero,
+                              clipBehavior: Clip.none,
+                              itemCount: destination.hotels!.length,
+                              itemBuilder: (context, index) {
+                                final hotel = destination.hotels![index];
+                                return _buildHotelCard(context, hotel);
+                              },
+                            ),
+                          ),
+                        ],
+
                         const SizedBox(height: 120), // Bottom padding
                       ],
                     ),
@@ -760,5 +795,141 @@ class DestinationDetailsScreen extends StatelessWidget {
       default:
         return Icons.star;
     }
+  }
+
+  Widget _buildHotelCard(BuildContext context, Map<String, dynamic> hotel) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => HotelDetailsScreen(hotel: hotel)),
+        );
+      },
+      child: Container(
+        width: 180,
+        margin: const EdgeInsets.only(right: 16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+                child: hotel['image'].startsWith('assets')
+                    ? Image.asset(
+                        hotel['image'],
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.grey[200],
+                          child: const Icon(
+                            Icons.hotel,
+                            color: Colors.grey,
+                            size: 40,
+                          ),
+                        ),
+                      )
+                    : Image.network(
+                        hotel['image'],
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.grey[200],
+                          child: const Icon(
+                            Icons.hotel,
+                            color: Colors.grey,
+                            size: 40,
+                          ),
+                        ),
+                      ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    hotel['name'],
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: AppColors.textPrimary,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.location_on,
+                        size: 12,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: Text(
+                          hotel['location'] ?? destination.city,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[600],
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        hotel['price'] ?? '',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
+                          fontSize: 13,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.star,
+                            size: 14,
+                            color: Colors.orange,
+                          ),
+                          const SizedBox(width: 2),
+                          Text(
+                            hotel['rating'].toString(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
