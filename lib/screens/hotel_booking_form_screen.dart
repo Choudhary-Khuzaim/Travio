@@ -28,7 +28,11 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
   }
 
   double _parsePrice(String priceStr) {
-    String cleaned = priceStr.replaceAll('Rs.', '').replaceAll(',', '').trim().toLowerCase();
+    String cleaned = priceStr
+        .replaceAll('Rs.', '')
+        .replaceAll(',', '')
+        .trim()
+        .toLowerCase();
     if (cleaned.contains('k')) {
       return double.parse(cleaned.replaceAll('k', '')) * 1000;
     }
@@ -135,7 +139,11 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
                   border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.arrow_back_ios_new, size: 16, color: AppColors.textPrimary),
+                child: const Icon(
+                  Icons.arrow_back_ios_new,
+                  size: 16,
+                  color: AppColors.textPrimary,
+                ),
               ),
             ),
           ),
@@ -143,7 +151,11 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
       ),
       title: const Text(
         'Confirm Details',
-        style: TextStyle(fontWeight: FontWeight.w800, color: AppColors.textPrimary, fontSize: 18),
+        style: TextStyle(
+          fontWeight: FontWeight.w800,
+          color: AppColors.textPrimary,
+          fontSize: 18,
+        ),
       ),
     );
   }
@@ -186,20 +198,45 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
               children: [
                 Text(
                   widget.hotel['name'],
-                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: AppColors.textPrimary),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 18,
+                    color: AppColors.textPrimary,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    const Icon(Icons.location_on, size: 14, color: AppColors.primary),
+                    const Icon(
+                      Icons.location_on,
+                      size: 14,
+                      color: AppColors.primary,
+                    ),
                     const SizedBox(width: 4),
-                    Text(widget.hotel['location'], style: TextStyle(color: Colors.grey[600], fontSize: 13, fontWeight: FontWeight.w500)),
+                    Expanded(
+                      child: Text(
+                        widget.hotel['location'],
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 Text(
                   widget.hotel['price'],
-                  style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w900, fontSize: 16),
+                  style: const TextStyle(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 16,
+                  ),
                 ),
               ],
             ),
@@ -212,7 +249,12 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
   Widget _buildSectionHeader(String title) {
     return Text(
       title,
-      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: AppColors.textPrimary, letterSpacing: -0.5),
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w900,
+        color: AppColors.textPrimary,
+        letterSpacing: -0.5,
+      ),
     ).animate().fadeIn(delay: 200.ms);
   }
 
@@ -232,30 +274,54 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          _buildTextField('Full Name', Icons.person_outline_rounded, _nameController),
+          _buildTextField(
+            'Full Name',
+            Icons.person_outline_rounded,
+            _nameController,
+          ),
           const SizedBox(height: 20),
-          _buildTextField('CNIC / Passport Number', Icons.badge_outlined, _cnicController),
+          _buildTextField(
+            'CNIC / Passport Number',
+            Icons.badge_outlined,
+            _cnicController,
+          ),
           const SizedBox(height: 20),
-          _buildTextField('Mobile Number', Icons.phone_android_rounded, _phoneController, keyboardType: TextInputType.phone),
+          _buildTextField(
+            'Mobile Number',
+            Icons.phone_android_rounded,
+            _phoneController,
+            keyboardType: TextInputType.phone,
+          ),
         ],
       ),
     ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.1);
   }
 
-  Widget _buildTextField(String label, IconData icon, TextEditingController controller, {TextInputType? keyboardType}) {
+  Widget _buildTextField(
+    String label,
+    IconData icon,
+    TextEditingController controller, {
+    TextInputType? keyboardType,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[600], letterSpacing: 0.5),
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey[600],
+            letterSpacing: 0.5,
+          ),
         ),
         const SizedBox(height: 8),
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          validator: (v) => v == null || v.isEmpty ? 'Knowledge is required' : null,
+          validator: (v) =>
+              v == null || v.isEmpty ? 'Knowledge is required' : null,
           decoration: InputDecoration(
             prefixIcon: Icon(icon, color: AppColors.primary, size: 20),
             hintText: "Enter $label",
@@ -272,9 +338,15 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+              borderSide: const BorderSide(
+                color: AppColors.primary,
+                width: 1.5,
+              ),
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 16,
+            ),
           ),
         ),
       ],
@@ -291,15 +363,29 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
       ),
       child: Row(
         children: [
-          const Icon(Icons.verified_user_outlined, color: Colors.blue, size: 24),
+          const Icon(
+            Icons.verified_user_outlined,
+            color: Colors.blue,
+            size: 24,
+          ),
           const SizedBox(width: 16),
           const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Secure Checkout", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.textPrimary)),
+                Text(
+                  "Secure Checkout",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
                 SizedBox(height: 2),
-                Text("Your information is encrypted and securely processed.", style: TextStyle(fontSize: 12, color: Colors.grey)),
+                Text(
+                  "Your information is encrypted and securely processed.",
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
               ],
             ),
           ),
@@ -332,8 +418,18 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Service Fee", style: TextStyle(color: Colors.grey, fontSize: 14)),
-                  Text("Inc. Taxes", style: TextStyle(color: Colors.grey[600], fontWeight: FontWeight.w600, fontSize: 13)),
+                  const Text(
+                    "Service Fee",
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                  Text(
+                    "Inc. Taxes",
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
@@ -346,16 +442,36 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
                     backgroundColor: AppColors.primary,
                     elevation: 10,
                     shadowColor: AppColors.primary.withValues(alpha: 0.4),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                   child: _isLoading
-                      ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                      ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
                       : const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Confirm & Pay", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Colors.white)),
+                            Text(
+                              "Confirm & Pay",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
+                              ),
+                            ),
                             SizedBox(width: 12),
-                            Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 20),
+                            Icon(
+                              Icons.arrow_forward_rounded,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                           ],
                         ),
                 ),
