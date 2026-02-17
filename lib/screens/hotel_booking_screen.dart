@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../core/colors.dart';
 import 'featured_hotels_screen.dart';
 import 'hotel_details_screen.dart';
+import '../models/destination_model.dart';
 import 'hotel_booking_form_screen.dart';
 
 class HotelBookingScreen extends StatefulWidget {
@@ -35,8 +36,59 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
   @override
   void initState() {
     super.initState();
+    _populateHotels();
     _filteredFeaturedHotels = List.from(_featuredHotels);
     _filteredAllHotels = List.from(_allHotels);
+  }
+
+  void _populateHotels() {
+    List<Map<String, dynamic>> all = [];
+    try {
+      if (destinationsList.isNotEmpty) {
+        for (var dest in destinationsList) {
+          if (dest.hotels != null) {
+            for (var hotel in dest.hotels!) {
+              // Parse price for tags
+              String priceStr = hotel['price'].toString().replaceAll(
+                RegExp(r'[^0-9]'),
+                '',
+              );
+              int price = int.tryParse(priceStr) ?? 0;
+
+              List<String> tags = [];
+              if (price >= 30000) tags.add('Luxury');
+              if (price >= 20000) tags.add('Top Rated');
+              if (hotel['name'].toString().toLowerCase().contains('resort')) {
+                tags.add('Resort');
+              }
+              if (price < 20000) tags.add('Boutique');
+
+              all.add({
+                'name': hotel['name'],
+                'location': hotel['location'],
+                'price': hotel['price'],
+                'rating': hotel['rating'],
+                'image': hotel['image'],
+                'tags': tags,
+              });
+            }
+          }
+        }
+      }
+    } catch (e) {
+      debugPrint("Error populating hotels: $e");
+    }
+
+    _allHotels = all;
+
+    // Feature hotels with high ratings
+    _featuredHotels = all.where((h) {
+      final r = h['rating'];
+      final double rating = (r is double)
+          ? r
+          : double.tryParse(r.toString()) ?? 0.0;
+      return rating >= 4.8;
+    }).toList();
   }
 
   void _filterResults() {
@@ -295,79 +347,9 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
     );
   }
 
-  final List<Map<String, dynamic>> _featuredHotels = [
-    {
-      'name': 'Serena Hotel',
-      'location': 'Islamabad',
-      'price': 'Rs. 48k',
-      'rating': '4.9',
-      'image': 'assets/images/serena_hotel.png',
-    },
-    {
-      'name': 'Pearl Continental',
-      'location': 'Lahore',
-      'price': 'Rs. 35k',
-      'rating': '4.8',
-      'image': 'assets/images/pearl_continental_lahore.png',
-    },
-    {
-      'name': 'Shangrila Skardu',
-      'location': 'Kachura',
-      'price': 'Rs. 42k',
-      'rating': '4.9',
-      'image': 'assets/images/shangrila_resort_skardu.png',
-    },
-    {
-      'name': 'Quetta Serena Hotel',
-      'location': 'Quetta, Balochistan',
-      'price': 'Rs. 45k',
-      'rating': '4.9',
-      'image': 'assets/images/serena_hotel_quetta.png',
-    },
-  ];
+  List<Map<String, dynamic>> _featuredHotels = [];
 
-  final List<Map<String, dynamic>> _allHotels = [
-    {
-      'name': 'Avari Towers',
-      'location': 'Karachi, Sindh',
-      'price': 'Rs. 25,000',
-      'rating': 4.7,
-      'image': 'assets/images/avari_towers_karachi.png',
-      'tags': ['Luxury', 'Top Rated'],
-    },
-    {
-      'name': 'Monal Resort',
-      'location': 'Pir Sohawa, Islamabad',
-      'price': 'Rs. 18,000',
-      'rating': 4.5,
-      'image': 'assets/images/monal_resort_islamabad.png',
-      'tags': ['Resort', 'View'],
-    },
-    {
-      'name': 'Luxus Grand',
-      'location': 'Gulberg, Lahore',
-      'price': 'Rs. 22,000',
-      'rating': 4.6,
-      'image': 'assets/images/luxus_grand_lahore.png',
-      'tags': ['Boutique', 'City'],
-    },
-    {
-      'name': 'Ziarat Continental',
-      'location': 'Quetta/Ziarat',
-      'price': 'Rs. 15,000',
-      'rating': 4.4,
-      'image': 'assets/images/ziarat_continental.png',
-      'tags': ['View', 'Mountains'],
-    },
-    {
-      'name': 'Bykea Hotel',
-      'location': 'Lahore, Pakistan',
-      'price': 'Rs. 5,000',
-      'rating': 4.2,
-      'image': 'assets/images/bykea_hotel_lahore.png',
-      'tags': ['Budget'],
-    },
-  ];
+  List<Map<String, dynamic>> _allHotels = [];
 
   @override
   Widget build(BuildContext context) {
@@ -443,7 +425,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
 
   Widget _buildUltraHeroHeader() {
     return SliverAppBar(
-      expandedHeight: 260, // Reduced height for better balance
+      expandedHeight: 300, // Increased height for better visibility
       pinned: true,
       backgroundColor: AppColors.primary,
       elevation: 0,
@@ -473,8 +455,9 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
           fit: StackFit.expand,
           children: [
             Image.asset(
-              'assets/images/luxury_experience.png',
+              'assets/images/luxury_hotel_hero.png',
               fit: BoxFit.cover,
+              alignment: Alignment.topCenter,
             ),
             Container(
               decoration: BoxDecoration(
@@ -484,7 +467,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                   colors: [
                     Colors.black.withValues(alpha: 0.4),
                     Colors.black.withValues(alpha: 0.1),
-                    AppColors.primary.withValues(alpha: 0.6),
+                    AppColors.primary.withValues(alpha: 0.4),
                   ],
                 ),
               ),
@@ -838,7 +821,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                                           width: 4,
                                                         ),
                                                         Text(
-                                                          hotel['rating'],
+                                                          hotel['rating']
+                                                              .toString(),
                                                           style:
                                                               const TextStyle(
                                                                 color: Colors
@@ -968,6 +952,19 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                   height: 200,
                                   width: double.infinity,
                                   fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Container(
+                                        height: 200,
+                                        width: double.infinity,
+                                        color: Colors.grey[200],
+                                        child: const Center(
+                                          child: Icon(
+                                            Icons.hotel,
+                                            size: 40,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ),
                                 ),
                         ),
                         // Glass Price Tag
@@ -1032,36 +1029,44 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    hotel['name'],
-                                    style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w900,
-                                      color: AppColors.textPrimary,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      hotel['name'],
+                                      style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w900,
+                                        color: AppColors.textPrimary,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.location_on,
-                                        color: AppColors.primary,
-                                        size: 16,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        hotel['location'],
-                                        style: TextStyle(
-                                          color: Colors.grey[600],
-                                          fontSize: 14,
+                                    const SizedBox(height: 4),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on,
+                                          color: AppColors.primary,
+                                          size: 16,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                        const SizedBox(width: 4),
+                                        Expanded(
+                                          child: Text(
+                                            hotel['location'],
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontSize: 14,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                               Container(
                                 padding: const EdgeInsets.all(12),
