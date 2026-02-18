@@ -84,7 +84,17 @@ class HotelDetailsScreen extends StatelessWidget {
               tag: 'hotel-${hotel['name']}',
               child: hotel['image'].startsWith('http')
                   ? Image.network(hotel['image'], fit: BoxFit.cover)
-                  : Image.asset(hotel['image'], fit: BoxFit.cover),
+                  : Image.asset(
+                      hotel['image'],
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[300],
+                        child: const Icon(
+                          Icons.broken_image,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
             ),
             Container(
               decoration: BoxDecoration(
@@ -125,7 +135,10 @@ class HotelDetailsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    hotel['tags']?[0] ?? "Luxury Hotel",
+                    (hotel['tags'] is List &&
+                            (hotel['tags'] as List).isNotEmpty)
+                        ? hotel['tags'][0]
+                        : "Luxury Hotel",
                     style: const TextStyle(
                       color: AppColors.primary,
                       fontSize: 12,

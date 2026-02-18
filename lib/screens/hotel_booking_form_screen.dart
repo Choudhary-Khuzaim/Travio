@@ -320,8 +320,9 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
           controller: controller,
           keyboardType: keyboardType,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          validator: (v) =>
-              v == null || v.isEmpty ? 'Knowledge is required' : null,
+          validator: (v) => v == null || v.isEmpty
+              ? 'Please enter ${label.toLowerCase()}'
+              : null,
           decoration: InputDecoration(
             prefixIcon: Icon(icon, color: AppColors.primary, size: 20),
             hintText: "Enter $label",

@@ -249,6 +249,17 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
                           height: 240,
                           width: double.infinity,
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Container(
+                                color: Colors.grey[200],
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.broken_image,
+                                    color: Colors.grey,
+                                    size: 40,
+                                  ),
+                                ),
+                              ),
                         ),
                 ),
                 // Glass Price Tag
@@ -270,7 +281,7 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Text(
-                          "${hotel['price']}/night",
+                          "${hotel['price'] ?? 'N/A'}/night",
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w900,
