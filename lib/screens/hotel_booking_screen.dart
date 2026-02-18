@@ -726,6 +726,18 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                           : Image.asset(
                                               hotel['image'],
                                               fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (
+                                                    context,
+                                                    error,
+                                                    stackTrace,
+                                                  ) => Container(
+                                                    color: Colors.grey[300],
+                                                    child: const Icon(
+                                                      Icons.broken_image,
+                                                      color: Colors.grey,
+                                                    ),
+                                                  ),
                                             ),
                                     ),
                                     Container(
@@ -868,7 +880,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
           final isSelected = _selectedCategory == _categories[index];
           return GestureDetector(
             onTap: () {
-              setState(() => _selectedCategory = _categories[index]);
+              _selectedCategory = _categories[index];
               _filterResults();
             },
             child: Container(
@@ -986,7 +998,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                                 child: Text(
-                                  "${hotel['price']}/night",
+                                  "${hotel['price'] ?? 'N/A'}/night",
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w900,
@@ -996,28 +1008,32 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                             ),
                           ),
                         ),
-                        Positioned(
-                          top: 20,
-                          left: 20,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Text(
-                              "TOP RATED",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w900,
+                        // Dynamic Tag Badge
+                        if ((hotel['tags'] as List).isNotEmpty)
+                          Positioned(
+                            top: 20,
+                            left: 20,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                (hotel['tags'] as List).first
+                                    .toString()
+                                    .toUpperCase(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w900,
+                                ),
                               ),
                             ),
                           ),
-                        ),
                       ],
                     ),
                     // Info Section
