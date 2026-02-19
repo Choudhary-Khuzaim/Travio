@@ -124,6 +124,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       _emailController,
                       Icons.email_outlined,
                       keyboardType: TextInputType.emailAddress,
+                      enabled: false,
                     ),
                     const SizedBox(height: 20),
                     _buildPhoneField(),
@@ -441,6 +442,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     TextEditingController controller,
     IconData icon, {
     TextInputType keyboardType = TextInputType.text,
+    bool enabled = true,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -459,7 +461,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         const SizedBox(height: 10),
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: enabled ? Colors.white : Colors.grey.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(18),
             border: Border.all(color: AppColors.primary.withValues(alpha: 0.1)),
             boxShadow: [
@@ -473,9 +475,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: TextFormField(
             controller: controller,
             keyboardType: keyboardType,
-            style: const TextStyle(
+            enabled: enabled,
+            style: TextStyle(
               fontWeight: FontWeight.w500,
-              color: AppColors.textPrimary,
+              color: enabled ? AppColors.textPrimary : Colors.black54,
             ),
             decoration: InputDecoration(
               prefixIcon: Icon(
