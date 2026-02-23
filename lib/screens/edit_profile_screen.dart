@@ -117,6 +117,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       "Full Name",
                       _nameController,
                       Icons.person_outline,
+                      keyboardType: TextInputType.name,
                     ),
                     const SizedBox(height: 20),
                     _buildTextField(
@@ -133,6 +134,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       "Location",
                       _locationController,
                       Icons.location_on_outlined,
+                      keyboardType: TextInputType.streetAddress,
                     ),
                     const SizedBox(height: 48),
                     SizedBox(
@@ -162,10 +164,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   final code = selectedCountry['code'];
 
                                   Navigator.pop(context, {
-                                    'name': _nameController.text,
-                                    'email': _emailController.text,
-                                    'phone': '$code ${_phoneController.text}',
-                                    'location': _locationController.text,
+                                    'name': _nameController.text.trim(),
+                                    'email': _emailController.text.trim(),
+                                    'phone':
+                                        '$code ${_phoneController.text.trim()}',
+                                    'location': _locationController.text.trim(),
                                   });
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
@@ -286,23 +289,37 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       Positioned(
                         bottom: 4,
                         right: 4,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.1),
-                                blurRadius: 10,
-                                offset: const Offset(0, 4),
+                        child: GestureDetector(
+                          onTap: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "Profile picture update coming soon!",
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: AppColors.primary,
+                                duration: Duration(seconds: 2),
                               ),
-                            ],
-                          ),
-                          child: const Icon(
-                            Icons.camera_alt_rounded,
-                            color: AppColors.primary,
-                            size: 20,
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(alpha: 0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.camera_alt_rounded,
+                              color: AppColors.primary,
+                              size: 20,
+                            ),
                           ),
                         ),
                       ),
@@ -494,7 +511,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.5)),
             ),
             validator: (value) {
-              if (value == null || value.isEmpty) {
+              if (value == null || value.trim().isEmpty) {
                 return 'Please enter $label';
               }
               return null;
