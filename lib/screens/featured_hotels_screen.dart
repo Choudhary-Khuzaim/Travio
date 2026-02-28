@@ -417,7 +417,7 @@ class _FeaturedHotelsScreenState extends State<FeaturedHotelsScreen> {
             ),
           ],
         ),
-      ).animate().fadeIn(delay: (index * 150).ms).slideY(begin: 0.1, end: 0),
+      ),
     );
   }
 }
