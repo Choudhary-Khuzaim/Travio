@@ -173,9 +173,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.black.withValues(alpha: 0.2),
-                  Colors.black.withValues(alpha: 0.6),
+                  Colors.black.withValues(alpha: 0.1),
+                  Colors.black.withValues(alpha: 0.4),
+                  Colors.black.withValues(alpha: 0.8),
                 ],
+                stops: const [0.0, 0.4, 1.0],
               ),
               borderRadius: const BorderRadius.vertical(
                 bottom: Radius.circular(40),
@@ -184,48 +186,114 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Explore",
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.white,
-                      letterSpacing: 1.5,
-                      shadows: [
-                        Shadow(
-                          color: Colors.black26,
-                          offset: Offset(0, 2),
-                          blurRadius: 4,
+                  // Top Row Header
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 8,
                         ),
-                      ],
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.3),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.1),
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on,
+                              color: Colors.white,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 6),
+                            const Text(
+                              "Pakistan",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ).animate().fadeIn(duration: 500.ms).slideY(begin: -0.2),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ProfileScreen(),
+                          ),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.5),
+                              width: 2,
+                            ),
+                          ),
+                          child: const CircleAvatar(
+                            radius: 18,
+                            backgroundColor: Colors.white24,
+                            child: Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ).animate().fadeIn(duration: 500.ms).slideY(begin: -0.2),
+                    ],
+                  ),
+                  const SizedBox(height: 35),
+                  // Title
+                  const Text(
+                    "Discover",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.white70,
+                      letterSpacing: 1.2,
                     ),
                   ).animate().fadeIn(duration: 600.ms).slideX(),
                   const Text(
-                    "Beautiful Pakistan",
+                    "Beautiful\nPakistan",
                     style: TextStyle(
-                      fontSize: 38,
-                      fontWeight: FontWeight.w800,
+                      fontSize: 42,
+                      fontWeight: FontWeight.w900,
                       color: Colors.white,
                       height: 1.1,
-                      letterSpacing: 0.5,
+                      letterSpacing: -0.5,
                       shadows: [
                         Shadow(
-                          color: Colors.black38,
+                          color: Colors.black45,
                           offset: Offset(0, 4),
-                          blurRadius: 10,
+                          blurRadius: 15,
                         ),
                       ],
                     ),
                   ).animate().fadeIn(duration: 800.ms, delay: 200.ms).slideX(),
 
-                  const SizedBox(height: 55),
+                  const SizedBox(height: 40),
                   _buildSearchBar(),
-                  const SizedBox(height: 55),
+                  const Spacer(),
                   _buildCategoryPills(),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),
@@ -242,53 +310,84 @@ class _HomeScreenState extends State<HomeScreen> {
         MaterialPageRoute(builder: (_) => const SearchScreen()),
       ),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        height: 56,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: const [
+          borderRadius: BorderRadius.circular(28),
+          boxShadow: [
             BoxShadow(
-              color: Colors.black12,
-              blurRadius: 10,
-              offset: Offset(0, 5),
+              color: Colors.black.withValues(alpha: 0.15),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
             ),
           ],
         ),
         child: Row(
           children: [
-            const Icon(Icons.search, color: AppColors.textSecondary),
+            const Icon(Icons.search, color: AppColors.primary, size: 24),
             const SizedBox(width: 12),
-            Text(
-              "Search destinations, flights...",
-              style: TextStyle(
-                color: AppColors.textSecondary.withValues(alpha: 0.7),
+            Expanded(
+              child: Text(
+                "Search destinations, flights...",
+                style: TextStyle(
+                  color: AppColors.textSecondary.withValues(alpha: 0.6),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.tune, color: AppColors.primary, size: 20),
             ),
           ],
         ),
       ),
-    ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2);
+    ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2);
   }
 
   Widget _buildCategoryPills() {
     final categories = [
-      {'icon': Icons.grid_view, 'label': 'All', 'route': null},
-      {'icon': Icons.flight, 'label': 'Flights', 'route': const SearchScreen()},
+      {
+        'icon': Icons.public,
+        'label': 'All',
+        'route': null,
+        'color': Colors.blueAccent,
+      },
+      {
+        'icon': Icons.flight_takeoff,
+        'label': 'Flights',
+        'route': const SearchScreen(),
+        'color': Colors.orangeAccent,
+      },
       {
         'icon': Icons.hotel,
         'label': 'Hotels',
         'route': const HotelBookingScreen(),
+        'color': Colors.purpleAccent,
       },
       {
         'icon': Icons.directions_car,
         'label': 'Cabs',
         'route': const CabBookingScreen(),
+        'color': Colors.greenAccent,
       },
-      {'icon': Icons.event, 'label': 'Events', 'route': const EventsScreen()},
+      {
+        'icon': Icons.celebration,
+        'label': 'Events',
+        'route': const EventsScreen(),
+        'color': Colors.pinkAccent,
+      },
     ];
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
       child: Row(
         children: categories.map((cat) {
           return GestureDetector(
@@ -305,40 +404,55 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   Container(
-                    height: 60,
-                    width: 60,
+                    height: 64,
+                    width: 64,
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(
-                        alpha: 0.2,
-                      ), // Glassmorphic
-                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white.withValues(alpha: 0.25),
+                      borderRadius: BorderRadius.circular(22),
                       border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.3),
-                        width: 1,
+                        color: Colors.white.withValues(alpha: 0.4),
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: (cat['color'] as Color).withValues(alpha: 0.2),
+                          blurRadius: 15,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Icon(
+                        cat['icon'] as IconData,
+                        color: Colors.white,
+                        size: 30,
                       ),
                     ),
-                    child: Icon(
-                      cat['icon'] as IconData,
-                      color: Colors.white,
-                      size: 28,
-                    ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10),
                   Text(
                     cat['label'] as String,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black45,
+                          offset: Offset(0, 2),
+                          blurRadius: 4,
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-          );
+          ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.2);
         }).toList(),
       ),
-    ).animate().fadeIn(delay: 300.ms).slideX();
+    );
   }
 
   Widget _build3DCarousel() {
