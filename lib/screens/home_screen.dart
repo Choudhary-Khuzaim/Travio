@@ -1000,6 +1000,55 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Map<String, dynamic>> _popularHotels = [
     {
+      'name': 'Vista Hotel',
+      'city': 'Skardu',
+      'price': 'Rs. 38,000',
+      'rating': '4.9',
+      'image': 'assets/images/vista_hotel.png',
+    },
+    {
+      'name': 'Hotel One',
+      'city': 'Hyderabad',
+      'price': 'Rs. 18,000',
+      'rating': '4.5',
+      'image': 'assets/images/hotel_one_hyderabad.png',
+    },
+    {
+      'name': 'Hotel Crown',
+      'city': 'Multan',
+      'price': 'Rs. 22,000',
+      'rating': '4.7',
+      'image': 'assets/images/hotel_crown.png',
+    },
+    {
+      'name': 'Indus Hotel',
+      'city': 'Hyderabad',
+      'price': 'Rs. 28,000',
+      'rating': '4.6',
+      'image': 'assets/images/indus_hotel.png',
+    },
+    {
+      'name': 'Rupal Inn',
+      'city': 'Astore',
+      'price': 'Rs. 25,000',
+      'rating': '4.8',
+      'image': 'assets/images/rupal_inn.png',
+    },
+    {
+      'name': 'Gilgit Hotel',
+      'city': 'Gilgit',
+      'price': 'Rs. 32,000',
+      'rating': '4.8',
+      'image': 'assets/images/gilgit_hotel.png',
+    },
+    {
+      'name': 'Gilgit Serena Hotel',
+      'city': 'Gilgit',
+      'price': 'Rs. 40,000',
+      'rating': '4.9',
+      'image': 'assets/images/serena_gilgit.png',
+    },
+    {
       'name': 'Serena Hotel',
       'city': 'Islamabad',
       'price': 'Rs. 48,000',
