@@ -87,9 +87,27 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
                         const SizedBox(height: 40),
 
-                        SizedBox(
+                        Container(
                           width: double.infinity,
-                          height: 56,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: LinearGradient(
+                              colors: [
+                                AppColors.primary,
+                                AppColors.primary.withValues(alpha: 0.7),
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.primary.withValues(alpha: 0.3),
+                                blurRadius: 15,
+                                offset: const Offset(0, 6),
+                              ),
+                            ],
+                          ),
                           child: ElevatedButton(
                             onPressed: () {
                               if (_emailController.text.isEmpty) {
@@ -112,10 +130,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               Navigator.pop(context);
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: Colors.transparent,
+                              shadowColor: Colors.transparent,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               elevation: 0,
                             ),
@@ -124,6 +143,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
+                                letterSpacing: 1.2,
                               ),
                             ),
                           ),
@@ -145,23 +165,35 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     required String hint,
     required IconData icon,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
-      ),
-      child: TextField(
-        controller: controller,
-        style: const TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.5)),
-          prefixIcon: Icon(icon, color: Colors.white.withValues(alpha: 0.8)),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.3),
+              width: 1.2,
+            ),
+          ),
+          child: TextField(
+            controller: controller,
+            style: const TextStyle(color: Colors.white, fontSize: 16),
+            decoration: InputDecoration(
+              hintText: hint,
+              hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.6)),
+              prefixIcon: Icon(
+                icon,
+                color: Colors.white.withValues(alpha: 0.9),
+              ),
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 18,
+              ),
+            ),
           ),
         ),
       ),

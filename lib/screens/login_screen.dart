@@ -50,18 +50,37 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(
                     child:
                         Container(
-                          padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.2),
                             shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.5),
-                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white.withValues(alpha: 0.15),
+                                blurRadius: 30,
+                                spreadRadius: 5,
+                              ),
+                            ],
                           ),
-                          child: const Icon(
-                            Icons.travel_explore,
-                            size: 60,
-                            color: Colors.white,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                padding: const EdgeInsets.all(24),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.2),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.white.withValues(alpha: 0.6),
+                                    width: 1.5,
+                                  ),
+                                ),
+                                child: const Icon(
+                                  Icons.travel_explore,
+                                  size: 50,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
                         ).animate().scale(
                           duration: 600.ms,
@@ -127,9 +146,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 32),
 
                   // Login Button
-                  SizedBox(
+                  Container(
                     width: double.infinity,
-                    height: 56,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                        colors: [
+                          AppColors.primary,
+                          AppColors.primary.withValues(alpha: 0.7),
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.3),
+                          blurRadius: 15,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
+                    ),
                     child: ElevatedButton(
                       onPressed: () {
                         if (_emailController.text == 'admin' &&
@@ -152,10 +189,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         elevation: 0,
                       ),
@@ -164,6 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
+                          letterSpacing: 1.2,
                         ),
                       ),
                     ),
@@ -242,35 +281,47 @@ class _LoginScreenState extends State<LoginScreen> {
     bool obscureText = false,
     VoidCallback? onTogglePassword,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
-      ),
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        style: const TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.5)),
-          prefixIcon: Icon(icon, color: Colors.white.withValues(alpha: 0.8)),
-          suffixIcon: isPassword
-              ? IconButton(
-                  icon: Icon(
-                    obscureText
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    color: Colors.white.withValues(alpha: 0.8),
-                  ),
-                  onPressed: onTogglePassword,
-                )
-              : null,
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.3),
+              width: 1.2,
+            ),
+          ),
+          child: TextField(
+            controller: controller,
+            obscureText: obscureText,
+            style: const TextStyle(color: Colors.white, fontSize: 16),
+            decoration: InputDecoration(
+              hintText: hint,
+              hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.6)),
+              prefixIcon: Icon(
+                icon,
+                color: Colors.white.withValues(alpha: 0.9),
+              ),
+              suffixIcon: isPassword
+                  ? IconButton(
+                      icon: Icon(
+                        obscureText
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: Colors.white.withValues(alpha: 0.8),
+                      ),
+                      onPressed: onTogglePassword,
+                    )
+                  : null,
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 18,
+              ),
+            ),
           ),
         ),
       ),
@@ -280,14 +331,24 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildSocialButton(IconData icon, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.1),
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+      borderRadius: BorderRadius.circular(20),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.3),
+                width: 1.2,
+              ),
+            ),
+            child: Icon(icon, color: Colors.white, size: 28),
+          ),
         ),
-        child: Icon(icon, color: Colors.white, size: 28),
       ),
     );
   }
