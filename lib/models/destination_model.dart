@@ -468,7 +468,7 @@ final List<Destination> destinationsList = [
       },
       {
         'name': 'Gilgitan Hotel',
-        'image': 'assets/images/gilgitan_hotel.png',
+        'image': 'assets/images/gilgitan_hotel_bg.png',
         'rating': 4.0,
         'price': 'Rs. 8,000',
         'location': 'Airport Rd, Gilgit',
