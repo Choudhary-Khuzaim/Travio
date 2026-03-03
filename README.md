@@ -1,146 +1,175 @@
-# <p align="center"> <img src="assets/images/readme/banner.png" alt="Travio Banner" width="100%"> </p>
+<div align="center">
+  <img src="assets/images/readme/banner.png" alt="Travio Banner" width="100%">
+  
+  <br />
+  <br />
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
-  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart">
-  <img src="https://img.shields.io/badge/Version-2.3.0-FF6B6B?style=for-the-badge" alt="Version">
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
-</p>
+  <p>
+    <b>A Premium, Mobile-First Travel & Booking Ecosystem</b>
+  </p>
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Choudhary-Khuzaim&repo=travio&theme=radical" alt="Repo Stats">
-</p>
+  <p>
+    <a href="https://flutter.dev">
+      <img src="https://img.shields.io/badge/Flutter-%2302569B.svg?logo=flutter&logoColor=white" alt="Flutter" />
+    </a>
+    <a href="https://dart.dev">
+      <img src="https://img.shields.io/badge/Dart-%230175C2.svg?logo=dart&logoColor=white" alt="Dart" />
+    </a>
+    <a href="https://github.com/Choudhary-Khuzaim/travio">
+      <img src="https://img.shields.io/badge/Version-v2.3.0-FF6B6B.svg" alt="Version" />
+    </a>
+    <a href="https://github.com/Choudhary-Khuzaim/travio">
+      <img src="https://img.shields.io/badge/Status-Active-brightgreen.svg" alt="Status" />
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+      <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" />
+    </a>
+  </p>
+  
+  <p>
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=Choudhary-Khuzaim&repo=travio&theme=radical" alt="Repo Stats">
+  </p>
+</div>
 
 ---
 
-## 🌎 Overview
+## � Overview
 
-**Travio** is a premium, high-fidelity travel ecosystem designed to revolutionize the way people explore, plan, and book their journeys. Built with a "Mobile-First" and "Luxury" philosophy, Travio seamlessly integrates destination discovery, high-end hotel reservations, flight management, and interactive mapping into a single, cohesive, and visually stunning mobile experience.
+**Travio** is a high-fidelity, comprehensive mobile application designed to redefine how travelers explore, plan, and book their journeys. Built with the powerful Flutter framework, Travio embraces a **Mobile-First** and **Luxury** philosophy. It provides a seamless, visually stunning experience that integrates destination discovery, high-end hotel reservations, flight and transport management, and interactive maps—all within one cohesive ecosystem.
 
-Whether you're looking for the serene mountains of **Hunza**, the historic streets of **Lahore**, or the juniper forests of **Ziarat**, Travio provides a curated gateway to the world's most beautiful destinations.
+Whether you're dreaming of the serene, snow-capped mountains of **Hunza**, the vibrant historical streets of **Lahore**, or the ancient, majestic juniper forests of **Ziarat**, Travio brings the world's most breathtaking destinations right to your fingertips.
 
 ---
 
-## ✨ Key Features & Modules
+## ✨ Key Features
 
-### 🔐 Advanced Authentication & Onboarding
-- **Dynamic Onboarding:** A visually immersive entry into the app using advanced animations.
-- **Secure Auth Suite:** Robust Login, Signup, OTP Verification, and Forgot Password flows with sleek UI.
-- **User Profiles:** Personalized user experiences with editable profiles and preferences.
+### 🔐 Seamless Onboarding & Security
+- **Dynamic Onboarding:** Beautiful, immersive entry flows utilizing advanced 3D & parallax animations.
+- **Robust Authentication:** Secure Login, Signup, OTP Verification, and Forgot Password mechanisms.
+- **Personalized Profiles:** Fully customizable user profiles, avatars, and settings for a tailored experience.
 
 ### 🗺️ Intelligent Exploration
-- **3D Destination Carousel:** Experience destinations like never before with interactive 3D perspective browsing.
-- **Explore Hub:** A dedicated space to discover cities, attractions, and local events.
-- **Interactive Maps:** Real-time visualization of destinations and nearby points of interest.
-- **Ziarat Integration:** Recently added dedicated support for the majestic Ziarat residency and surrounding juniper forests.
+- **Interactive Destinations:** Browse cities, top attractions, and hidden gems with a 3D perspective carousel.
+- **Real-time Mapping:** Integrated mapping using `flutter_map`, allowing detailed interaction and location viewing.
+- **Comprehensive Guides:** Detailed descriptions, weather insights, and curated facilities lists for dozens of destinations including Islamabad, Swat, Skardu, Gwadar, and more.
 
-### � Elite Booking System
-- **Luxury Stays:** Comprehensive hotel booking engine with detailed descriptions, facility lists, and rating systems.
-- **Flight & Transport:** Manage flight details, select seats, and book local cab services (Hotels, Cabs, Events).
-- **Digital Boarding Pass:** Instant generation of QR-coded boarding passes for a paperless travel experience.
+### 🏨 Premium Booking Engine
+- **Luxury Stays:** A fully-featured hotel booking module with rich imagery, localized descriptions, rating systems, and interactive facility icons.
+- **Transport Hub:** Manage local cabs, integrated flight details, and local events to complement your hotel stay.
+- **Digital Ticketing:** Painless digital boarding passes and ticketing powered by fast QR-code generation.
 
 ### 👤 Personal Concierge
-- **My Trips:** Manage all your upcoming and past bookings in a clean, organized timeline.
-- **Saved Treasures:** Bookmark your favorite destinations for future planning.
-- **Settings & Privacy:** Full control over notifications, dark mode (experimental), and data policies.
+- **My Trips:** An intuitive, organized timeline for managing your previous adventures and upcoming journeys.
+- **Saved Treasures:** Bookmark and wishlist your top-tier destinations to craft your ultimate bucket list.
+- **Privacy & Customization:** Granular control over notifications, data policies, and UI themes (including a sleek dark mode).
 
 ---
 
 ## 📸 Visual Showcase
 
-<p align="center">
+<div align="center">
   <img src="assets/images/readme/explore_mockup.png" alt="Explore Screen" width="48%">
+  &nbsp;
   <img src="assets/images/readme/booking_mockup.png" alt="Booking Screen" width="48%">
-</p>
+</div>
+
+> _Note: Ensure `/assets/images/readme/` contains the actual mockups or these will appear as broken images. Standardized names have been assumed in this visual showcase._
 
 ---
 
 ## 🛠️ Technical Stack
 
-- **Framework:** [Flutter SDK](https://flutter.dev) (v3.35.7+)
-- **Language:** [Dart](https://dart.dev) (v3.9.2+)
-- **UI & Animations:** `flutter_animate` for premium micro-interactions.
-- **Typography:** `google_fonts` (Outfit as primary font).
-- **Mapping:** `flutter_map` with `latlong2` & `geolocator`.
-- **Utilities:** `qr_flutter` (Ticketing), `share_plus`, `url_launcher`, `intl`.
+- **Core Framework:** [Flutter](https://flutter.dev) (v3.35.7+)
+- **Programming Language:** [Dart](https://dart.dev) (v3.9.2+)
+- **UI & Micro-Interactions:** `flutter_animate` for smooth, performant, eye-catching transitions.
+- **Typography:** `google_fonts` (featuring primary *Outfit* aesthetics).
+- **Mapping Engine:** `flutter_map`, `latlong2`, and `geolocator` for deep geospatial integration.
+- **Utilities:** `qr_flutter` (Digital Passes), `share_plus` (Social Sharing), `url_launcher` (External Links), `intl` (Formatting).
 
 ---
 
-## 📂 Project Structure
+## 📂 Project Architecture
+
+A clean, scalable, and highly maintainable folder structure ensures fast iteration:
 
 ```text
 lib/
-├── core/               # Design System (Colors, Theme, Typography)
-├── models/             # Data Models (Destination, Hotel, Trip, etc.)
-├── screens/            # 40+ Feature-rich UI Screens
-│   ├── auth/           # Authentication Workflow
-│   ├── booking/        # Hotels, Flights, Cabs Integration
-│   ├── explorer/       # Maps, Search, Discover
-│   └── profile/        # Settings, Digital Tickets, Privacy
-├── widgets/            # Reusable Premium UI Components
-└── main.dart           # App Entry Point
+├── core/               # App-wide configurations (Colors, Theme, Constants)
+├── models/             # Business Logic & Data Models (Destinations, Hotels, Utilities)
+├── main.dart           # App Entry Point & Root Configuration
+├── screens/            # 40+ Feature-rich Modules
+│   ├── auth/           # Login, Register, Forgot Password
+│   ├── booking/        # Flights, Cabs, Hotel Reservations
+│   ├── explorer/       # Discovery, Search, Maps, Interactive Carousels
+│   └── profile/        # Preferences, Security, Privacy, Support
+└── widgets/            # Reusable UI Components (Cards, Buttons, Inputs, Parallax)
 ```
 
 ---
 
-## 🚀 Version Log (v2.3.0)
+## 🚀 Release Notes (v2.3.0)
 
-### v2.3.0 - The Destination Update
-- **New Destinations:** Integrated high-resolution imagery and data for **Ziarat**, **Swat**, and **Skardu**.
-- **UI Enhancement:** Added dedicated "Ziarat Card" with professional asset management.
-- **Asset Optimization:** Improved image loading performance and error handling for remote assets.
-- **Bug Fixes:** Resolved minor navigation overflows and updated deprecated member usages.
+### **v2.3.0 - The Destination Update**
+- 🌟 **New Locales:** Added high-fidelity datasets & visual assets for **Ziarat**, **Swat**, and **Skardu**.
+- 🎨 **UI Overhaul:** Introduced bespoke destination cards with optimized layout metrics.
+- ⚡ **Performance:** Boosted remote imagery caching, fixed list scrolling physics, and squashed rendering overflow edges.
 
-### v2.1.0 - The Global Update
-- Added support for multiple local attractions in major cities.
-- Updated theme engines for better contrast and accessibility.
-
-### v1.0.0 - Initial Release
-- Core booking engine and exploration hub.
+### **v2.1.0 - The Global Update**
+- Added expansive multi-point local attractions inside major urban centers.
+- Upgraded theme engines to enhance accessibility, contrast, and typography scaling.
 
 ---
 
 ## ⚙️ Setup & Installation
 
-### Prerequisites
-- [Flutter SDK](https://docs.flutter.dev/get-started/install) installed.
-- Android/iOS Emulator or Physical Device.
+Follow these steps to run **Travio** locally on your machine:
 
-### Steps
-1. **Clone the Repo:**
-   ```bash
-   git clone https://github.com/Choudhary-Khuzaim/travio.git
-   ```
-2. **Install Dependencies:**
-   ```bash
-   flutter pub get
-   ```
-3. **Run the App:**
-   ```bash
-   flutter run
-   ```
+### 1. Prerequisites
+- Install [Flutter SDK](https://docs.flutter.dev/get-started/install).
+- Ensure you have a running Android Emulator, iOS Simulator, or a connected physical device.
+
+### 2. Installation Steps
+Clone the repository to your local machine:
+```bash
+git clone https://github.com/Choudhary-Khuzaim/travio.git
+cd travio
+```
+
+Fetch the required dependencies:
+```bash
+flutter pub get
+```
+
+Run the application:
+```bash
+flutter run
+```
 
 ---
 
-## 🤝 Support & Contribution
+## 🤝 Contributing
 
-We welcome contributions! If you'd like to improve Travio:
-1. Fork the project.
+We welcome contributions and continuous improvements! 
+
+1. **Fork** the project on GitHub.
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+3. Commit your changes (`git commit -m 'Added an AmazingFeature'`).
 4. Push to the Branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+5. Open a **Pull Request** explaining your modifications.
 
 ---
 
 ## 📄 License
-This project is licensed under the **MIT License**.
+
+This repository is licensed under the **MIT License**. Check out the `LICENSE` file for more information.
 
 ---
 
-<p align="center">
-  <b>Developed with ❤️ by</b><br>
-  <a href="https://github.com/Choudhary-Khuzaim">Khuzaim Sajjad</a><br><br>
-  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
-</p>
+<div align="center">
+  <br/>
+  <b>Crafted with ❤️ by <a href="https://github.com/Choudhary-Khuzaim">Khuzaim Sajjad</a></b>
+  <br/><br/>
+  <a href="https://linkedin.com">
+    <img src="https://img.shields.io/badge/Connect_on_LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+  </a>
+</div>

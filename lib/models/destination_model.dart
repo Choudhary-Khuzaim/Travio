@@ -59,8 +59,18 @@ final List<Destination> destinationsList = [
         'description':
             'The Pakistan Monument is a national monument and heritage museum located on the western Shakarparian Hills in Islamabad. Built to symbolize the unity of the Pakistani people, its design represents the four provinces and three territories of the country.',
       },
-      {'name': 'Daman-e-Koh', 'image': 'assets/images/daman_e_koh.png'},
-      {'name': 'Monal', 'image': 'assets/images/monal.png'},
+      {
+        'name': 'Daman-e-Koh',
+        'image': 'assets/images/daman_e_koh.png',
+        'description':
+            'Daman-e-Koh is a viewing point and hilltop garden north of Islamabad. It offers a panoramic view of the beautifully planned capital city.',
+      },
+      {
+        'name': 'Monal',
+        'image': 'assets/images/monal.png',
+        'description':
+            'Monal is an iconic restaurant located high in the Margalla Hills. It offers breathtaking aerial views of Islamabad along with a diverse menu.',
+      },
     ],
     hotels: [
       {
@@ -300,7 +310,6 @@ final List<Destination> destinationsList = [
       },
       {
         'name': 'Liaquat Park',
-        'point': 'Liaquat Park',
         'image': 'assets/images/liaquat_park.png',
         'description':
             'Liaquat Park is one of the oldest parks in Quetta. It provides a serene escape in the heart of the city with beautiful gardens and a historic atmosphere.',
@@ -746,9 +755,24 @@ final List<Destination> destinationsList = [
         'Known as the Switzerland of the East, Swat offers lush green valleys, rivers, and snow-capped mountains.',
     facilities: ['River View', 'Heater', 'Camping', 'Food'],
     attractions: [
-      {'name': 'Malam Jabba', 'image': 'assets/images/malam_jabba.png'},
-      {'name': 'Kalam', 'image': 'assets/images/kalam.png'},
-      {'name': 'White Palace', 'image': 'assets/images/white_palace.png'},
+      {
+        'name': 'Malam Jabba',
+        'image': 'assets/images/malam_jabba.png',
+        'description':
+            'Malam Jabba is a popular hill station and ski resort in the Hindu Kush mountain range, offering beautiful scenery and skiing opportunities.',
+      },
+      {
+        'name': 'Kalam',
+        'image': 'assets/images/kalam.png',
+        'description':
+            'Kalam is a picturesque valley in Swat known for its lush greenery, clear rivers, and beautiful waterfalls. It is a true paradise for nature lovers.',
+      },
+      {
+        'name': 'White Palace',
+        'image': 'assets/images/white_palace.png',
+        'description':
+            'The White Palace of Marghazar was built in 1940 completely from white marble. It serves as a beautiful historical hotel and attraction.',
+      },
     ],
     hotels: [
       {
@@ -801,12 +825,24 @@ final List<Destination> destinationsList = [
         'Experience the breathtaking beauty of Hunza Valley. Known as heaven on earth, it serves rich culture, hospitality, and majestic views of Rakaposhi.',
     facilities: ['Hiking', 'Bonfire', 'Wifi', 'Breakfast'],
     attractions: [
-      {'name': 'Baltit Fort', 'image': 'assets/images/baltit_fort.png'},
-      {'name': 'Attabad Lake', 'image': 'assets/images/attabad_lake.png'},
+      {
+        'name': 'Baltit Fort',
+        'image': 'assets/images/baltit_fort.png',
+        'description':
+            'Baltit Fort is an ancient fort in the Hunza valley. Founded in the 8th century, it has been on the UNESCO World Heritage Tentative list since 2004.',
+      },
+      {
+        'name': 'Attabad Lake',
+        'image': 'assets/images/attabad_lake.png',
+        'description':
+            'Attabad Lake is a stunning turquoise lake formed by a massive landslide in 2010. It is a major spot offering boating and jet skiing.',
+      },
       {
         'name': 'Rakaposhi',
         'image':
             'https://images.unsplash.com/photo-1739676882863-f087febf073d?q=80&w=400',
+        'description':
+            'Rakaposhi is a magnificent mountain in the Karakoram range. Viewing points offer up-close perspectives of this majestic snow-covered peak.',
       },
     ],
     hotels: [
