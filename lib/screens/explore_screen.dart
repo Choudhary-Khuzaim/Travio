@@ -47,28 +47,47 @@ class _ExploreScreenState extends State<ExploreScreen> {
       _filteredDestinations = destinationsList.where((dest) {
         final matchesSearch =
             dest.city.toLowerCase().contains(query) ||
-            dest.country.toLowerCase().contains(query);
+            dest.country.toLowerCase().contains(query) ||
+            (dest.description?.toLowerCase().contains(query) ?? false);
 
         bool matchesCategory = true;
         if (_selectedCategory == "Mountains") {
-          matchesCategory =
-              dest.city.contains("Hunza") ||
-              dest.city.contains("Skardu") ||
-              dest.city.contains("Swat");
+          matchesCategory = [
+            "Hunza",
+            "Skardu",
+            "Swat",
+            "Gilgit",
+            "Ziarat"
+          ].any((c) => dest.city.contains(c));
         } else if (_selectedCategory == "Cities") {
-          matchesCategory =
-              dest.city == "Lahore" ||
-              dest.city == "Islamabad" ||
-              dest.city == "Karachi" ||
-              dest.city == "Peshawar" ||
-              dest.city == "Multan" ||
-              dest.city == "Quetta";
+          matchesCategory = [
+            "Lahore",
+            "Islamabad",
+            "Karachi",
+            "Peshawar",
+            "Multan",
+            "Quetta",
+            "Faisalabad",
+            "Hyderabad",
+            "Gwadar"
+          ].any((c) => dest.city.contains(c));
         } else if (_selectedCategory == "Cultural") {
-          matchesCategory =
-              dest.city == "Lahore" ||
-              dest.city == "Peshawar" ||
-              dest.city == "Multan" ||
-              dest.city == "Hyderabad";
+          matchesCategory = [
+            "Lahore",
+            "Peshawar",
+            "Multan",
+            "Hyderabad",
+            "Quetta"
+          ].any((c) => dest.city.contains(c));
+        } else if (_selectedCategory == "Nature") {
+          matchesCategory = [
+            "Hunza",
+            "Skardu",
+            "Swat",
+            "Gilgit",
+            "Gwadar",
+            "Ziarat"
+          ].any((c) => dest.city.contains(c));
         }
 
         return matchesSearch && matchesCategory;
@@ -94,7 +113,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               icon: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
+                  color: Colors.white.withOpacity(0.2),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -125,8 +144,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.primary.withValues(alpha: 0.85),
-                          const Color(0xFF065F46).withValues(alpha: 0.75),
+                          AppColors.primary.withOpacity(0.85),
+                          const Color(0xFF065F46).withOpacity(0.75),
                         ],
                       ),
                     ),
@@ -148,7 +167,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     top: -20,
                     child: CircleAvatar(
                       radius: 80,
-                      backgroundColor: Colors.white.withValues(alpha: 0.05),
+                      backgroundColor: Colors.white.withOpacity(0.05),
                     ),
                   ),
                   Positioned(
@@ -156,7 +175,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     bottom: -10,
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundColor: Colors.white.withValues(alpha: 0.03),
+                      backgroundColor: Colors.white.withOpacity(0.03),
                     ),
                   ),
                 ],
@@ -180,7 +199,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       borderRadius: BorderRadius.circular(18),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.08),
+                          color: AppColors.primary.withOpacity(0.08),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -192,7 +211,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       decoration: InputDecoration(
                         hintText: "Search for cities or landmarks...",
                         hintStyle: TextStyle(
-                          color: Colors.grey.withValues(alpha: 0.6),
+                          color: Colors.grey.withOpacity(0.6),
                           fontSize: 15,
                         ),
                         prefixIcon: const Icon(
@@ -256,7 +275,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             border: Border.all(
                               color: isSelected
                                   ? AppColors.primary
-                                  : Colors.grey.withValues(alpha: 0.3),
+                                  : Colors.grey.withOpacity(0.3),
                               width: 1.5,
                             ),
                             boxShadow: isSelected
@@ -387,7 +406,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               borderRadius: BorderRadius.circular(24),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.1),
+                  color: Colors.black.withOpacity(0.1),
                   blurRadius: 15,
                   offset: const Offset(0, 8),
                 ),
@@ -415,8 +434,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           end: Alignment.bottomCenter,
                           colors: [
                             Colors.transparent,
-                            Colors.black.withValues(alpha: 0.1),
-                            Colors.black.withValues(alpha: 0.8),
+                            Colors.black.withOpacity(0.1),
+                            Colors.black.withOpacity(0.8),
                           ],
                           stops: const [0.5, 0.7, 1.0],
                         ),
@@ -434,7 +453,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.9),
+                        color: Colors.white.withOpacity(0.9),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -532,7 +551,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.15),
+                              color: Colors.white.withOpacity(0.15),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(

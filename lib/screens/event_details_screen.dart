@@ -60,7 +60,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: CircleAvatar(
-          backgroundColor: Colors.black.withValues(alpha: 0.3),
+          backgroundColor: Colors.black.withOpacity(0.3),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white, size: 20),
             onPressed: () => Navigator.pop(context),
@@ -81,9 +81,9 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
+                    Colors.black.withOpacity(0.3),
                     Colors.transparent,
-                    Colors.black.withValues(alpha: 0.7),
+                    Colors.black.withOpacity(0.7),
                   ],
                 ),
               ),
@@ -104,7 +104,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.1),
+                color: AppColors.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
@@ -244,7 +244,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppColors.primary.withValues(alpha: 0.05)
+              ? AppColors.primary.withOpacity(0.05)
               : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
@@ -254,7 +254,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.1),
+                    color: AppColors.primary.withOpacity(0.1),
                     blurRadius: 10,
                   ),
                 ]
@@ -326,7 +326,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
+              color: Colors.black.withOpacity(0.05),
               blurRadius: 20,
               offset: const Offset(0, -5),
             ),
@@ -375,7 +375,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   elevation: 10,
-                  shadowColor: AppColors.primary.withValues(alpha: 0.4),
+                  shadowColor: AppColors.primary.withOpacity(0.4),
                 ),
                 child: const Text(
                   "Book Tickets",

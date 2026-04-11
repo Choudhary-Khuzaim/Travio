@@ -248,8 +248,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
-                    AppColors.primary.withValues(alpha: 0.9),
+                    Colors.black.withOpacity(0.3),
+                    AppColors.primary.withOpacity(0.9),
                   ],
                 ),
               ),
@@ -266,7 +266,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.5),
+                            color: Colors.white.withOpacity(0.5),
                             width: 2,
                           ),
                         ),
@@ -309,7 +309,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.1),
+                                  color: Colors.black.withOpacity(0.1),
                                   blurRadius: 10,
                                   offset: const Offset(0, 4),
                                 ),
@@ -354,10 +354,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: AppColors.primary.withValues(alpha: 0.1)),
+            border: Border.all(color: AppColors.primary.withOpacity(0.1)),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withValues(alpha: 0.05),
+                color: AppColors.primary.withOpacity(0.05),
                 blurRadius: 15,
                 offset: const Offset(0, 5),
               ),
@@ -371,7 +371,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 decoration: BoxDecoration(
                   border: Border(
                     right: BorderSide(
-                      color: Colors.grey.withValues(alpha: 0.2),
+                      color: Colors.grey.withOpacity(0.2),
                     ),
                   ),
                 ),
@@ -433,7 +433,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       orElse: () => _countryCodes[0],
                     )['example'],
                     hintStyle: TextStyle(
-                      color: Colors.grey.withValues(alpha: 0.5),
+                      color: Colors.grey.withOpacity(0.5),
                     ),
                   ),
                   validator: (value) {
@@ -478,12 +478,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         const SizedBox(height: 10),
         Container(
           decoration: BoxDecoration(
-            color: enabled ? Colors.white : Colors.grey.withValues(alpha: 0.1),
+            color: enabled ? Colors.white : Colors.grey.withOpacity(0.1),
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: AppColors.primary.withValues(alpha: 0.1)),
+            border: Border.all(color: AppColors.primary.withOpacity(0.1)),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withValues(alpha: 0.05),
+                color: AppColors.primary.withOpacity(0.05),
                 blurRadius: 15,
                 offset: const Offset(0, 5),
               ),
@@ -500,7 +500,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             decoration: InputDecoration(
               prefixIcon: Icon(
                 icon,
-                color: AppColors.primary.withValues(alpha: 0.5),
+                color: AppColors.primary.withOpacity(0.5),
                 size: 22,
               ),
               border: InputBorder.none,
@@ -508,7 +508,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 horizontal: 20,
                 vertical: 16,
               ),
-              hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.5)),
+              hintStyle: TextStyle(color: Colors.grey.withOpacity(0.5)),
             ),
             validator: (value) {
               if (value == null || value.trim().isEmpty) {

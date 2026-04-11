@@ -148,8 +148,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
-                    AppColors.primary.withValues(alpha: 0.9),
+                    Colors.black.withOpacity(0.3),
+                    AppColors.primary.withOpacity(0.9),
                   ],
                 ),
               ),
@@ -159,10 +159,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 margin: const EdgeInsets.only(top: 60),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.15),
+                  color: Colors.white.withOpacity(0.15),
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.3),
+                    color: Colors.white.withOpacity(0.3),
                   ),
                 ),
                 child: const Icon(
@@ -204,10 +204,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
+        border: Border.all(color: AppColors.primary.withOpacity(0.05)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.05),
+            color: AppColors.primary.withOpacity(0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -219,7 +219,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           secondary: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.08),
+              color: AppColors.primary.withOpacity(0.08),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: AppColors.primary, size: 22),
@@ -236,13 +236,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle,
             style: TextStyle(
               fontSize: 12,
-              color: AppColors.textSecondary.withValues(alpha: 0.7),
+              color: AppColors.textSecondary.withOpacity(0.7),
             ),
           ),
           value: value,
           onChanged: onChanged,
           activeThumbColor: AppColors.primary,
-          activeTrackColor: AppColors.primary.withValues(alpha: 0.2),
+          activeTrackColor: AppColors.primary.withOpacity(0.2),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 8,
@@ -267,10 +267,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
+        border: Border.all(color: AppColors.primary.withOpacity(0.05)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.05),
+            color: AppColors.primary.withOpacity(0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -280,7 +280,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: AppColors.primary.withValues(alpha: 0.08),
+            color: AppColors.primary.withOpacity(0.08),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(icon, color: AppColors.primary, size: 22),
@@ -297,7 +297,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           subtitle,
           style: TextStyle(
             fontSize: 12,
-            color: AppColors.textSecondary.withValues(alpha: 0.7),
+            color: AppColors.textSecondary.withOpacity(0.7),
           ),
         ),
         trailing: Row(
@@ -316,7 +316,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: Colors.grey.withValues(alpha: 0.1),
+                color: Colors.grey.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
@@ -352,7 +352,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.amber.withValues(alpha: 0.1),
+                      color: Colors.amber.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(

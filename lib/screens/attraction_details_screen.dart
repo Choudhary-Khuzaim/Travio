@@ -9,6 +9,8 @@ class AttractionDetailsScreen extends StatelessWidget {
   final String attractionImage;
   final String heroTag;
   final String? description;
+  final String? rating;
+  final String? distance;
 
   const AttractionDetailsScreen({
     super.key,
@@ -16,6 +18,8 @@ class AttractionDetailsScreen extends StatelessWidget {
     required this.attractionImage,
     required this.heroTag,
     this.description,
+    this.rating,
+    this.distance,
   });
 
   Future<void> _shareAttraction() async {
@@ -64,7 +68,7 @@ class AttractionDetailsScreen extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.9),
+                      color: Colors.white.withOpacity(0.9),
                       shape: BoxShape.circle,
                       boxShadow: const [
                         BoxShadow(color: Colors.black12, blurRadius: 10),
@@ -88,7 +92,7 @@ class AttractionDetailsScreen extends StatelessWidget {
                       ),
                       width: 40,
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.9),
+                        color: Colors.white.withOpacity(0.9),
                         shape: BoxShape.circle,
                         boxShadow: const [
                           BoxShadow(color: Colors.black12, blurRadius: 10),
@@ -128,9 +132,9 @@ class AttractionDetailsScreen extends StatelessWidget {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              Colors.black.withValues(alpha: 0.3),
+                              Colors.black.withOpacity(0.3),
                               Colors.transparent,
-                              Colors.black.withValues(alpha: 0.6),
+                              Colors.black.withOpacity(0.6),
                             ],
                           ),
                         ),
@@ -220,9 +224,9 @@ class AttractionDetailsScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            _buildStatItem(Icons.star, "4.8", "Rating"),
+                            _buildStatItem(Icons.star, rating ?? "4.8", "Rating"),
                             _buildStatItem(Icons.access_time, "Open", "Status"),
-                            _buildStatItem(Icons.map, "12km", "Distance"),
+                            _buildStatItem(Icons.map, distance ?? "12km", "Distance"),
                           ],
                         ).animate().slideY(
                           begin: 0.5,
@@ -248,7 +252,7 @@ class AttractionDetailsScreen extends StatelessWidget {
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.1),
+                                  color: Colors.black.withOpacity(0.1),
                                   blurRadius: 10,
                                   offset: const Offset(0, 5),
                                 ),
@@ -297,13 +301,13 @@ class AttractionDetailsScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.05),
+                            color: Colors.black.withOpacity(0.05),
                             blurRadius: 15,
                             offset: const Offset(0, 8),
                           ),
                         ],
                         border: Border.all(
-                          color: AppColors.primary.withValues(alpha: 0.1),
+                          color: AppColors.primary.withOpacity(0.1),
                         ),
                       ),
                       child: IconButton(
@@ -328,7 +332,7 @@ class AttractionDetailsScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(18),
                           ),
                           elevation: 8,
-                          shadowColor: AppColors.primary.withValues(alpha: 0.4),
+                          shadowColor: AppColors.primary.withOpacity(0.4),
                         ),
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,

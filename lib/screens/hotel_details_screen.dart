@@ -39,7 +39,7 @@ class HotelDetailsScreen extends StatelessWidget {
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: CircleAvatar(
-          backgroundColor: Colors.black.withValues(alpha: 0.3),
+          backgroundColor: Colors.black.withOpacity(0.3),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white, size: 20),
             onPressed: () => Navigator.pop(context),
@@ -50,7 +50,7 @@ class HotelDetailsScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: Colors.black.withValues(alpha: 0.3),
+            backgroundColor: Colors.black.withOpacity(0.3),
             child: IconButton(
               icon: const Icon(
                 Icons.favorite_border,
@@ -64,7 +64,7 @@ class HotelDetailsScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: Colors.black.withValues(alpha: 0.3),
+            backgroundColor: Colors.black.withOpacity(0.3),
             child: IconButton(
               icon: const Icon(
                 Icons.share_outlined,
@@ -102,9 +102,9 @@ class HotelDetailsScreen extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
+                    Colors.black.withOpacity(0.3),
                     Colors.transparent,
-                    Colors.black.withValues(alpha: 0.6),
+                    Colors.black.withOpacity(0.6),
                   ],
                 ),
               ),
@@ -131,7 +131,7 @@ class HotelDetailsScreen extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
+                    color: AppColors.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -351,7 +351,7 @@ class HotelDetailsScreen extends StatelessWidget {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
+                  color: Colors.black.withOpacity(0.05),
                   blurRadius: 20,
                   offset: const Offset(0, -5),
                 ),
@@ -397,7 +397,7 @@ class HotelDetailsScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       elevation: 10,
-                      shadowColor: AppColors.primary.withValues(alpha: 0.4),
+                      shadowColor: AppColors.primary.withOpacity(0.4),
                     ),
                     child: const Text(
                       "Book Now",

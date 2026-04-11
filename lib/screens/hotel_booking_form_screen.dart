@@ -74,7 +74,7 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.primary.withValues(alpha: 0.05),
+                    AppColors.primary.withOpacity(0.05),
                     Colors.white,
                     Colors.white,
                   ],
@@ -136,7 +136,7 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
+                  border: Border.all(color: Colors.grey.withOpacity(0.1)),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(
@@ -168,7 +168,7 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
+            color: Colors.black.withOpacity(0.04),
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),
@@ -265,7 +265,7 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
+            color: Colors.black.withOpacity(0.03),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -358,9 +358,9 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.blue.withValues(alpha: 0.03),
+        color: Colors.blue.withOpacity(0.03),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.blue.withValues(alpha: 0.1)),
+        border: Border.all(color: Colors.blue.withOpacity(0.1)),
       ),
       child: Row(
         children: [
@@ -406,7 +406,7 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
+              color: Colors.black.withOpacity(0.08),
               blurRadius: 30,
               offset: const Offset(0, -10),
             ),
@@ -442,7 +442,7 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     elevation: 10,
-                    shadowColor: AppColors.primary.withValues(alpha: 0.4),
+                    shadowColor: AppColors.primary.withOpacity(0.4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),

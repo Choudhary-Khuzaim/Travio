@@ -31,10 +31,10 @@ class SavedScreen extends StatelessWidget {
 
   Widget _buildSavedItem(int index) {
     final items = [
-      {'title': 'Swiss Alps Trip', 'type': 'Trip', 'image': 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=2070&auto=format&fit=crop'},
-      {'title': 'Grand Luxury Hotel', 'type': 'Hotel', 'image': 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop'},
-      {'title': 'Paris Guide', 'type': 'Guide', 'image': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop'},
-      {'title': 'Cab to Airport', 'type': 'Ride', 'image': 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop'},
+      {'title': 'Hunza Valley', 'type': 'Destination', 'image': 'assets/images/hunza.png'},
+      {'title': 'Faisal Mosque', 'type': 'Attraction', 'image': 'assets/images/faisal_mosque.png'},
+      {'title': 'Skardu Trip', 'type': 'Trip', 'image': 'assets/images/skardu.png'},
+      {'title': 'Serena Hotel', 'type': 'Hotel', 'image': 'assets/images/serena_hotel.png'},
     ];
     
     final item = items[index];
@@ -50,12 +50,21 @@ class SavedScreen extends StatelessWidget {
         contentPadding: const EdgeInsets.all(10),
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.network(
-            item['image']!,
-            width: 60,
-            height: 60,
-            fit: BoxFit.cover,
-          ),
+          child: item['image']!.startsWith('http')
+              ? Image.network(
+                  item['image']!,
+                  width: 60,
+                  height: 60,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+                )
+              : Image.asset(
+                  item['image']!,
+                  width: 60,
+                  height: 60,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+                ),
         ),
         title: Text(
           item['title']!,

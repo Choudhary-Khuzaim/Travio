@@ -432,7 +432,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: CircleAvatar(
-          backgroundColor: Colors.black.withValues(alpha: 0.3),
+          backgroundColor: Colors.black.withOpacity(0.3),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white, size: 20),
             onPressed: () => Navigator.pop(context),
@@ -465,9 +465,9 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.4),
-                    Colors.black.withValues(alpha: 0.1),
-                    AppColors.primary.withValues(alpha: 0.4),
+                    Colors.black.withOpacity(0.4),
+                    Colors.black.withOpacity(0.1),
+                    AppColors.primary.withOpacity(0.4),
                   ],
                 ),
               ),
@@ -526,7 +526,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
         borderRadius: BorderRadius.circular(32),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
+            color: Colors.black.withOpacity(0.08),
             blurRadius: 30,
             offset: const Offset(0, 15),
           ),
@@ -577,7 +577,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 elevation: 10,
-                shadowColor: AppColors.primary.withValues(alpha: 0.5),
+                shadowColor: AppColors.primary.withOpacity(0.5),
               ),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -744,7 +744,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                   end: Alignment.bottomCenter,
                                   colors: [
                                     Colors.transparent,
-                                    Colors.black.withValues(alpha: 0.8),
+                                    Colors.black.withOpacity(0.8),
                                   ],
                                 ),
                               ),
@@ -876,7 +876,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                 boxShadow: isSelected
                     ? [
                         BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.3),
+                          color: AppColors.primary.withOpacity(0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
@@ -916,7 +916,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
           borderRadius: BorderRadius.circular(32),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.04),
+              color: Colors.black.withOpacity(0.04),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),
@@ -973,7 +973,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.3),
+                          color: Colors.white.withOpacity(0.3),
                           border: Border.all(color: Colors.white30),
                           borderRadius: BorderRadius.circular(16),
                         ),

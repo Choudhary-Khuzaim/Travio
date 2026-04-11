@@ -87,7 +87,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.2),
+                          color: Colors.black.withOpacity(0.2),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -432,7 +432,7 @@ class _ReviewItemState extends State<ReviewItem> {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withValues(alpha: 0.08),
+                color: Colors.grey.withOpacity(0.08),
                 blurRadius: 20,
                 offset: const Offset(0, 4),
               ),
@@ -478,7 +478,7 @@ class _ReviewItemState extends State<ReviewItem> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.orange.withValues(alpha: 0.08),
+                      color: Colors.orange.withOpacity(0.08),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(

@@ -45,7 +45,7 @@ class _OTPScreenState extends State<OTPScreen> {
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(color: Colors.black.withValues(alpha: 0.4)),
+              child: Container(color: Colors.black.withOpacity(0.4)),
             ),
           ),
 
@@ -159,7 +159,17 @@ class _OTPScreenState extends State<OTPScreen> {
                               ),
                               const SizedBox(height: 8),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        "OTP code has been resent to your email.",
+                                      ),
+                                      backgroundColor: AppColors.primary,
+                                      behavior: SnackBarBehavior.floating,
+                                    ),
+                                  );
+                                },
                                 child: const Text(
                                   "Resend Code",
                                   style: TextStyle(
@@ -189,9 +199,9 @@ class _OTPScreenState extends State<OTPScreen> {
       width: 70,
       height: 70,
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.1),
+        color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+        border: Border.all(color: Colors.white.withOpacity(0.2)),
       ),
       child: TextField(
         controller: _controllers[index],

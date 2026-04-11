@@ -172,7 +172,7 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                       height: 60,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.blue.withValues(alpha: 0.3),
+                          color: Colors.blue.withOpacity(0.3),
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 2),
                         ),
@@ -211,7 +211,7 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.1),
+                          color: Colors.black.withOpacity(0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 5),
                         ),
@@ -395,7 +395,7 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
+              color: Colors.black.withOpacity(0.1),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -414,12 +414,12 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.9),
+            color: Colors.white.withOpacity(0.9),
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
+            border: Border.all(color: Colors.white.withOpacity(0.5)),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
+                color: Colors.black.withOpacity(0.1),
                 blurRadius: 20,
                 offset: const Offset(0, 10),
               ),
@@ -492,7 +492,7 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withValues(alpha: 0.4),
+                            color: AppColors.primary.withOpacity(0.4),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),

@@ -57,7 +57,7 @@ class TripDetailsScreen extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.2),
+              color: Colors.white.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: Colors.white, size: 20),
@@ -87,9 +87,9 @@ class TripDetailsScreen extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
+                    Colors.black.withOpacity(0.3),
                     Colors.transparent,
-                    Colors.black.withValues(alpha: 0.8),
+                    Colors.black.withOpacity(0.8),
                   ],
                 ),
               ),
@@ -111,7 +111,7 @@ class TripDetailsScreen extends StatelessWidget {
                   Text(
                     trip['airline'],
                     style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.8),
+                      color: Colors.white.withOpacity(0.8),
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -145,7 +145,7 @@ class TripDetailsScreen extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
+                    color: AppColors.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -350,7 +350,7 @@ class TripDetailsScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           elevation: 5,
-          shadowColor: color.withValues(alpha: 0.3),
+          shadowColor: color.withOpacity(0.3),
         ),
       ),
     );

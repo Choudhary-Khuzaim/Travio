@@ -64,7 +64,7 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
               icon: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
+                  color: Colors.white.withOpacity(0.2),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -95,8 +95,8 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.primary.withValues(alpha: 0.85),
-                          const Color(0xFF065F46).withValues(alpha: 0.75),
+                          AppColors.primary.withOpacity(0.85),
+                          const Color(0xFF065F46).withOpacity(0.75),
                         ],
                       ),
                     ),
@@ -115,7 +115,7 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                     top: -20,
                     child: CircleAvatar(
                       radius: 80,
-                      backgroundColor: Colors.white.withValues(alpha: 0.05),
+                      backgroundColor: Colors.white.withOpacity(0.05),
                     ),
                   ),
                   Positioned(
@@ -123,7 +123,7 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                     bottom: -10,
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundColor: Colors.white.withValues(alpha: 0.03),
+                      backgroundColor: Colors.white.withOpacity(0.03),
                     ),
                   ),
                 ],
@@ -145,7 +145,7 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                           borderRadius: BorderRadius.circular(18),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withValues(alpha: 0.08),
+                              color: AppColors.primary.withOpacity(0.08),
                               blurRadius: 20,
                               offset: const Offset(0, 10),
                             ),
@@ -158,7 +158,7 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                             hintText:
                                 "Find things to do in ${widget.cityName}...",
                             hintStyle: TextStyle(
-                              color: Colors.grey.withValues(alpha: 0.6),
+                              color: Colors.grey.withOpacity(0.6),
                               fontSize: 15,
                             ),
                             prefixIcon: const Icon(
@@ -194,7 +194,7 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.1),
+                          color: AppColors.primary.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
@@ -274,6 +274,8 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                   attractionImage: attraction['image'] ?? '',
                   heroTag: 'attraction-${attraction['name']}-$index',
                   description: attraction['description'],
+                  rating: rating.toStringAsFixed(1),
+                  distance: "${(index + 1) * 2}km",
                 ),
               ),
             );
@@ -283,7 +285,7 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
               borderRadius: BorderRadius.circular(24),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.1),
+                  color: Colors.black.withOpacity(0.1),
                   blurRadius: 15,
                   offset: const Offset(0, 8),
                 ),
@@ -323,8 +325,8 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                           end: Alignment.bottomCenter,
                           colors: [
                             Colors.transparent,
-                            Colors.black.withValues(alpha: 0.1),
-                            Colors.black.withValues(alpha: 0.8),
+                            Colors.black.withOpacity(0.1),
+                            Colors.black.withOpacity(0.8),
                           ],
                           stops: const [0.5, 0.7, 1.0],
                         ),
@@ -407,7 +409,7 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                               Text(
                                 "(${100 + (index * 15)})",
                                 style: TextStyle(
-                                  color: Colors.white.withValues(alpha: 0.6),
+                                  color: Colors.white.withOpacity(0.6),
                                   fontSize: 10,
                                 ),
                               ),

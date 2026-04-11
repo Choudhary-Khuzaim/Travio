@@ -85,7 +85,7 @@ class _TravelGuideScreenState extends State<TravelGuideScreen> {
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: CircleAvatar(
-          backgroundColor: Colors.black.withValues(alpha: 0.3),
+          backgroundColor: Colors.black.withOpacity(0.3),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white, size: 20),
             onPressed: () => Navigator.pop(context),
@@ -112,9 +112,9 @@ class _TravelGuideScreenState extends State<TravelGuideScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
+                    Colors.black.withOpacity(0.3),
                     Colors.transparent,
-                    AppColors.primary.withValues(alpha: 0.8),
+                    AppColors.primary.withOpacity(0.8),
                   ],
                 ),
               ),
@@ -179,7 +179,7 @@ class _TravelGuideScreenState extends State<TravelGuideScreen> {
                     boxShadow: isSelected
                         ? [
                             BoxShadow(
-                              color: AppColors.primary.withValues(alpha: 0.3),
+                              color: AppColors.primary.withOpacity(0.3),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
                             ),
@@ -233,7 +233,7 @@ class _TravelGuideScreenState extends State<TravelGuideScreen> {
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.04),
+                  color: Colors.black.withOpacity(0.04),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
@@ -278,7 +278,7 @@ class _TravelGuideScreenState extends State<TravelGuideScreen> {
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.2),
+                              color: Colors.white.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(

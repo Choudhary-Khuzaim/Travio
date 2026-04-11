@@ -35,7 +35,7 @@ class _SignupScreenState extends State<SignupScreen> {
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(color: Colors.black.withValues(alpha: 0.4)),
+              child: Container(color: Colors.black.withOpacity(0.4)),
             ),
           ),
 
@@ -123,14 +123,14 @@ class _SignupScreenState extends State<SignupScreen> {
                             gradient: LinearGradient(
                               colors: [
                                 AppColors.primary,
-                                AppColors.primary.withValues(alpha: 0.7),
+                                AppColors.primary.withOpacity(0.7),
                               ],
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: AppColors.primary.withValues(alpha: 0.3),
+                                color: AppColors.primary.withOpacity(0.3),
                                 blurRadius: 15,
                                 offset: const Offset(0, 6),
                               ),
@@ -235,10 +235,10 @@ class _SignupScreenState extends State<SignupScreen> {
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.15),
+            color: Colors.white.withOpacity(0.15),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.3),
+              color: Colors.white.withOpacity(0.3),
               width: 1.2,
             ),
           ),
@@ -248,10 +248,10 @@ class _SignupScreenState extends State<SignupScreen> {
             style: const TextStyle(color: Colors.white, fontSize: 16),
             decoration: InputDecoration(
               hintText: hint,
-              hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.6)),
+              hintStyle: TextStyle(color: Colors.white.withOpacity(0.6)),
               prefixIcon: Icon(
                 icon,
-                color: Colors.white.withValues(alpha: 0.9),
+                color: Colors.white.withOpacity(0.9),
               ),
               suffixIcon: isPassword
                   ? IconButton(
@@ -259,7 +259,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         obscureText
                             ? Icons.visibility_off_outlined
                             : Icons.visibility_outlined,
-                        color: Colors.white.withValues(alpha: 0.8),
+                        color: Colors.white.withOpacity(0.8),
                       ),
                       onPressed: onTogglePassword,
                     )

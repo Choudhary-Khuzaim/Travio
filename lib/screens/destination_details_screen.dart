@@ -41,7 +41,7 @@ class DestinationDetailsScreen extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.9),
+                      color: Colors.white.withOpacity(0.9),
                       shape: BoxShape.circle,
                       boxShadow: const [
                         BoxShadow(color: Colors.black12, blurRadius: 10),
@@ -59,7 +59,7 @@ class DestinationDetailsScreen extends StatelessWidget {
                     margin: const EdgeInsets.all(8),
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.9),
+                      color: Colors.white.withOpacity(0.9),
                       shape: BoxShape.circle,
                       boxShadow: const [
                         BoxShadow(color: Colors.black12, blurRadius: 10),
@@ -113,7 +113,7 @@ class DestinationDetailsScreen extends StatelessWidget {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              Colors.black.withValues(alpha: 0.2),
+                              Colors.black.withOpacity(0.2),
                               Colors.transparent,
                               Colors.transparent,
                             ],
@@ -200,7 +200,7 @@ class DestinationDetailsScreen extends StatelessWidget {
                                 vertical: 8,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.orange.withValues(alpha: 0.1),
+                                color: Colors.orange.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Row(
@@ -511,7 +511,7 @@ class DestinationDetailsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.3),
+                        color: Colors.black.withOpacity(0.3),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -646,6 +646,8 @@ class DestinationDetailsScreen extends StatelessWidget {
                 (a) => a['name'] == title,
                 orElse: () => {},
               )['description'],
+              rating: (4.5 + (title.length % 5) * 0.1).toStringAsFixed(1),
+              distance: "${(title.length % 10) + 1}km",
             ),
           ),
         );
@@ -703,7 +705,7 @@ class DestinationDetailsScreen extends StatelessWidget {
                     end: Alignment.bottomCenter,
                     colors: [
                       Colors.transparent,
-                      Colors.black.withValues(alpha: 0.8),
+                      Colors.black.withOpacity(0.8),
                     ],
                     stops: const [0.5, 1.0],
                   ),

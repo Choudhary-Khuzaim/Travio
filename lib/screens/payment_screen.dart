@@ -223,7 +223,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.green.withValues(alpha: 0.1),
+                color: Colors.green.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
@@ -392,7 +392,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.04),
+                          color: Colors.black.withOpacity(0.04),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -452,14 +452,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
           end: Alignment.bottomRight,
           colors: [
             AppColors.primary,
-            AppColors.primary.withValues(alpha: 0.85),
+            AppColors.primary.withOpacity(0.85),
             const Color(0xFF0F172A),
           ],
         ),
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.35),
+            color: AppColors.primary.withOpacity(0.35),
             blurRadius: 25,
             offset: const Offset(0, 12),
           ),
@@ -473,7 +473,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             top: -50,
             child: CircleAvatar(
               radius: 100,
-              backgroundColor: Colors.white.withValues(alpha: 0.05),
+              backgroundColor: Colors.white.withOpacity(0.05),
             ),
           ),
           Positioned(
@@ -481,7 +481,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             bottom: -20,
             child: CircleAvatar(
               radius: 60,
-              backgroundColor: Colors.white.withValues(alpha: 0.03),
+              backgroundColor: Colors.white.withOpacity(0.03),
             ),
           ),
           Padding(
@@ -548,7 +548,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         Text(
           label,
           style: TextStyle(
-            color: Colors.white.withValues(alpha: 0.6),
+            color: Colors.white.withOpacity(0.6),
             fontSize: 10,
             letterSpacing: 1,
           ),
@@ -580,7 +580,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
+            color: Colors.black.withOpacity(0.03),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -637,7 +637,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.05),
+                    color: AppColors.primary.withOpacity(0.05),
                     blurRadius: 15,
                     offset: const Offset(0, 5),
                   ),
@@ -724,7 +724,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
+            color: Colors.black.withOpacity(0.06),
             blurRadius: 25,
             offset: const Offset(0, -8),
           ),
@@ -743,13 +743,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   end: Alignment.centerRight,
                   colors: [
                     AppColors.primary,
-                    AppColors.primary.withValues(alpha: 0.9),
+                    AppColors.primary.withOpacity(0.9),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.3),
+                    color: AppColors.primary.withOpacity(0.3),
                     blurRadius: 15,
                     offset: const Offset(0, 8),
                   ),
@@ -772,7 +772,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         children: [
                           Icon(
                             Icons.lock_outline_rounded,
-                            color: Colors.white.withValues(alpha: 0.9),
+                            color: Colors.white.withOpacity(0.9),
                             size: 20,
                           ),
                           const SizedBox(width: 10),

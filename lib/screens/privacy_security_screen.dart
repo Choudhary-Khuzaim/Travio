@@ -158,8 +158,8 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
-                    AppColors.primary.withValues(alpha: 0.9),
+                    Colors.black.withOpacity(0.3),
+                    AppColors.primary.withOpacity(0.9),
                   ],
                 ),
               ),
@@ -169,10 +169,10 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                 margin: const EdgeInsets.only(top: 60),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.15),
+                  color: Colors.white.withOpacity(0.15),
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.3),
+                    color: Colors.white.withOpacity(0.3),
                   ),
                 ),
                 child: const Icon(
@@ -214,10 +214,10 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
+        border: Border.all(color: AppColors.primary.withOpacity(0.05)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.05),
+            color: AppColors.primary.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -243,7 +243,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
                   subtitle,
                   style: TextStyle(
                     fontSize: 13,
-                    color: AppColors.textSecondary.withValues(alpha: 0.8),
+                    color: AppColors.textSecondary.withOpacity(0.8),
                   ),
                 ),
               ],
@@ -253,7 +253,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
             value: value,
             onChanged: onChanged,
             activeThumbColor: AppColors.primary,
-            activeTrackColor: AppColors.primary.withValues(alpha: 0.2),
+            activeTrackColor: AppColors.primary.withOpacity(0.2),
           ),
         ],
       ),
@@ -266,10 +266,10 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
+        border: Border.all(color: AppColors.primary.withOpacity(0.05)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.05),
+            color: AppColors.primary.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -280,7 +280,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppColors.primary.withValues(alpha: 0.08),
+            color: AppColors.primary.withOpacity(0.08),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(icon, color: AppColors.primary, size: 20),
@@ -296,7 +296,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
         trailing: Container(
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: Colors.grey.withValues(alpha: 0.1),
+            color: Colors.grey.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
           child: const Icon(
