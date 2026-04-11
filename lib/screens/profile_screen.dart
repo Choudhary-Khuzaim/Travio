@@ -153,10 +153,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Icons.person_add_outlined,
                       "Invite Friends",
                       onTap: () {
-                        SharePlus.instance.share(
-                          ShareParams(
-                            text: 'Check out this amazing travel app - Travio!',
-                          ),
+                        Share.share(
+                          'Check out this amazing travel app - Travio!',
                         );
                       },
                     ),

@@ -25,7 +25,7 @@ class AttractionDetailsScreen extends StatelessWidget {
   Future<void> _shareAttraction() async {
     final text =
         "Check out $attractionName on Travio! 🌍\n\n${description ?? 'Explore this amazing place with me.'}";
-    await SharePlus.instance.share(ShareParams(text: text));
+    await Share.share(text);
   }
 
   Future<void> _openMap() async {

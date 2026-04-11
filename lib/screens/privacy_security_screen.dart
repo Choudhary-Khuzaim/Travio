@@ -252,7 +252,7 @@ class _PrivacySecurityScreenState extends State<PrivacySecurityScreen> {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeThumbColor: AppColors.primary,
+            activeColor: AppColors.primary,
             activeTrackColor: AppColors.primary.withOpacity(0.2),
           ),
         ],

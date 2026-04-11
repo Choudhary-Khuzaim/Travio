@@ -241,7 +241,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           value: value,
           onChanged: onChanged,
-          activeThumbColor: AppColors.primary,
+          activeColor: AppColors.primary,
           activeTrackColor: AppColors.primary.withOpacity(0.2),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
