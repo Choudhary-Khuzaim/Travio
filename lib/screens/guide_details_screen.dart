@@ -66,7 +66,9 @@ class GuideDetailsScreen extends StatelessWidget {
           children: [
             Hero(
               tag: 'guide-${guide['title']}',
-              child: Image.network(guide['image'], fit: BoxFit.cover),
+              child: guide['image'].startsWith('assets')
+                  ? Image.asset(guide['image'], fit: BoxFit.cover)
+                  : Image.network(guide['image'], fit: BoxFit.cover),
             ),
             Container(
               decoration: BoxDecoration(

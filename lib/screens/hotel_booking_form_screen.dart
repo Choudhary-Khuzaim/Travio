@@ -185,7 +185,9 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
-                  image: NetworkImage(widget.hotel['image']),
+                  image: widget.hotel['image'].startsWith('assets') 
+                      ? AssetImage(widget.hotel['image']) as ImageProvider
+                      : NetworkImage(widget.hotel['image']),
                   fit: BoxFit.cover,
                 ),
               ),

@@ -29,14 +29,23 @@ class BookingChoiceScreen extends StatelessWidget {
               // Using a different tag if needed, or keeping it same but risk of conflict if both screens open.
               // Actually, DestinationDetails is probably below this in stack, so standard Hero might work or conflict.
               // Let's use standard Image for now to avoid conflict or complex Hero handling across multiple pushes.
-              child: Image.network(
-                destination.imageUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Container(
-                   color: Colors.grey[300],
-                   child: const Icon(Icons.broken_image, size: 50, color: Colors.grey),
-                 ),
-              ),
+              child: destination.imageUrl.startsWith('assets') 
+                  ? Image.asset(
+                      destination.imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[300],
+                        child: const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+                      ),
+                    )
+                  : Image.network(
+                      destination.imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[300],
+                        child: const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+                      ),
+                    ),
             ),
           ),
           
