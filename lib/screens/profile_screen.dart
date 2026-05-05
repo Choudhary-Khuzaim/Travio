@@ -214,12 +214,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           elevation: 0,
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.logout_rounded),
-                            const SizedBox(width: 12),
-                            const Text(
+                            Icon(Icons.logout_rounded),
+                            SizedBox(width: 12),
+                            Text(
                               "Log Out",
                               style: TextStyle(
                                 fontSize: 16,
