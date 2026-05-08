@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/theme.dart';
-import 'screens/onboarding_screen.dart';
+import 'package:travio/screens/onboarding/onboarding_screen.dart';
 
 void main() {
   runApp(const TravioApp());

@@ -1,0 +1,1253 @@
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:travio/core/colors.dart';
+import 'package:travio/models/destination_model.dart';
+import 'package:travio/screens/main/search_screen.dart';
+import 'package:travio/screens/main/profile_screen.dart';
+import 'package:travio/screens/trips/my_trips_screen.dart';
+import 'package:travio/screens/details/travel_guide_screen.dart';
+import 'package:travio/screens/booking/hotel_booking_screen.dart';
+import 'package:travio/screens/booking/cab_booking_screen.dart';
+import 'package:travio/screens/main/explore_screen.dart';
+import 'package:travio/screens/details/events_screen.dart';
+import 'package:travio/screens/details/destination_details_screen.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final ScrollController _scrollController = ScrollController();
+  late PageController _pageController;
+  int _selectedIndex = 0;
+  final Set<String> _likedDestinations = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 0.8, initialPage: 0);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: AppColors.background,
+      extendBody: true,
+      bottomNavigationBar: _buildGlassBottomBar(),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          _buildHomeContent(),
+          const MyTripsScreen(),
+          const TravelGuideScreen(),
+          const ProfileScreen(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHomeContent() {
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: [
+        SliverAppBar(
+          expandedHeight: 520, // Height of the expanded header
+          floating: false,
+          pinned: true, // This keeps it visible when scrolling up
+          backgroundColor: Colors.transparent,
+          flexibleSpace: FlexibleSpaceBar(
+            background: _buildImmersiveHeader(context),
+            collapseMode:
+                CollapseMode.parallax, // Parallax effect for better visual
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(0),
+            child: Container(), // Empty container to satisfy bottom widget
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              const SizedBox(height: 24), // Added space below header image
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _buildSectionHeader(
+                  "Popular Destinations",
+                  "See All",
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ExploreScreen()),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ), // Added space between title and carousel
+              _build3DCarousel(),
+
+              // --- NEW SECTION: PAKISTAN POPULAR HOTELS ---
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _buildSectionHeader(
+                  "Pakistan Popular Hotels",
+                  "See All",
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const HotelBookingScreen(),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildHotelList(),
+
+              // ---------------------------------------------
+              const SizedBox(height: 30),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _buildSectionHeader(
+                  "Explore",
+                  "View All",
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ExploreScreen()),
+                  ), // Navigate to Search or Explore
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildExploreList(),
+              const SizedBox(height: 120), // Bottom padding for glass bar
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildImmersiveHeader(BuildContext context) {
+    return SizedBox(
+      height: 560,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/home_header.png',
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.medium,
+              errorBuilder: (context, error, stackTrace) => Container(
+                color: Colors.grey[300],
+                child: const Icon(
+                  Icons.broken_image,
+                  size: 50,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            height: 560,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black.withOpacity(0.1),
+                  Colors.black.withOpacity(0.4),
+                  Colors.black.withOpacity(0.8),
+                ],
+                stops: const [0.0, 0.4, 1.0],
+              ),
+              borderRadius: const BorderRadius.vertical(
+                bottom: Radius.circular(40),
+              ),
+            ),
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Top Row Header
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.3),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on,
+                              color: Colors.white,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 6),
+                            const Text(
+                              "Pakistan",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ).animate().fadeIn(duration: 500.ms).slideY(begin: -0.2),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ProfileScreen(),
+                          ),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.5),
+                              width: 2,
+                            ),
+                          ),
+                          child: const CircleAvatar(
+                            radius: 18,
+                            backgroundColor: Colors.white24,
+                            child: Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ).animate().fadeIn(duration: 500.ms).slideY(begin: -0.2),
+                    ],
+                  ),
+                  const SizedBox(height: 35),
+                  // Title
+                  const Text(
+                    "Discover",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.white70,
+                      letterSpacing: 1.2,
+                    ),
+                  ).animate().fadeIn(duration: 600.ms).slideX(),
+                  const Text(
+                    "Beautiful\nPakistan",
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                      height: 1.1,
+                      letterSpacing: -0.5,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black45,
+                          offset: Offset(0, 4),
+                          blurRadius: 15,
+                        ),
+                      ],
+                    ),
+                  ).animate().fadeIn(duration: 800.ms, delay: 200.ms).slideX(),
+
+                  const SizedBox(height: 40),
+                  _buildSearchBar(),
+                  const Spacer(),
+                  _buildCategoryPills(),
+                  const SizedBox(height: 30),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const SearchScreen()),
+      ),
+      child: Container(
+        height: 56,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(28),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.search, color: AppColors.primary, size: 24),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                "Search destinations, flights...",
+                style: TextStyle(
+                  color: AppColors.textSecondary.withOpacity(0.6),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.tune, color: AppColors.primary, size: 20),
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2);
+  }
+
+  Widget _buildCategoryPills() {
+    final categories = [
+      {
+        'icon': Icons.public,
+        'label': 'All',
+        'route': null,
+        'color': Colors.blueAccent,
+      },
+      {
+        'icon': Icons.flight_takeoff,
+        'label': 'Flights',
+        'route': const SearchScreen(),
+        'color': Colors.orangeAccent,
+      },
+      {
+        'icon': Icons.hotel,
+        'label': 'Hotels',
+        'route': const HotelBookingScreen(),
+        'color': Colors.purpleAccent,
+      },
+      {
+        'icon': Icons.directions_car,
+        'label': 'Cabs',
+        'route': const CabBookingScreen(),
+        'color': Colors.greenAccent,
+      },
+      {
+        'icon': Icons.celebration,
+        'label': 'Events',
+        'route': const EventsScreen(),
+        'color': Colors.pinkAccent,
+      },
+    ];
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
+      child: Row(
+        children: categories.map((cat) {
+          return GestureDetector(
+            onTap: () {
+              if (cat['route'] != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => cat['route'] as Widget),
+                );
+              }
+            },
+            child: Container(
+              margin: const EdgeInsets.only(right: 20),
+              child: Column(
+                children: [
+                  Container(
+                    height: 64,
+                    width: 64,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.25),
+                      borderRadius: BorderRadius.circular(22),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.4),
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: (cat['color'] as Color).withOpacity(0.2),
+                          blurRadius: 15,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Icon(
+                        cat['icon'] as IconData,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    cat['label'] as String,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black45,
+                          offset: Offset(0, 2),
+                          blurRadius: 4,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.2);
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _build3DCarousel() {
+    return SizedBox(
+      height: 400,
+      child: PageView.builder(
+        controller: _pageController,
+        itemCount: destinationsList.length,
+        onPageChanged: (int index) {
+          setState(() {
+            // _currentPage = index;
+          });
+        },
+        itemBuilder: (context, index) {
+          return AnimatedBuilder(
+            animation: _pageController,
+            builder: (context, child) {
+              double value = 0.0;
+              if (_pageController.position.haveDimensions) {
+                value = index.toDouble() - (_pageController.page ?? 0);
+                value = (value * 0.038).clamp(-1, 1);
+              }
+              // 3D rotation logic
+              const pi = 3.14159;
+              final rotate = value * pi;
+
+              return Transform(
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001) // perspective
+                  ..rotateY(rotate),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 20,
+                  ),
+                  child: _buildFeaturedCard(destinationsList[index]),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildFeaturedCard(Destination dest) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => DestinationDetailsScreen(
+              destination: dest,
+              heroTag: 'destination-img-${dest.id}',
+            ),
+          ),
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Hero(
+                tag: 'destination-img-${dest.id}',
+                child: dest.imageUrl.startsWith('http')
+                    ? Image.network(
+                        dest.imageUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.grey[200],
+                          child: const Icon(
+                            Icons.broken_image,
+                            size: 40,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      )
+                    : Image.asset(
+                        dest.imageUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.grey[200],
+                          child: const Icon(
+                            Icons.broken_image,
+                            size: 40,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.2),
+                      Colors.black.withOpacity(0.8),
+                    ],
+                    stops: const [0.4, 0.7, 1.0],
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 20,
+                right: 20,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Solid white for visibility
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 4,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Colors.orange,
+                        size: 16,
+                      ), // Orange star
+                      const SizedBox(width: 4),
+                      Text(
+                        dest.rating.toString(),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ), // Black text
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 20,
+                left: 20,
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (_likedDestinations.contains(dest.id)) {
+                        _likedDestinations.remove(dest.id);
+                      } else {
+                        _likedDestinations.add(dest.id);
+                      }
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white, // Solid white
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 4,
+                        ),
+                      ],
+                    ),
+                    child: Icon(
+                      _likedDestinations.contains(dest.id)
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: _likedDestinations.contains(dest.id)
+                          ? Colors.red
+                          : Colors.grey, // Red or Grey
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 25,
+                left: 25,
+                right: 25,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      dest.city,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.location_on_outlined,
+                          color: Colors.white70,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          dest.country,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            dest.price ?? 'Rs. 25,000',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildExploreList() {
+    return SizedBox(
+      height: 280, // Increased height to prevent overflow (Price text added)
+      child: ListView.builder(
+        padding: const EdgeInsets.only(left: 24, bottom: 20),
+        scrollDirection: Axis.horizontal,
+        itemCount: destinationsList.length,
+        itemBuilder: (context, index) {
+          final dest = destinationsList[index];
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DestinationDetailsScreen(
+                    destination: dest,
+                    heroTag: 'destination-img-explore-${dest.id}',
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              width: 160,
+              margin: const EdgeInsets.only(right: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.08),
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(24),
+                    ),
+                    child: Stack(
+                      children: [
+                        Hero(
+                          tag: 'destination-img-explore-${dest.id}',
+                          child: dest.imageUrl.startsWith('http')
+                              ? Image.network(
+                                  dest.imageUrl,
+                                  height: 140,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Container(
+                                        height: 140,
+                                        width: double.infinity,
+                                        color: Colors.grey[200],
+                                        child: const Icon(
+                                          Icons.broken_image,
+                                          size: 30,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                )
+                              : Image.asset(
+                                  dest.imageUrl,
+                                  height: 140,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Container(
+                                        height: 140,
+                                        width: double.infinity,
+                                        color: Colors.grey[200],
+                                        child: const Icon(
+                                          Icons.broken_image,
+                                          size: 30,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (_likedDestinations.contains(dest.id)) {
+                                  _likedDestinations.remove(dest.id);
+                                } else {
+                                  _likedDestinations.add(dest.id);
+                                }
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.white, // Solid white
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 4,
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                _likedDestinations.contains(dest.id)
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: _likedDestinations.contains(dest.id)
+                                    ? Colors.red
+                                    : Colors.grey, // Red or Grey
+                                size: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          dest.city,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: AppColors.textPrimary,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 6),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on_outlined,
+                              color: AppColors.textSecondary,
+                              size: 14,
+                            ),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                dest.country,
+                                style: const TextStyle(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 13,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          dest.price ?? 'Rs. 25,000',
+                          style: const TextStyle(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    ).animate().fadeIn(delay: 500.ms).slideX();
+  }
+
+  Widget _buildSectionHeader(
+    String title,
+    String action, {
+    VoidCallback? onTap,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: AppColors.textPrimary,
+          ),
+        ),
+        GestureDetector(
+          onTap: onTap,
+          child: Text(
+            action,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: AppColors.primary,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGlassBottomBar() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 0, 24, 30),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(35),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            height: 70,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(35),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.3),
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 20,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildNavItem(Icons.home_filled, "Home", 0),
+                _buildNavItem(Icons.confirmation_number_outlined, "Trips", 1),
+                _buildNavItem(Icons.menu_book_outlined, "Guide", 2),
+                _buildNavItem(Icons.person_outline, "Profile", 3),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ).animate().slideY(
+      begin: 1,
+      end: 0,
+      delay: 600.ms,
+      curve: Curves.easeOutBack,
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, String label, int index) {
+    bool isSelected = _selectedIndex == index;
+    return GestureDetector(
+      onTap: () => _onItemTapped(index),
+      child: AnimatedContainer(
+        duration: 300.ms,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: isSelected ? AppColors.primary : Colors.white),
+            if (isSelected)
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // --- NEW HOTEL DATA AND WIDGET ---
+
+  final List<Map<String, dynamic>> _popularHotels = [
+    {
+      'name': 'Vista Hotel',
+      'city': 'Skardu',
+      'price': 'Rs. 38,000',
+      'rating': '4.9',
+      'image': 'assets/images/vista_hotel.png',
+    },
+    {
+      'name': 'Hotel One',
+      'city': 'Hyderabad',
+      'price': 'Rs. 18,000',
+      'rating': '4.5',
+      'image': 'assets/images/hotel_one_hyderabad.png',
+    },
+    {
+      'name': 'Hotel Crown',
+      'city': 'Multan',
+      'price': 'Rs. 22,000',
+      'rating': '4.7',
+      'image': 'assets/images/hotel_crown.png',
+    },
+    {
+      'name': 'Indus Hotel',
+      'city': 'Hyderabad',
+      'price': 'Rs. 28,000',
+      'rating': '4.6',
+      'image': 'assets/images/indus_hotel.png',
+    },
+    {
+      'name': 'Rupal Inn',
+      'city': 'Astore',
+      'price': 'Rs. 25,000',
+      'rating': '4.8',
+      'image': 'assets/images/rupal_inn.png',
+    },
+    {
+      'name': 'Gilgit Hotel',
+      'city': 'Gilgit',
+      'price': 'Rs. 32,000',
+      'rating': '4.8',
+      'image': 'assets/images/gilgit_hotel.png',
+    },
+    {
+      'name': 'Gilgit Serena Hotel',
+      'city': 'Gilgit',
+      'price': 'Rs. 40,000',
+      'rating': '4.9',
+      'image': 'assets/images/serena_gilgit.png',
+    },
+    {
+      'name': 'Serena Hotel',
+      'city': 'Islamabad',
+      'price': 'Rs. 48,000',
+      'rating': '4.9',
+      'image': 'assets/images/serena_hotel.png',
+    },
+    {
+      'name': 'Pearl Continental',
+      'city': 'Lahore',
+      'price': 'Rs. 35,000',
+      'rating': '4.8',
+      'image': 'assets/images/pearl_continental_lahore.png',
+    },
+    {
+      'name': 'Avari Towers',
+      'city': 'Karachi',
+      'price': 'Rs. 30,000',
+      'rating': '4.7',
+      'image': 'assets/images/avari_towers_karachi.png',
+    },
+    {
+      'name': 'Shangrila Resort',
+      'city': 'Skardu',
+      'price': 'Rs. 42,000',
+      'rating': '4.9',
+      'image': 'assets/images/shangrila_resort_skardu.png',
+    },
+    {
+      'name': 'Quetta Serena',
+      'city': 'Quetta',
+      'price': 'Rs. 45,000',
+      'rating': '4.9',
+      'image': 'assets/images/serena_hotel_quetta.png',
+    },
+    {
+      'name': 'Ziarat Continental',
+      'city': 'Ziarat',
+      'price': 'Rs. 15,000',
+      'rating': '4.4',
+      'image': 'assets/images/ziarat_continental.png',
+    },
+  ];
+
+  Widget _buildHotelList() {
+    return SizedBox(
+      height: 260,
+      child: ListView.builder(
+        padding: const EdgeInsets.only(left: 24, bottom: 20),
+        scrollDirection: Axis.horizontal,
+        itemCount: _popularHotels.length,
+        itemBuilder: (context, index) {
+          final hotel = _popularHotels[index];
+          return Container(
+            width: 200,
+            margin: const EdgeInsets.only(right: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 15,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        hotel['image'].startsWith('http')
+                            ? Image.network(
+                                hotel['image'],
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Container(
+                                      color: Colors.grey[200],
+                                      child: const Icon(
+                                        Icons.broken_image,
+                                        size: 30,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                              )
+                            : Image.asset(
+                                hotel['image'],
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Container(
+                                      color: Colors.grey[200],
+                                      child: const Icon(
+                                        Icons.broken_image,
+                                        size: 30,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                              ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.orange,
+                                  size: 12,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  hotel['rating'],
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              hotel['name'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: AppColors.textPrimary,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on_outlined,
+                                  color: AppColors.textSecondary,
+                                  size: 12,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  hotel['city'],
+                                  style: const TextStyle(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Text(
+                          hotel['price'],
+                          style: const TextStyle(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    ).animate().fadeIn(delay: 500.ms).slideX();
+  }
+}
