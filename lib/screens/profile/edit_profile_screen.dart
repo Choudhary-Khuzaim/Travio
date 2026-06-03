@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:travio/core/colors.dart';
+import 'package:travio/services/api_service.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final String initialName;
@@ -151,7 +152,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ],
                             ),
                             child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   // Find selected country code
                                   final selectedCountry = _countryCodes
@@ -160,23 +161,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         orElse: () => _countryCodes[0],
                                       );
                                   final code = selectedCountry['code'];
+                                  final name = _nameController.text.trim();
+                                  final phone = '$code ${_phoneController.text.trim()}';
+                                  final location = _locationController.text.trim();
 
-                                  Navigator.pop(context, {
-                                    'name': _nameController.text.trim(),
-                                    'email': _emailController.text.trim(),
-                                    'phone':
-                                        '$code ${_phoneController.text.trim()}',
-                                    'location': _locationController.text.trim(),
-                                  });
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        "Profile Updated Successfully!",
+                                  // Call API update profile
+                                  final res = await ApiService.updateProfile(name, phone, location);
+                                  if (res['success'] == true) {
+                                    Navigator.pop(context, {
+                                      'name': name,
+                                      'email': _emailController.text.trim(),
+                                      'phone': phone,
+                                      'location': location,
+                                    });
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          "Profile Updated Successfully!",
+                                        ),
+                                        behavior: SnackBarBehavior.floating,
+                                        backgroundColor: AppColors.primary,
                                       ),
-                                      behavior: SnackBarBehavior.floating,
-                                      backgroundColor: AppColors.primary,
-                                    ),
-                                  );
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(res['error'] ?? "Failed to update profile"),
+                                        backgroundColor: Colors.redAccent,
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                               style: ElevatedButton.styleFrom(

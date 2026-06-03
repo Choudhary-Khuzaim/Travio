@@ -12,6 +12,7 @@ import 'package:travio/screens/booking/cab_booking_screen.dart';
 import 'package:travio/screens/main/explore_screen.dart';
 import 'package:travio/screens/details/events_screen.dart';
 import 'package:travio/screens/details/destination_details_screen.dart';
+import 'package:travio/services/api_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,6 +32,20 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _pageController = PageController(viewportFraction: 0.8, initialPage: 0);
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    final saved = await ApiService.getSavedDestinations();
+    if (mounted) {
+      setState(() {
+        _likedDestinations.addAll(saved.map((d) => d.id));
+      });
+    }
+    await ApiService.getDestinations();
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -613,14 +628,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 top: 20,
                 left: 20,
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    final isSaved = _likedDestinations.contains(dest.id);
                     setState(() {
-                      if (_likedDestinations.contains(dest.id)) {
+                      if (isSaved) {
                         _likedDestinations.remove(dest.id);
                       } else {
                         _likedDestinations.add(dest.id);
                       }
                     });
+
+                    final success = await ApiService.toggleBookmark(dest.id, !isSaved);
+                    if (!success) {
+                      setState(() {
+                        if (isSaved) {
+                          _likedDestinations.add(dest.id);
+                        } else {
+                          _likedDestinations.remove(dest.id);
+                        }
+                      });
+                    }
                   },
                   child: Container(
                     padding: const EdgeInsets.all(8),
@@ -796,14 +823,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: 10,
                           right: 10,
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              final isSaved = _likedDestinations.contains(dest.id);
                               setState(() {
-                                if (_likedDestinations.contains(dest.id)) {
+                                if (isSaved) {
                                   _likedDestinations.remove(dest.id);
                                 } else {
                                   _likedDestinations.add(dest.id);
                                 }
                               });
+
+                              final success = await ApiService.toggleBookmark(dest.id, !isSaved);
+                              if (!success) {
+                                setState(() {
+                                  if (isSaved) {
+                                    _likedDestinations.add(dest.id);
+                                  } else {
+                                    _likedDestinations.remove(dest.id);
+                                  }
+                                });
+                              }
                             },
                             child: Container(
                               padding: const EdgeInsets.all(6),

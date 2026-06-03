@@ -24,10 +24,46 @@ class Flight {
     required this.price,
     required this.duration,
   });
+
+  factory Flight.fromJson(Map<String, dynamic> json) {
+    return Flight(
+      id: json['id']?.toString() ?? '',
+      airline: json['airline']?.toString() ?? '',
+      airlineLogo: json['airlineLogo']?.toString() ?? '',
+      fromCity: json['fromCity']?.toString() ?? '',
+      fromCode: json['fromCode']?.toString() ?? '',
+      toCity: json['toCity']?.toString() ?? '',
+      toCode: json['toCode']?.toString() ?? '',
+      departureTime: json['departureTime'] != null
+          ? DateTime.parse(json['departureTime'].toString())
+          : DateTime.now(),
+      arrivalTime: json['arrivalTime'] != null
+          ? DateTime.parse(json['arrivalTime'].toString())
+          : DateTime.now(),
+      price: double.tryParse(json['price']?.toString() ?? '0.0') ?? 0.0,
+      duration: json['duration']?.toString() ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'airline': airline,
+      'airlineLogo': airlineLogo,
+      'fromCity': fromCity,
+      'fromCode': fromCode,
+      'toCity': toCity,
+      'toCode': toCode,
+      'departureTime': departureTime.toIso8601String(),
+      'arrivalTime': arrivalTime.toIso8601String(),
+      'price': price,
+      'duration': duration,
+    };
+  }
 }
 
 // Mock Data
-final List<Flight> mockFlights = [
+List<Flight> mockFlights = [
   Flight(
     id: '1',
     airline: 'PIA',

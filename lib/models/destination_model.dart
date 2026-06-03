@@ -27,9 +27,68 @@ class Destination {
     required this.latitude,
     required this.longitude,
   });
+
+  factory Destination.fromJson(Map<String, dynamic> json) {
+    List<String> facilitiesList = [];
+    if (json['facilities'] != null && json['facilities'] is List) {
+      facilitiesList = List<String>.from(json['facilities']);
+    }
+
+    List<Map<String, String>> attractionsList = [];
+    if (json['attractions'] != null && json['attractions'] is List) {
+      for (var item in json['attractions']) {
+        if (item is Map) {
+          attractionsList.add(Map<String, String>.from(
+            item.map((key, value) => MapEntry(key.toString(), value.toString())),
+          ));
+        }
+      }
+    }
+
+    List<Map<String, dynamic>> hotelsList = [];
+    if (json['hotels'] != null && json['hotels'] is List) {
+      for (var item in json['hotels']) {
+        if (item is Map) {
+          hotelsList.add(Map<String, dynamic>.from(item));
+        }
+      }
+    }
+
+    return Destination(
+      id: json['id']?.toString() ?? '',
+      city: json['city']?.toString() ?? '',
+      country: json['country']?.toString() ?? '',
+      imageUrl: json['imageUrl']?.toString() ?? '',
+      rating: double.tryParse(json['rating']?.toString() ?? '0.0') ?? 0.0,
+      price: json['price']?.toString(),
+      description: json['description']?.toString() ?? '',
+      facilities: facilitiesList,
+      attractions: attractionsList,
+      hotels: hotelsList,
+      latitude: double.tryParse(json['latitude']?.toString() ?? '0.0') ?? 0.0,
+      longitude: double.tryParse(json['longitude']?.toString() ?? '0.0') ?? 0.0,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'city': city,
+      'country': country,
+      'imageUrl': imageUrl,
+      'rating': rating,
+      'price': price,
+      'description': description,
+      'facilities': facilities,
+      'attractions': attractions,
+      'hotels': hotels,
+      'latitude': latitude,
+      'longitude': longitude,
+    };
+  }
 }
 
-final List<Destination> destinationsList = [
+List<Destination> destinationsList = [
   Destination(
     id: '4',
     city: 'Islamabad',

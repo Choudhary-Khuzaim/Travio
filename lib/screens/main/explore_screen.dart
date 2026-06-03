@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:travio/core/colors.dart';
 import 'package:travio/models/destination_model.dart';
 import 'package:travio/screens/details/destination_details_screen.dart';
+import 'package:travio/services/api_service.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -15,6 +16,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   final TextEditingController _searchController = TextEditingController();
   String _selectedCategory = "All";
   List<Destination> _filteredDestinations = destinationsList;
+  bool _isLoading = false;
 
   final List<String> _categories = [
     "All",
@@ -28,6 +30,19 @@ class _ExploreScreenState extends State<ExploreScreen> {
   void initState() {
     super.initState();
     _searchController.addListener(_onSearchChanged);
+    _fetchDestinations();
+  }
+
+  Future<void> _fetchDestinations() async {
+    setState(() => _isLoading = true);
+    await ApiService.getDestinations();
+    if (mounted) {
+      setState(() {
+        _filteredDestinations = destinationsList;
+        _isLoading = false;
+      });
+      _applyFilters();
+    }
   }
 
   @override
@@ -342,9 +357,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
           // 3. Immersive Grid of Destinations
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            sliver: _filteredDestinations.isEmpty
-                ? SliverFillRemaining(
+            sliver: _isLoading
+                ? const SliverFillRemaining(
                     child: Center(
+                      child: CircularProgressIndicator(color: AppColors.primary),
+                    ),
+                  )
+                : _filteredDestinations.isEmpty
+                    ? SliverFillRemaining(
+                        child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

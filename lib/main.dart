@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'core/theme.dart';
 import 'package:travio/screens/onboarding/splash_screen.dart';
+import 'package:travio/screens/main/home_screen.dart';
+import 'package:travio/services/api_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ApiService.init();
   runApp(const TravioApp());
 }
 
@@ -15,7 +19,7 @@ class TravioApp extends StatelessWidget {
       title: 'Travio',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const SplashScreen(),
+      home: ApiService.isLoggedIn ? const HomeScreen() : const SplashScreen(),
     );
   }
 }

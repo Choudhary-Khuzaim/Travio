@@ -10,6 +10,7 @@ import 'package:travio/screens/profile/help_support_screen.dart';
 import 'package:travio/screens/profile/edit_profile_screen.dart';
 import 'package:travio/screens/auth/login_screen.dart';
 import 'package:travio/core/colors.dart';
+import 'package:travio/services/api_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -24,6 +25,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String _email = "khuzaim.sajjad@example.com";
   String _phone = "+92 312 3456789";
   String _location = "Multan, Pakistan";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
+  }
+
+  void _loadProfile() {
+    final user = ApiService.currentUser;
+    if (user != null) {
+      setState(() {
+        _name = user['name'] ?? _name;
+        _email = user['email'] ?? _email;
+        _phone = user['phone'] ?? _phone;
+        _location = user['location'] ?? _location;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -194,13 +213,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const LoginScreen(),
-                            ),
-                          );
+                        onPressed: () async {
+                          await ApiService.logout();
+                          if (mounted) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const LoginScreen(),
+                              ),
+                            );
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,

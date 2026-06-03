@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:travio/core/colors.dart';
+import 'package:travio/services/api_service.dart';
 
 class PaymentScreen extends StatefulWidget {
   final String title;
@@ -47,7 +48,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void _processPayment() async {
     if (_selectedMethod == 'card') {
       setState(() => _isPaying = true);
-      await Future.delayed(const Duration(seconds: 2));
+      await ApiService.createBooking(
+        type: widget.title.toLowerCase().contains('flight')
+            ? 'flight'
+            : widget.title.toLowerCase().contains('hotel')
+                ? 'hotel'
+                : 'cab',
+        details: widget.data ?? {'title': widget.title},
+        price: widget.amount,
+      );
       setState(() => _isPaying = false);
       if (mounted) _showSuccessDialog();
     } else if (_selectedMethod == 'apple') {
@@ -206,7 +215,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void _processBiometricPayment(String method) async {
     setState(() => _isPaying = true);
-    await Future.delayed(const Duration(seconds: 1));
+    await ApiService.createBooking(
+      type: widget.title.toLowerCase().contains('flight')
+          ? 'flight'
+          : widget.title.toLowerCase().contains('hotel')
+              ? 'hotel'
+              : 'cab',
+      details: widget.data ?? {'title': widget.title},
+      price: widget.amount,
+    );
     setState(() => _isPaying = false);
     if (mounted) _showSuccessDialog();
   }
