@@ -189,7 +189,7 @@ router.put('/profile', authenticateToken, async (req, res) => {
     
     await db.run(
       'UPDATE users SET name = ?, phone = ?, location = ?, profile_image = ? WHERE id = ?',
-      [name, phone, location, profile_image, userId]
+      [name || '', phone || '', location || '', profile_image || '', userId]
     );
 
     const updatedUser = await db.get('SELECT id, email, name, phone, location, profile_image FROM users WHERE id = ?', [userId]);

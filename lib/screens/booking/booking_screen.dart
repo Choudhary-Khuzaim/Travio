@@ -44,7 +44,14 @@ class _BookingScreenState extends State<BookingScreen> {
             builder: (context) => PaymentScreen(
               title: "Flight",
               amount: widget.flight.price,
-              data: {'flightId': widget.flight.id},
+              data: {
+                ...widget.flight.toJson(),
+                'flightNo': 'TR-${widget.flight.id}845',
+                'date': DateFormat('MMM d, y').format(widget.flight.departureTime),
+                'time': DateFormat('HH:mm').format(widget.flight.departureTime),
+                'seat': '12A',
+                'gate': 'B2',
+              },
             ),
           ),
         );
