@@ -15,12 +15,15 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const TravioApp());
 
+    // Wait for the splash screen's 5 second timer to expire and the onboarding screen to fade in.
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
     // Verify that onboarding screen content is present.
     // The first slide has "Discover Hunza Valley"
     expect(find.textContaining('Discover'), findsOneWidget);
     expect(find.textContaining('Hunza Valley'), findsAtLeast(1));
 
     // Check for the next button icon
-    expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
+    expect(find.byIcon(Icons.arrow_forward_rounded), findsOneWidget);
   });
 }
