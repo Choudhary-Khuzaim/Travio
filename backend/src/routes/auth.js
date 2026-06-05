@@ -14,11 +14,21 @@ router.post('/signup', async (req, res) => {
     return res.status(400).json({ error: 'Email and password are required' });
   }
 
+  const normalizedEmail = email.toLowerCase().trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(normalizedEmail)) {
+    return res.status(400).json({ error: 'Invalid email format' });
+  }
+
+  if (password.length < 6) {
+    return res.status(400).json({ error: 'Password must be at least 6 characters long' });
+  }
+
   try {
     const db = await getDb();
     
     // Check if user already exists
-    const existingUser = await db.get('SELECT * FROM users WHERE email = ?', [email]);
+    const existingUser = await db.get('SELECT * FROM users WHERE email = ?', [normalizedEmail]);
     if (existingUser) {
       return res.status(409).json({ error: 'Email already registered' });
     }
@@ -31,13 +41,13 @@ router.post('/signup', async (req, res) => {
     // Insert user (profile fields will be filled in create-profile step)
     await db.run(
       'INSERT INTO users (id, email, password_hash) VALUES (?, ?, ?)',
-      [userId, email, passwordHash]
+      [userId, normalizedEmail, passwordHash]
     );
 
     // Return verification OTP code (mocked as '0000')
     res.status(201).json({
       message: 'Signup successful. OTP sent.',
-      email: email,
+      email: normalizedEmail,
       otp: '0000'
     });
   } catch (error) {
@@ -50,17 +60,19 @@ router.post('/signup', async (req, res) => {
 router.post('/verify-otp', async (req, res) => {
   const { email, otp } = req.body;
 
-  if (!email || !otp) {
+  if (!email || otp === undefined || otp === null) {
     return res.status(400).json({ error: 'Email and OTP are required' });
   }
 
-  if (otp !== '0000') {
+  const normalizedEmail = email.toLowerCase().trim();
+
+  if (String(otp) !== '0000') {
     return res.status(400).json({ error: 'Invalid OTP code' });
   }
 
   try {
     const db = await getDb();
-    const user = await db.get('SELECT * FROM users WHERE email = ?', [email]);
+    const user = await db.get('SELECT * FROM users WHERE email = ?', [normalizedEmail]);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -124,9 +136,11 @@ router.post('/login', async (req, res) => {
     return res.status(400).json({ error: 'Email and password are required' });
   }
 
+  const normalizedEmail = email.toLowerCase().trim();
+
   try {
     const db = await getDb();
-    const user = await db.get('SELECT * FROM users WHERE email = ?', [email]);
+    const user = await db.get('SELECT * FROM users WHERE email = ?', [normalizedEmail]);
 
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
@@ -210,8 +224,10 @@ router.post('/forgot-password', async (req, res) => {
   if (!email) {
     return res.status(400).json({ error: 'Email is required' });
   }
+  const normalizedEmail = email.toLowerCase().trim();
   res.json({
     message: 'Password reset code sent successfully',
+    email: normalizedEmail,
     otp: '0000'
   });
 });

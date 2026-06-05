@@ -3,6 +3,15 @@ const router = express.Router();
 const { getDb } = require('../db');
 const { authenticateToken } = require('../middleware/auth');
 
+function safeJsonParse(str, fallback = []) {
+  try {
+    return str ? JSON.parse(str) : fallback;
+  } catch (e) {
+    console.error('JSON parse error:', e);
+    return fallback;
+  }
+}
+
 // GET / - Get all bookmarked destinations for authenticated user
 router.get('/', authenticateToken, async (req, res) => {
   const userId = req.user.id;
@@ -18,9 +27,9 @@ router.get('/', authenticateToken, async (req, res) => {
 
     const destinations = rows.map(row => ({
       ...row,
-      facilities: row.facilities ? JSON.parse(row.facilities) : [],
-      attractions: row.attractions ? JSON.parse(row.attractions) : [],
-      hotels: row.hotels ? JSON.parse(row.hotels) : []
+      facilities: safeJsonParse(row.facilities, []),
+      attractions: safeJsonParse(row.attractions, []),
+      hotels: safeJsonParse(row.hotels, [])
     }));
 
     res.json({ destinations });

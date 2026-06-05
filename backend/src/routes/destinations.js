@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const { getDb } = require('../db');
 
+function safeJsonParse(str, fallback = []) {
+  try {
+    return str ? JSON.parse(str) : fallback;
+  } catch (e) {
+    console.error('JSON parse error:', e);
+    return fallback;
+  }
+}
+
 // GET / - Get all destinations
 router.get('/', async (req, res) => {
   try {
@@ -11,9 +20,9 @@ router.get('/', async (req, res) => {
     // Parse JSON fields
     const destinations = rows.map(row => ({
       ...row,
-      facilities: row.facilities ? JSON.parse(row.facilities) : [],
-      attractions: row.attractions ? JSON.parse(row.attractions) : [],
-      hotels: row.hotels ? JSON.parse(row.hotels) : []
+      facilities: safeJsonParse(row.facilities, []),
+      attractions: safeJsonParse(row.attractions, []),
+      hotels: safeJsonParse(row.hotels, [])
     }));
 
     res.json({ destinations });
@@ -36,9 +45,9 @@ router.get('/:id', async (req, res) => {
 
     const destination = {
       ...row,
-      facilities: row.facilities ? JSON.parse(row.facilities) : [],
-      attractions: row.attractions ? JSON.parse(row.attractions) : [],
-      hotels: row.hotels ? JSON.parse(row.hotels) : []
+      facilities: safeJsonParse(row.facilities, []),
+      attractions: safeJsonParse(row.attractions, []),
+      hotels: safeJsonParse(row.hotels, [])
     };
 
     res.json({ destination });

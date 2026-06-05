@@ -4,6 +4,15 @@ const crypto = require('crypto');
 const { getDb } = require('../db');
 const { authenticateToken } = require('../middleware/auth');
 
+function safeJsonParse(str, fallback = {}) {
+  try {
+    return str ? JSON.parse(str) : fallback;
+  } catch (e) {
+    console.error('JSON parse error:', e);
+    return fallback;
+  }
+}
+
 // GET / - Retrieve user's bookings
 router.get('/', authenticateToken, async (req, res) => {
   const userId = req.user.id;
@@ -14,7 +23,7 @@ router.get('/', authenticateToken, async (req, res) => {
 
     const bookings = rows.map(row => ({
       ...row,
-      details: JSON.parse(row.details)
+      details: safeJsonParse(row.details, {})
     }));
 
     res.json({ bookings });
