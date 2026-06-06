@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:travio/core/colors.dart';
+import 'package:travio/services/api_service.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -21,6 +22,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   bool _obscureCurrent = true;
   bool _obscureNew = true;
   bool _obscureConfirm = true;
+
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -132,21 +135,40 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               ],
                             ),
                             child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  // TODO: Implement password change logic
-                                  Navigator.pop(context);
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        "Password Changed Successfully!",
-                                      ),
-                                      behavior: SnackBarBehavior.floating,
-                                      backgroundColor: AppColors.primary,
-                                    ),
-                                  );
-                                }
-                              },
+                              onPressed: _isLoading
+                                  ? null
+                                  : () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        setState(() => _isLoading = true);
+                                        final res = await ApiService.changePassword(
+                                          _currentPasswordController.text,
+                                          _newPasswordController.text,
+                                        );
+                                        if (!mounted) return;
+                                        setState(() => _isLoading = false);
+
+                                        if (res['success'] == true) {
+                                          Navigator.pop(context);
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                "Password Changed Successfully!",
+                                              ),
+                                              behavior: SnackBarBehavior.floating,
+                                              backgroundColor: AppColors.primary,
+                                            ),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(res['error'] ?? "Failed to update password"),
+                                              backgroundColor: Colors.redAccent,
+                                              behavior: SnackBarBehavior.floating,
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.primary,
                                 foregroundColor: Colors.white,
@@ -158,14 +180,23 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 ),
                                 elevation: 0,
                               ),
-                              child: const Text(
-                                "Update Password",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
+                              child: _isLoading
+                                  ? const SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                  : const Text(
+                                      "Update Password",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 0.5,
+                                      ),
+                                    ),
                             ),
                           ),
                         )

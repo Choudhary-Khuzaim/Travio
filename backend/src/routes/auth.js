@@ -232,4 +232,45 @@ router.post('/forgot-password', async (req, res) => {
   });
 });
 
+// POST /change-password - Change password (Authenticated)
+router.post('/change-password', authenticateToken, async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const userId = req.user.id;
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).json({ error: 'Current password and new password are required' });
+  }
+
+  if (newPassword.length < 6) {
+    return res.status(400).json({ error: 'New password must be at least 6 characters long' });
+  }
+
+  try {
+    const db = await getDb();
+    const user = await db.get('SELECT * FROM users WHERE id = ?', [userId]);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Verify current password
+    const isMatch = await bcrypt.compare(currentPassword, user.password_hash);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Incorrect current password' });
+    }
+
+    // Hash new password
+    const salt = await bcrypt.genSalt(10);
+    const newPasswordHash = await bcrypt.hash(newPassword, salt);
+
+    // Update password
+    await db.run('UPDATE users SET password_hash = ? WHERE id = ?', [newPasswordHash, userId]);
+
+    res.json({ message: 'Password updated successfully' });
+  } catch (error) {
+    console.error('Change password error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;

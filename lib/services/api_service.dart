@@ -311,4 +311,27 @@ class ApiService {
     }
     return {'upcoming': [], 'past': []};
   }
+
+  // Change Password
+  static Future<Map<String, dynamic>> changePassword(String currentPassword, String newPassword) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/auth/change-password'),
+        headers: _headers,
+        body: jsonEncode({
+          'currentPassword': currentPassword,
+          'newPassword': newPassword,
+        }),
+      );
+
+      final data = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        return {'success': true, 'message': data['message'] ?? 'Password updated successfully'};
+      } else {
+        return {'success': false, 'error': data['error'] ?? 'Failed to change password'};
+      }
+    } catch (e) {
+      return {'success': false, 'error': 'Network error: $e'};
+    }
+  }
 }
