@@ -1,9 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:travio/core/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpSupportScreen extends StatelessWidget {
   const HelpSupportScreen({super.key});
+
+  Future<void> _launchUrl(String urlString, BuildContext context) async {
+    final Uri url = Uri.parse(urlString);
+    try {
+      if (!await launchUrl(url)) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Could not launch contact option: $urlString'),
+              backgroundColor: Colors.redAccent,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error launching: $e'),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +68,13 @@ class HelpSupportScreen extends StatelessWidget {
                     Icons.email_outlined,
                     "Email Support",
                     "support@travio.com",
+                    onTap: () => _launchUrl('mailto:support@travio.com', context),
                   ),
                   _buildContactItem(
                     Icons.phone_outlined,
                     "Call Center",
                     "+1 (800) 123-4567",
+                    onTap: () => _launchUrl('tel:+18001234567', context),
                   ),
 
                   const SizedBox(height: 40),
@@ -222,7 +252,7 @@ class HelpSupportScreen extends StatelessWidget {
     ).animate().fadeIn().slideY(begin: 0.1);
   }
 
-  Widget _buildContactItem(IconData icon, String title, String subtitle) {
+  Widget _buildContactItem(IconData icon, String title, String subtitle, {VoidCallback? onTap}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
@@ -274,7 +304,7 @@ class HelpSupportScreen extends StatelessWidget {
             color: AppColors.textSecondary,
           ),
         ),
-        onTap: () {},
+        onTap: onTap,
       ),
     ).animate().fadeIn().slideX(begin: 0.1);
   }
