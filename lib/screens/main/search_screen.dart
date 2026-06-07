@@ -6,6 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:travio/core/colors.dart';
 import 'package:travio/models/flight_model.dart';
 import 'package:travio/screens/booking/flight_details_screen.dart';
+import 'package:travio/services/api_service.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -25,6 +26,33 @@ class _SearchScreenState extends State<SearchScreen> {
   DateTime selectedDate = DateTime.now();
   int travellerCount = 1;
   int childrenCount = 0;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchFlights();
+  }
+
+  Future<void> _fetchFlights() async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      await ApiService.getFlights(
+        from: selectedFromCode,
+        to: selectedToCode,
+      );
+    } catch (e) {
+      debugPrint("Error fetching flights: $e");
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
 
   final List<Map<String, dynamic>> citiesList = [
     {'city': 'Karachi', 'code': 'KHI', 'lat': 24.9065, 'lng': 67.1608},
@@ -189,6 +217,7 @@ class _SearchScreenState extends State<SearchScreen> {
       selectedToCity = tempCity;
       selectedToCode = tempCode;
     });
+    _fetchFlights();
   }
 
   void _showCitySelectionModal(bool isFrom) {
@@ -228,6 +257,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           }
                         });
                         Navigator.pop(context);
+                        _fetchFlights();
                       },
                     );
                   },
@@ -495,11 +525,43 @@ class _SearchScreenState extends State<SearchScreen> {
 
 
   Widget _buildFlightList() {
+    if (_isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(color: AppColors.primary),
+      );
+    }
+
     final pakistaniFlights = mockFlights.where((flight) {
       const pakistaniAirlines = ['PIA', 'Airblue', 'SereneAir', 'AirSial'];
       final matchesRoute = flight.fromCode == selectedFromCode && flight.toCode == selectedToCode;
       return pakistaniAirlines.contains(flight.airline) && matchesRoute;
     }).toList();
+
+    if (pakistaniFlights.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.search_off_rounded, size: 80, color: Colors.grey[300]),
+            const SizedBox(height: 16),
+            const Text(
+              "No flights found",
+              style: TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "Try changing your search route from $selectedFromCode to $selectedToCode",
+              style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
+    }
 
     return ListView.builder(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),

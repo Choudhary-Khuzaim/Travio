@@ -260,10 +260,10 @@ class AttractionDetailsScreen extends StatelessWidget {
                             ),
                             child: Center(
                               child:
-                                  CircleAvatar(
+                                  const CircleAvatar(
                                     backgroundColor: Colors.white,
                                     radius: 25,
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.location_on,
                                       color: AppColors.primary,
                                       size: 28,

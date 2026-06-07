@@ -911,6 +911,31 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
   }
 
   void _confirmBooking() {
+    final pickupText = _pickupController.text.trim();
+    final dropoffText = _dropoffController.text.trim();
+
+    if (pickupText.isEmpty && _currentPosition == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please select or enter a pickup location"),
+          backgroundColor: Colors.redAccent,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    if (dropoffText.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please select or enter a dropoff location"),
+          backgroundColor: Colors.redAccent,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
     final cab = _cabs[selectedCabIndex];
     final priceString = cab['price'] as String;
     // Remove '$' and any other non-numeric chars except dot
@@ -924,12 +949,8 @@ class _CabBookingScreenState extends State<CabBookingScreen> {
           amount: price,
           data: {
             'cab_name': cab['name'],
-            'pickup': _pickupController.text.isEmpty
-                ? "Current Location"
-                : _pickupController.text,
-            'dropoff': _dropoffController.text.isEmpty
-                ? "Not specified"
-                : _dropoffController.text,
+            'pickup': pickupText.isEmpty ? "Current Location" : pickupText,
+            'dropoff': dropoffText,
             'est_time': cab['time'],
           },
         ),

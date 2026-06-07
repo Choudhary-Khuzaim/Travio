@@ -109,9 +109,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       },
                     ),
                     const SizedBox(height: 12),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4),
-                      child: const Text(
+                    const Padding(
+                      padding: EdgeInsets.only(left: 4),
+                      child: Text(
                         "Both passwords must match.",
                         style: TextStyle(
                           color: AppColors.textSecondary,

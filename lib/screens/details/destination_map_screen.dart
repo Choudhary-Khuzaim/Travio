@@ -453,15 +453,15 @@ class _DestinationMapScreenState extends State<DestinationMapScreen> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Row(
+                    const Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.access_time_filled,
                           size: 16,
                           color: AppColors.primary,
                         ),
-                        const SizedBox(width: 4),
-                        const Text(
+                        SizedBox(width: 4),
+                        Text(
                           "Open 24/7",
                           style: TextStyle(
                             fontSize: 12,

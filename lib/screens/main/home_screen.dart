@@ -227,15 +227,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                        child: Row(
+                        child: const Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.location_on,
                               color: Colors.white,
                               size: 16,
                             ),
-                            const SizedBox(width: 6),
-                            const Text(
+                            SizedBox(width: 6),
+                            Text(
                               "Pakistan",
                               style: TextStyle(
                                 color: Colors.white,

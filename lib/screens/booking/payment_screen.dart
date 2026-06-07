@@ -210,16 +210,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.account_balance_wallet_rounded,
                   color: Color(0xFF4285F4),
                   size: 32,
                 ),
-                const SizedBox(width: 12),
-                const Text(
+                SizedBox(width: 12),
+                Text(
                   'Google Pay',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -578,15 +578,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.contactless_outlined,
                       color: Colors.white,
                       size: 28,
                     ),
-                    const Text(
+                    Text(
                       'VISA',
                       style: TextStyle(
                         color: Colors.white,

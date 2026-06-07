@@ -364,15 +364,15 @@ class _HotelBookingFormScreenState extends State<HotelBookingFormScreen> {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.blue.withOpacity(0.1)),
       ),
-      child: Row(
+      child: const Row(
         children: [
-          const Icon(
+          Icon(
             Icons.verified_user_outlined,
             color: Colors.blue,
             size: 24,
           ),
-          const SizedBox(width: 16),
-          const Expanded(
+          SizedBox(width: 16),
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

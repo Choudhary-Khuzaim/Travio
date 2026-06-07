@@ -517,10 +517,10 @@ class _DestinationDetailsScreenState extends State<DestinationDetailsScreen> {
                         // Hotels
                         if (destination.hotels != null &&
                             destination.hotels!.isNotEmpty) ...[
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 "Top Hotels",
                                 style: TextStyle(
                                   fontSize: 18,

@@ -169,13 +169,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 // Loading Indicator with "Please wait" text
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 40,
                       height: 40,
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(AppColors.accent),
                         strokeWidth: 2.5,
-                        backgroundColor: Colors.white.withOpacity(0.2),
+                        backgroundColor: Colors.white24,
                       ),
                     ),
                     const SizedBox(height: 24),

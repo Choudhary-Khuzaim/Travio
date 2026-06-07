@@ -217,7 +217,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: AppColors.primary,
               onPrimary: Colors.white,
               onSurface: AppColors.textPrimary,
