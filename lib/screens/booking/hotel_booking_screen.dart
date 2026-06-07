@@ -50,9 +50,9 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
             for (var hotel in dest.hotels!) {
               // Parse price for tags
               String priceStr = hotel['price'].toString().replaceAll(
-                RegExp(r'[^0-9]'),
-                '',
-              );
+                    RegExp(r'[^0-9]'),
+                    '',
+                  );
               int price = int.tryParse(priceStr) ?? 0;
 
               List<String> tags = [];
@@ -84,9 +84,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
     // Feature hotels with high ratings
     _featuredHotels = all.where((h) {
       final r = h['rating'];
-      final double rating = (r is double)
-          ? r
-          : double.tryParse(r.toString()) ?? 0.0;
+      final double rating =
+          (r is double) ? r : double.tryParse(r.toString()) ?? 0.0;
       return rating >= 4.8;
     }).toList();
   }
@@ -95,13 +94,11 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
     setState(() {
       // Filter Featured Hotels
       _filteredFeaturedHotels = _featuredHotels.where((hotel) {
-        final matchesDest =
-            _selectedDestination == "Search cities or hotels" ||
+        final matchesDest = _selectedDestination == "Search cities or hotels" ||
             hotel['location'].toString().toLowerCase().contains(
-              _selectedDestination.toLowerCase(),
-            );
-        final matchesCat =
-            _selectedCategory == "All" ||
+                  _selectedDestination.toLowerCase(),
+                );
+        final matchesCat = _selectedCategory == "All" ||
             (hotel['tags'] != null &&
                 (hotel['tags'] as List).contains(_selectedCategory));
         return matchesDest && matchesCat;
@@ -109,13 +106,11 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
 
       // Filter All Hotels
       _filteredAllHotels = _allHotels.where((hotel) {
-        final matchesDest =
-            _selectedDestination == "Search cities or hotels" ||
+        final matchesDest = _selectedDestination == "Search cities or hotels" ||
             hotel['location'].toString().toLowerCase().contains(
-              _selectedDestination.toLowerCase(),
-            );
-        final matchesCat =
-            _selectedCategory == "All" ||
+                  _selectedDestination.toLowerCase(),
+                );
+        final matchesCat = _selectedCategory == "All" ||
             (hotel['tags'] != null &&
                 (hotel['tags'] as List).contains(_selectedCategory));
         return matchesDest && matchesCat;
@@ -178,28 +173,27 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
             const SizedBox(height: 24),
             Expanded(
               child: ListView(
-                children:
-                    [
-                      "Quetta",
-                      "Islamabad",
-                      "Lahore",
-                      "Karachi",
-                      "Skardu",
-                      "Hunza Valley",
-                      "Murree",
-                    ].map((city) {
-                      return ListTile(
-                        leading: const Icon(
-                          Icons.location_city,
-                          color: AppColors.primary,
-                        ),
-                        title: Text(city),
-                        onTap: () {
-                          setState(() => _selectedDestination = city);
-                          Navigator.pop(context);
-                        },
-                      );
-                    }).toList(),
+                children: [
+                  "Quetta",
+                  "Islamabad",
+                  "Lahore",
+                  "Karachi",
+                  "Skardu",
+                  "Hunza Valley",
+                  "Murree",
+                ].map((city) {
+                  return ListTile(
+                    leading: const Icon(
+                      Icons.location_city,
+                      color: AppColors.primary,
+                    ),
+                    title: Text(city),
+                    onTap: () {
+                      setState(() => _selectedDestination = city);
+                      Navigator.pop(context);
+                    },
+                  );
+                }).toList(),
               ),
             ),
           ],
@@ -728,12 +722,12 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                       errorBuilder:
                                           (context, error, stackTrace) =>
                                               Container(
-                                                color: Colors.grey[300],
-                                                child: const Icon(
-                                                  Icons.broken_image,
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
+                                        color: Colors.grey[300],
+                                        child: const Icon(
+                                          Icons.broken_image,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
                                     ),
                             ),
                             Container(
@@ -807,7 +801,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                                               vertical: 4,
                                             ),
                                             decoration: BoxDecoration(
-                                              color: Colors.white.withOpacity(0.2),
+                                              color:
+                                                  Colors.white.withOpacity(0.2),
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                             ),
@@ -944,17 +939,17 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) =>
                               Container(
-                                height: 200,
-                                width: double.infinity,
-                                color: Colors.grey[200],
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.hotel,
-                                    size: 40,
-                                    color: Colors.grey,
-                                  ),
-                                ),
+                            height: 200,
+                            width: double.infinity,
+                            color: Colors.grey[200],
+                            child: const Center(
+                              child: Icon(
+                                Icons.hotel,
+                                size: 40,
+                                color: Colors.grey,
                               ),
+                            ),
+                          ),
                         ),
                 ),
                 // Glass Price Tag
