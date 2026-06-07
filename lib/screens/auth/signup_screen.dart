@@ -167,6 +167,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                                     setState(() => _isLoading = true);
                                     final res = await ApiService.signup(email, password);
+                                    if (!context.mounted) return;
                                     setState(() => _isLoading = false);
 
                                     if (res['success'] == true) {

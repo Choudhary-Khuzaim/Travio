@@ -166,8 +166,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   final location = _locationController.text.trim();
 
                                   // Call API update profile
-                                  final res = await ApiService.updateProfile(name, phone, location);
-                                  if (res['success'] == true) {
+                                   final res = await ApiService.updateProfile(name, phone, location);
+                                   if (!context.mounted) return;
+                                   if (res['success'] == true) {
                                     Navigator.pop(context, {
                                       'name': name,
                                       'email': _emailController.text.trim(),

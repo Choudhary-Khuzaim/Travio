@@ -215,7 +215,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: ElevatedButton(
                         onPressed: () async {
                           await ApiService.logout();
-                          if (mounted) {
+                          if (context.mounted) {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

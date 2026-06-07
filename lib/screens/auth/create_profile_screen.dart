@@ -80,6 +80,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                       _phoneController.text.trim(),
                                       _locationController.text.trim(),
                                     );
+                                    if (!context.mounted) return;
                                     setState(() => _isLoading = false);
 
                                     if (res['success'] == true) {

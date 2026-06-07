@@ -144,7 +144,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                           _currentPasswordController.text,
                                           _newPasswordController.text,
                                         );
-                                        if (!mounted) return;
+                                        if (!context.mounted) return;
                                         setState(() => _isLoading = false);
 
                                         if (res['success'] == true) {

@@ -130,6 +130,7 @@ class _OTPScreenState extends State<OTPScreen> {
 
                                     setState(() => _isLoading = true);
                                     final res = await ApiService.verifyOtp(widget.email, otp);
+                                    if (!context.mounted) return;
                                     setState(() => _isLoading = false);
 
                                     if (res['success'] == true) {

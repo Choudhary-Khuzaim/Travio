@@ -47,8 +47,57 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void _processPayment() async {
     if (_selectedMethod == 'card') {
+      final cardNo = _cardNumberController.text.trim();
+      final cardName = _cardNameController.text.trim();
+      final expiry = _expiryController.text.trim();
+      final cvv = _cvvController.text.trim();
+
+      if (cardNo.isEmpty || cardName.isEmpty || expiry.isEmpty || cvv.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Please fill in all card details"),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+
+      if (cardNo.replaceAll(' ', '').length < 16) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Card number must be 16 digits"),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+
+      if (!expiry.contains('/')) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Expiry date must be in MM/YY format"),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+
+      if (cvv.length < 3) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("CVV must be 3 or 4 digits"),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+
       setState(() => _isPaying = true);
-      await ApiService.createBooking(
+      final success = await ApiService.createBooking(
         type: widget.title.toLowerCase().contains('flight')
             ? 'flight'
             : widget.title.toLowerCase().contains('hotel')
@@ -57,8 +106,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
         details: widget.data ?? {'title': widget.title},
         price: widget.amount,
       );
+      if (!mounted) return;
       setState(() => _isPaying = false);
-      if (mounted) _showSuccessDialog();
+      if (success) {
+        _showSuccessDialog();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Booking failed. Please try again."),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
     } else if (_selectedMethod == 'apple') {
       _showApplePaySheet();
     } else if (_selectedMethod == 'google') {
@@ -215,7 +275,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void _processBiometricPayment(String method) async {
     setState(() => _isPaying = true);
-    await ApiService.createBooking(
+    final success = await ApiService.createBooking(
       type: widget.title.toLowerCase().contains('flight')
           ? 'flight'
           : widget.title.toLowerCase().contains('hotel')
@@ -224,8 +284,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
       details: widget.data ?? {'title': widget.title},
       price: widget.amount,
     );
+    if (!mounted) return;
     setState(() => _isPaying = false);
-    if (mounted) _showSuccessDialog();
+    if (success) {
+      _showSuccessDialog();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Booking failed. Please try again."),
+          backgroundColor: Colors.redAccent,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   void _showSuccessDialog() {

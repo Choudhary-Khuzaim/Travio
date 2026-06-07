@@ -35,6 +35,7 @@ class _SavedScreenState extends State<SavedScreen> {
 
   Future<void> _removeBookmark(String destId) async {
     final success = await ApiService.toggleBookmark(destId, false);
+    if (!mounted) return;
     if (success) {
       setState(() {
         _savedItems.removeWhere((item) => item.id == destId);

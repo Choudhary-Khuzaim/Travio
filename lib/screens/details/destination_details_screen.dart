@@ -8,8 +8,9 @@ import 'package:travio/screens/details/destination_map_screen.dart';
 import 'package:travio/screens/details/attractions_screen.dart';
 import 'package:travio/screens/details/attraction_details_screen.dart';
 import 'package:travio/screens/details/hotel_details_screen.dart';
+import 'package:travio/services/api_service.dart';
 
-class DestinationDetailsScreen extends StatelessWidget {
+class DestinationDetailsScreen extends StatefulWidget {
   final Destination destination;
   final String? heroTag;
 
@@ -20,7 +21,60 @@ class DestinationDetailsScreen extends StatelessWidget {
   });
 
   @override
+  State<DestinationDetailsScreen> createState() => _DestinationDetailsScreenState();
+}
+
+class _DestinationDetailsScreenState extends State<DestinationDetailsScreen> {
+  bool _isSaved = false;
+  bool _isLoadingSaved = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkSavedStatus();
+  }
+
+  Future<void> _checkSavedStatus() async {
+    final saved = await ApiService.getSavedDestinations();
+    if (mounted) {
+      setState(() {
+        _isSaved = saved.any((d) => d.id == widget.destination.id);
+        _isLoadingSaved = false;
+      });
+    }
+  }
+
+  Future<void> _toggleSaved() async {
+    final newStatus = !_isSaved;
+    setState(() {
+      _isSaved = newStatus;
+    });
+    final success = await ApiService.toggleBookmark(widget.destination.id, newStatus);
+    if (!success && mounted) {
+      setState(() {
+        _isSaved = !newStatus;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Failed to update saved item"),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    } else if (success && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(newStatus ? "Added to saved items" : "Removed from saved items"),
+          backgroundColor: AppColors.primary,
+          duration: const Duration(seconds: 1),
+        ),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final destination = widget.destination;
+    final heroTag = widget.heroTag;
     final safeFacilities = destination.facilities ?? [];
     final safeAttractions = destination.attractions ?? [];
 
@@ -55,20 +109,23 @@ class DestinationDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 actions: [
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
-                      shape: BoxShape.circle,
-                      boxShadow: const [
-                        BoxShadow(color: Colors.black12, blurRadius: 10),
-                      ],
-                    ),
-                    child: const Icon(
-                      Icons.favorite_border,
-                      color: Colors.black87,
-                      size: 20,
+                  GestureDetector(
+                    onTap: _isLoadingSaved ? null : _toggleSaved,
+                    child: Container(
+                      margin: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.9),
+                        shape: BoxShape.circle,
+                        boxShadow: const [
+                          BoxShadow(color: Colors.black12, blurRadius: 10),
+                        ],
+                      ),
+                      child: Icon(
+                        _isSaved ? Icons.favorite : Icons.favorite_border,
+                        color: _isSaved ? Colors.red : Colors.black87,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ],
@@ -642,7 +699,7 @@ class DestinationDetailsScreen extends StatelessWidget {
               attractionName: title,
               attractionImage: imageUrl,
               heroTag: 'attraction-$title',
-              description: destination.attractions?.firstWhere(
+              description: widget.destination.attractions?.firstWhere(
                 (a) => a['name'] == title,
                 orElse: () => {},
               )['description'],
@@ -884,7 +941,7 @@ class DestinationDetailsScreen extends StatelessWidget {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          hotel['location'] ?? destination.city,
+                          hotel['location'] ?? widget.destination.city,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[600],
